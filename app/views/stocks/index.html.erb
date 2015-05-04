@@ -1,0 +1,7 @@
+Hello Nasdaq
+
+<%= form_tag("/ereports/create", method: "post") do %>
+  <%= label_tag("Stock symbol:") %>
+  <%= text_field_tag(:symbol) %>
+  <%= submit_tag("Search") %>
+<% end %>
