@@ -11,18 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150504020720) do
+ActiveRecord::Schema.define(version: 20150505021511) do
 
   create_table "ereports", force: :cascade do |t|
     t.string   "symbol"
     t.date     "date"
     t.boolean  "before_or_after_hour"
-    t.decimal  "price_before_er"
-    t.decimal  "price_on_er"
-    t.decimal  "price_after_er"
     t.integer  "stock_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+  end
+
+  create_table "prices", force: :cascade do |t|
+    t.date     "er_release_date"
+    t.text     "price_before_er"
+    t.text     "price_on_er"
+    t.text     "price_after_er"
+    t.integer  "ereport_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "stocks", force: :cascade do |t|

@@ -33,18 +33,38 @@ class EreportsController < ApplicationController
 			@all_ers = search_result[0].ereports
 			@html = []
 			@all_ers.each do |earning|
-				if earning.date <= Date.today
-					formatted_date = earning.date.strftime("%m/%d/%Y").to_s.split("/")
+				the_day = earning.date
+				if the_day <= Date.today
+					formatted_date = the_day.strftime("%m/%d/%Y").to_s.split("/")
 					month = formatted_date[0].to_i
 					date = formatted_date[1].to_i
 					year = formatted_date[2].to_i
-					url = "http://finance.yahoo.com/q/hp?s=#{params[:symbol]}&a=#{month-1}&b=#{date-1}&c=#{year}&d=#{month-1}&e=#{date+1}&f=#{year}&g=d"
+					if (the_day.month == the_day.next_day.month) && (!the_day.next_day.saturday?) && (the_day.month == the_day.prev_day.month)
+						url = "http://finance.yahoo.com/q/hp?s=#{@stock}&a=#{month-1}&b=#{date-1}&c=#{year}&d=#{month-1}&e=#{date+1}&f=#{year}&g=d"
+					elsif (the_day.month != the_day.prev_day.month) && (!the_day.next_day.saturday?)
+						special_date = the_day.prev_month.end_of_month.strftime('%Y/%m/%d').to_s.split('/')
+						url = "http://finance.yahoo.com/q/hp?s=#{@stock}&a=#{month-2}&b=#{special_date[2].to_i}&c=#{year}&d=#{month-1}&e=#{date+1}&f=#{year}&g=d"
+					elsif (the_day.month != the_day.prev_day.month) && (the_day.next_day.saturday?)
+						special_date = the_day.prev_month.end_of_month.strftime('%Y/%m/%d').to_s.split('/')
+						url = "http://finance.yahoo.com/q/hp?s=#{@stock}&a=#{month-2}&b=#{special_date[2].to_i}&c=#{year}&d=#{month-1}&e=#{date+3}&f=#{year}&g=d"						
+					elsif (the_day.month != the_day.next_day.month) && (!the_day.next_day.saturday?) && (the_day.month == the_day.prev_day.month)
+						url = "http://finance.yahoo.com/q/hp?s=#{@stock}&a=#{month-1}&b=#{date-1}&c=#{year}&d=#{month}&e=1&f=#{year}&g=d"
+					elsif (the_day.month != the_day.next_day.month) && (the_day.next_day.saturday?) && (the_day.month == the_day.prev_day.month)
+						url = "http://finance.yahoo.com/q/hp?s=#{@stock}&a=#{month-1}&b=#{date-1}&c=#{year}&d=#{month}&e=3&f=#{year}&g=d"
+					elsif (the_day.month == the_day.next_day.month) && (the_day.next_day.saturday?) && (the_day.month == the_day.prev_day.month)
+						url = "http://finance.yahoo.com/q/hp?s=#{@stock}&a=#{month-1}&b=#{date-1}&c=#{year}&d=#{month-1}&e=#{date+3}&f=#{year}&g=d"
+					end
+					p "#{the_day} #{url}"
 					page = Nokogiri::HTML(open(url))
 					page.search('.yfnc_datamodoutline1').map do |element|
 						@html.push(element.inner_html)
+						# array_of_quotes = element.css('.yfnc_tabledata1')
+						# array_of_quotes.each do |quote|
+						# 	p quote.inner_text
+						# end
 					end
 				else
-					p earning.date
+					p the_day
 				end
 			end
 			render 'index'
