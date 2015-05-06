@@ -39,7 +39,7 @@ class StocksController < ApplicationController
 
 			this_stock = Stock.where(symbol:stock_symbol)[0]
 			@all_reports = this_stock.ereports
-		  render action: "show"
+		  redirect_to "/stocks/#{stock_symbol}"
 		else
 			@stock = params[:symbol]
 			stock_symbol = @stock
@@ -56,7 +56,7 @@ class StocksController < ApplicationController
 				@no_report = true
 			end
 			p @no_report
-			render action: "show"
+			redirect_to "/stocks/#{stock_symbol}"
 		end
 	end
 
