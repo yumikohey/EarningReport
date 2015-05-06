@@ -17,12 +17,7 @@
 			</div>
 			<div class="block"></div>
 			<div class="block"></div>
-			<div class="search_box">
-				<%= form_tag("/ereports/create", method: "post", :class => 'searchform cf') do %>
-				  <%= text_field_tag(:symbol) %>
-				  <%= submit_tag("Search Stock") %>
-				<% end %>
-			</div>
+			<%= render 'search' %>
 		</div>
 		</div>
 		<div class="col-md-2"></div>
