@@ -46,6 +46,9 @@
 		</table>
 		</div>
 		<%end%>
+		<%else%>
+		<h2 class="primary-text"> Upcoming Earning Release Dates </h2>
+		<%= earning.date.strftime("%b %d, %Y") %>
 <% end %>
 <% if @stock.is_a? Stock %>
 		<%= @stock.symbol %>
