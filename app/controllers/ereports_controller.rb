@@ -8,7 +8,7 @@ class EreportsController < ApplicationController
 			@stock.save
 			p "stock stored in db, where stock_id = #{@stock.id}"
 			qrt = [1,2,3,4]
-			year = [2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015]
+			year = [2012, 2013, 2014, 2015]
 			year.each do |each_year|
 				qrt.each do |each_qrt|
 					url = "http://www.estimize.com/#{params[:symbol]}/fq#{each_qrt}-#{each_year}#chart=historical"
@@ -27,10 +27,13 @@ class EreportsController < ApplicationController
 				end
 			end
 			@all_ers = search_result[0].ereports
-			render 'stocks/show'
-		else
-			@stock = search_result[0].ereports.first.symbol
-			@all_ers = search_result[0].ereports
+			begin
+			@stock = @all_ers.first.symbol
+			rescue
+				p "no result"
+			else
+				p "do nothing"
+			end
 			@html = []
 			@all_ers.each do |earning|
 				the_day = earning.date
@@ -57,22 +60,78 @@ class EreportsController < ApplicationController
 					p "#{the_day} #{url}"
 					page = Nokogiri::HTML(open(url))
 					page.search('.yfnc_datamodoutline1').map do |element|
-						@html.push(element.inner_html)
-						# array_of_quotes = element.css('.yfnc_tabledata1')
-						# array_of_quotes.each do |quote|
-						# 	p quote.inner_text
-						# end
+						# @html.push(element.inner_html)
+						pricing_array = []
+						price_before_er = PriceBeforeEr.create(ereport_id:earning.id)
+						price_on_er = PriceOnEr.create(ereport_id:earning.id)
+						price_after_er = PriceAfterEr.create(ereport_id:earning.id)
+						array_of_quotes = element.css('.yfnc_tabledata1')
+						array_of_quotes.each do |quote|
+							p html_str = quote.inner_text
+							if  html_str.match('[a-zA-Z]{3}\s\d{1,2}\,\s\d{4}')
+								er_date = Date.parse(html_str)
+								if er_date < the_day
+									price_before_er.price_date = er_date
+									price_before_er.save
+								elsif er_date > the_day
+									price_after_er.price_date = er_date
+									price_after_er.save
+								else
+									price_on_er.price_date = er_date
+									price_on_er.save
+								end
+							elsif html_str.match('\d*\.\d*')
+								price = html_str.to_f
+								if price_before_er.price_date && (price_before_er.quote.length != 5)
+									price_before_er.quote.push(price)
+									price_before_er.save
+								elsif price_after_er.price_date && (price_after_er.quote.length != 5)
+									price_after_er.quote.push(price)
+									price_after_er.save
+								elsif ( price_on_er.quote.length != 5)
+									price_on_er.quote.push(price)
+									price_on_er.save
+								end
+
+							else
+								stock_volume = html_str.tr(",","").to_i
+								p "this volume"
+								if price_before_er.price_date
+									price_before_er.volume = stock_volume
+									price_before_er.save
+								elsif price_on_er.price_date
+									price_on_er.volume = stock_volume
+									price_on_er.save
+								elsif price_after_er.price_date
+									price_after_er.volume = stock_volume
+									price_after_er.save
+								end
+							end
+
+						end
 					end
 				else
 					p the_day
 				end
 			end
-			render 'index'
+			@all_reports = @stock.ereports
+			render 'stocks/show'
+		else
+			@stock = params[:symbol]
+			@stock_info = Stock.where(symbol:params[:symbol])[0]
+			@all_reports = @stock_info.ereports
+			@no_report = false
+			if @all_reports.count == 0
+				@no_report = true
+			end
+			p @no_report
+			render 'stocks/show'
 		end
 	end
 
 	private
 	  def ereports_params
-	    params.require(:ereport).permit(:symbol, :date, :before_or_after_hour, :price_before_er, :price_after_er, :price_on_er, :stock_id)
+	    params.require(:ereport).permit(:symbol, :date, :before_or_after_hour, :stock_id)
 	  end
+
 end

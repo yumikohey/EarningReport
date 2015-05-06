@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150505021511) do
+ActiveRecord::Schema.define(version: 20150505180016) do
 
   create_table "ereports", force: :cascade do |t|
     t.string   "symbol"
@@ -22,14 +22,31 @@ ActiveRecord::Schema.define(version: 20150505021511) do
     t.datetime "updated_at",           null: false
   end
 
-  create_table "prices", force: :cascade do |t|
-    t.date     "er_release_date"
-    t.text     "price_before_er"
-    t.text     "price_on_er"
-    t.text     "price_after_er"
+  create_table "price_after_ers", force: :cascade do |t|
+    t.date     "price_date"
+    t.text     "quote"
     t.integer  "ereport_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.integer  "volume"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "price_before_ers", force: :cascade do |t|
+    t.date     "price_date"
+    t.text     "quote"
+    t.integer  "ereport_id"
+    t.integer  "volume"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "price_on_ers", force: :cascade do |t|
+    t.date     "price_date"
+    t.text     "quote"
+    t.integer  "ereport_id"
+    t.integer  "volume"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "stocks", force: :cascade do |t|

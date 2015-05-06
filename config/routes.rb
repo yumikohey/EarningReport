@@ -6,6 +6,16 @@ Rails.application.routes.draw do
 
   post 'ereports/create' => 'ereports#create'
 
+  get '/stocks/:symbol', to: 'stocks#profile', as: 'stock_symbol'
+
+  resources :stocks do
+    resources :ereports do
+      resource :price_before_er
+      resource :price_after_er
+      resource :price_on_er
+    end
+  end
+
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

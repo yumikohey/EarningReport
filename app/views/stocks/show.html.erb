@@ -1,4 +1,58 @@
-<h1><%= @stock.symbol %></h1>
-<% @all_ers.each_with_index do |earning, idx|%>
+
+<div class="col-md-2"></div>
+<div class="col-md-8">
+<h1><%= @stock %></h1>
+<% @all_reports.each_with_index do |earning, idx| %>
+<% if earning.price_before_er %>
 <h2><%= earning.date.strftime("%b %d, %Y") %></h2>
+	<div class="table-responsive">
+		<table class="table">
+			<tr class="info">
+				<th>Date</th>
+				<th>Open</th>
+				<th>High</th>
+				<th>Low</th>
+				<th>Close</th>
+				<th>Volume</th>
+			</tr>
+			<tr>
+				<td><%= earning.price_before_er.price_date if earning.price_before_er %></td>
+			  <td><%= earning.price_before_er.quote[0] if earning.price_before_er %></td>
+			  <td><%= earning.price_before_er.quote[1] if earning.price_before_er %></td>
+			  <td><%= earning.price_before_er.quote[2] if earning.price_before_er %></td>
+			  <td><%= earning.price_before_er.quote[3] if earning.price_before_er %></td>
+			  <td><%= earning.price_before_er.volume if earning.price_before_er %></td>
+			</tr>
+			<tr class="info">
+				<td><%= earning.price_on_er.price_date if earning.price_on_er %></td>
+			  <td><%= earning.price_on_er.quote[0] if earning.price_on_er %></td>
+			  <td><%= earning.price_on_er.quote[1] if earning.price_on_er %></td>
+			  <td><%= earning.price_on_er.quote[2] if earning.price_on_er %></td>
+			  <td><%= earning.price_on_er.quote[3] if earning.price_on_er %></td>
+			  <td><%= earning.price_on_er.volume if earning.price_on_er %></td>
+			</tr>
+			<tr>
+				<td><%= earning.price_after_er.price_date if earning.price_after_er %></td>
+			  <td><%= earning.price_after_er.quote[0] if earning.price_after_er %></td>
+			  <td><%= earning.price_after_er.quote[1] if earning.price_after_er %></td>
+			  <td><%= earning.price_after_er.quote[2] if earning.price_after_er %></td>
+			  <td><%= earning.price_after_er.quote[3] if earning.price_after_er %></td>
+			  <td><%= earning.price_after_er.volume if earning.price_after_er %></td>
+			</tr>
+			<tr class="primary">
+				<th>Percentage Change After Earning Report Released</th>
+				<td class="danger"><%= number_to_currency(((earning.price_after_er.quote[3].to_f - earning.price_on_er.quote[3].to_f ) / earning.price_on_er.quote[3].to_f)*100)%>%</td>
+			</tr>
+		</table>
+		</div>
+		<%end%>
 <% end %>
+<% if @stock.is_a? Stock %>
+		<%= @stock.symbol %>
+		<h2> Sorry, this stock doesn't earning report released yet </h2>
+<%end%>
+<%if @no_report %>
+		<h2> Sorry, this stock doesn't earning report released yet </h2>
+<%end%>
+</div>
+<div class="col-md-2"></div>
