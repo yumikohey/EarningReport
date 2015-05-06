@@ -1,7 +1,35 @@
-Hello Nasdaq
+			
+<div class="container">
+<div class="row">
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-8">
+		<div class="container">
+			<div class="row info">
+				<div class="col-md-8">
+					<h2 class="text-primary">
+							Welcome to Yumiko's Options House
+					</h2>
+					<div class="text-success text-justify">
+						  If you are the first one to look up the equity, it will take a little bit longer to load historical data. We will aggressively make improvements.
+						  We will show you how equities' earning releases affected their stock pricing
+						  You can also check out equities upcoming earning release dates from here
+					</div>
+				</div>
+			</div>
+			<div class="block"></div>
+			<div class="block"></div>
+			<div class="search_box">
+				<%= form_tag("/ereports/create", method: "post", :class => 'searchform cf') do %>
+				  <%= text_field_tag(:symbol) %>
+				  <%= submit_tag("Search Stock") %>
+				<% end %>
+			</div>
+		</div>
+		</div>
+		<div class="col-md-2"></div>
+	</div>
+</div>
 
-<%= form_tag("/ereports/create", method: "post") do %>
-  <%= label_tag("Stock symbol:") %>
-  <%= text_field_tag(:symbol) %>
-  <%= submit_tag("Search") %>
-<% end %>
+
+

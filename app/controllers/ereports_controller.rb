@@ -114,7 +114,8 @@ class EreportsController < ApplicationController
 					p the_day
 				end
 			end
-			@all_reports = @stock.ereports
+			this_stock = Stock.where(symbol:params[:symbol])[0]
+			@all_reports = this_stock.ereports
 			render 'stocks/show'
 		else
 			@stock = params[:symbol]

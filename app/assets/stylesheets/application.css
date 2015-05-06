@@ -13,3 +13,16 @@
  *= require_tree .
  *= require_self
  */
+
+ body {
+   background: #3aaae8;
+   color: #fff;
+   font:12px/18px 'HelveticaNeue', Helvetica, Arial, sans-serif;
+ }
+ a,a:visited {
+   color:#fff
+ }
+
+ .block{
+ 	height: 200px;
+ }
