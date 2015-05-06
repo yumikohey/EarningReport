@@ -41,7 +41,7 @@
 			</tr>
 			<tr class="primary">
 				<th>Percentage Change After Earning Report Released</th>
-				<td class="danger"><%= number_to_currency(((earning.price_after_er.quote[3].to_f - earning.price_on_er.quote[3].to_f ) / earning.price_on_er.quote[3].to_f)*100)%>%</td>
+				<td class="danger"><%= (((earning.price_after_er.quote[3].to_f - earning.price_on_er.quote[3].to_f ) / earning.price_on_er.quote[3].to_f)*100).round(2) %> %</td>
 			</tr>
 		</table>
 		</div>
@@ -49,10 +49,10 @@
 		<% end %>
 <% if @stock.is_a? Stock %>
 		<%= @stock.symbol %>
-		<h2> Sorry, this stock doesn't earning report released yet </h2>
+		<h2> Sorry, this stock's earnings report has not yet been released. </h2>
 <%end%>
 <%if @no_report %>
-		<h2> Sorry, this stock doesn't earning report released yet </h2>
+		<h2> Sorry, this stock's earnings report has not yet been released. </h2>
 <%end%>
 </div>
 <div class="col-md-2"></div>
