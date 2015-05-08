@@ -1,28 +1,12 @@
-== README
+Earning Report is a web app that shows you how releases of equities' earnings affected their stock pricing. 
+Even Yahoo! Finance or TD Ameritrade doesn't come with such fancy services, so I decided to build one for the public to use.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+As an options trader, it's very important to know how much percentage changes after earning report released on a specific equity. It helps them construct the option trading strategies. 
 
-Things you may want to cover:
+# Stretch Goals
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Based on historical data, providing optimal options trading strategies;
+- Each equity will come along with a put/call ratio chart;
+- When you search an equity's upcoming earning report dates, we will show you its competitors earning report results.
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
