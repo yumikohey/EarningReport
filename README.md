@@ -1,7 +1,7 @@
 Earning Report is a web app that shows you how releases of equities' earnings affected their stock pricing. 
 Even Yahoo! Finance or TD Ameritrade doesn't come with such fancy services, so I decided to build one for the public to use.
 
-As an options trader, it's very important to know how much percentage changes after earning report released on a specific equity. It helps them construct the option trading strategies. 
+As an options trader, it's very important to know how much percentage changes after earning report released on a specific equity. It helps options traders construct the option trading strategies. 
 
 # Stretch Goals
 
