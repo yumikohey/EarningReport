@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   get '/stocks/:symbol', to: 'stocks#show', as: 'stock_symbol'
 
-  get '/stocks/earning_calendar', to: 'stocks#upcoming_er', as:'earning_calendar'
+  get '/earning_calendars/month_er', to: 'earning_calendars#month_er', as:'earning_calendar'
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
