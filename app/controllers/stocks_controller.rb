@@ -1,5 +1,6 @@
 class StocksController < ApplicationController
 	include EreportsHelper
+	include StocksHelper
 
 	def index
 		render 'index'
@@ -46,7 +47,10 @@ class StocksController < ApplicationController
 			@stock_info = Stock.where(symbol:params[:symbol])[0]
 			all_reports = @stock_info.ereports
 			all_reports.each do |report|
-				if (report.date <= Date.today && !report.price_before_er)
+				report_id = report.id
+				price_after_er = PriceAfterEr.where(ereport_id:report_id, volume:nil)[0]
+				if (report.date <= Date.today && price_after_er)
+					p "AWESOME"
 					EreportsHelper.earning_report_dates_data(stock_symbol, report)
 				end
 			end
@@ -65,6 +69,10 @@ class StocksController < ApplicationController
 		stock = Stock.where(symbol:params[:symbol])[0]
 		@all_reports = stock.ereports
 		render 'show'
+	end
+
+	def upcoming_er
+		StocksHelper.read_yahoo_data
 	end
 
 	private
