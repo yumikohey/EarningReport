@@ -1,0 +1,2 @@
+class EarningCalendarsController < ApplicationController
+end
