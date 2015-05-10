@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150508225359) do
+ActiveRecord::Schema.define(version: 20150509045034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,11 +63,30 @@ ActiveRecord::Schema.define(version: 20150508225359) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "put_call_ratios", force: :cascade do |t|
+    t.date     "date"
+    t.integer  "calls"
+    t.integer  "puts"
+    t.integer  "total"
+    t.decimal  "pcratio"
+    t.string   "symbol"
+    t.integer  "stock_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "stocks", force: :cascade do |t|
     t.string   "symbol"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.integer  "stock_volume"
+    t.string   "name"
+    t.string   "lastsale"
+    t.string   "market_cap"
+    t.integer  "ipo_year"
+    t.string   "sector"
+    t.string   "industry"
+    t.string   "summary_quote"
   end
 
 end

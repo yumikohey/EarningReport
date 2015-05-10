@@ -10,6 +10,10 @@ Rails.application.routes.draw do
 
   get '/earning_calendars/month_er', to: 'earning_calendars#month_er', as:'earning_calendar'
 
+  get '/put_call_ratios/index', to: 'put_call_ratios#index'
+  
+  get '/put_call_ratios/data', :defaults => { :format => 'json' }
+
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
