@@ -1,0 +1,17 @@
+<div class="pcratio_form">
+<%= form_for @stock, url: {action: "create"}, html: {class: "nifty_form"} do |f| %>
+		<%= f.label(:symbol) %>
+	  <%= f.text_field(:symbol) %>
+  	<%= f.label(:date) %>
+    <%= f.text_field(:date) %>
+  	<%= f.label(:calls) %>
+    <%= f.text_field(:calls) %>
+  	<%= f.label(:puts) %>
+    <%= f.text_field(:puts) %>
+  	<%= f.label(:total) %>
+    <%= f.text_field(:total) %>
+  	<%= f.label(:pcratio) %>
+    <%= f.text_field(:pcratio) %>
+	  <%= f.submit("Save") %>
+	<% end %>
+</div>
