@@ -14,6 +14,10 @@ Rails.application.routes.draw do
   
   get '/put_call_ratios/data', :defaults => { :format => 'json' }
 
+  get '/put_call_ratios/download_pcratio', to: 'put_call_ratios#download_pcratio'
+
+  post '/put_call_ratios/create', to:'put_call_ratios#create'
+
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
