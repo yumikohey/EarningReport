@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
   post '/put_call_ratios/create', to:'put_call_ratios#create'
 
+  get '/earning_calendars/index', to: 'earning_calendars#index'
+
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

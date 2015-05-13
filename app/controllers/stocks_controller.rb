@@ -8,7 +8,7 @@ class StocksController < ApplicationController
 
 	def create
 		require 'open-uri'
-		stock_symbol = params[:symbol]
+		stock_symbol = params[:symbol].upcase
 		stock = Stock.where(symbol:stock_symbol)[0]
 		all_reports = stock.ereports
 
@@ -53,6 +53,19 @@ class StocksController < ApplicationController
 	def show
 		@stock = params[:symbol]
 		stock = Stock.where(symbol:params[:symbol])[0]
+		if Ereport.where(symbol:params[:symbol]).empty?
+			qrt = [1,2,3,4]
+			year = (2012..Date.today.year).to_a
+			year.each do |each_year|
+				qrt.each do |each_qrt|
+					EreportsHelper.get_earning_report_dates(stock.symbol, stock.id, each_qrt, each_year)
+				end
+			end
+			@all_ers = stock.ereports
+			@all_ers.each do |earning|
+				EreportsHelper.earning_report_dates_data(stock.symbol, earning)
+			end			
+		end
 		@all_reports = stock.ereports
 		render 'show'
 	end

@@ -1,0 +1,122 @@
+D, [2015-05-12T15:17:23.394286 #23753] DEBUG -- :   [1m[36m (28.4ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+D, [2015-05-12T15:17:23.400468 #23753] DEBUG -- :   [1m[35m (1.4ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+D, [2015-05-12T15:17:23.402455 #23753] DEBUG -- :   [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+I, [2015-05-12T15:17:23.407301 #23753]  INFO -- : Migrating to CreateStocks (20150504020558)
+D, [2015-05-12T15:17:23.409144 #23753] DEBUG -- :   [1m[35m (0.8ms)[0m  BEGIN
+D, [2015-05-12T15:17:23.433797 #23753] DEBUG -- :   [1m[36m (23.3ms)[0m  [1mCREATE TABLE "stocks" ("id" serial primary key, "symbol" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+D, [2015-05-12T15:17:23.448909 #23753] DEBUG -- :   [1m[35mSQL (0.6ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150504020558"]]
+D, [2015-05-12T15:17:23.455835 #23753] DEBUG -- :   [1m[36m (6.3ms)[0m  [1mCOMMIT[0m
+I, [2015-05-12T15:17:23.455965 #23753]  INFO -- : Migrating to CreateEreports (20150504020720)
+D, [2015-05-12T15:17:23.463350 #23753] DEBUG -- :   [1m[35m (6.2ms)[0m  BEGIN
+D, [2015-05-12T15:17:23.480398 #23753] DEBUG -- :   [1m[36m (15.9ms)[0m  [1mCREATE TABLE "ereports" ("id" serial primary key, "symbol" character varying, "date" date, "before_or_after_hour" boolean, "stock_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+D, [2015-05-12T15:17:23.482773 #23753] DEBUG -- :   [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150504020720"]]
+D, [2015-05-12T15:17:23.483649 #23753] DEBUG -- :   [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+I, [2015-05-12T15:17:23.483747 #23753]  INFO -- : Migrating to CreatePriceBeforeErs (20150505162506)
+D, [2015-05-12T15:17:23.491185 #23753] DEBUG -- :   [1m[35m (6.3ms)[0m  BEGIN
+D, [2015-05-12T15:17:23.512553 #23753] DEBUG -- :   [1m[36m (20.3ms)[0m  [1mCREATE TABLE "price_before_ers" ("id" serial primary key, "price_date" date, "quote" text, "ereport_id" integer, "volume" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+D, [2015-05-12T15:17:23.516404 #23753] DEBUG -- :   [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150505162506"]]
+D, [2015-05-12T15:17:23.517415 #23753] DEBUG -- :   [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+I, [2015-05-12T15:17:23.517566 #23753]  INFO -- : Migrating to CreatePriceAfterErs (20150505175931)
+D, [2015-05-12T15:17:23.524602 #23753] DEBUG -- :   [1m[35m (6.0ms)[0m  BEGIN
+D, [2015-05-12T15:17:23.540992 #23753] DEBUG -- :   [1m[36m (15.4ms)[0m  [1mCREATE TABLE "price_after_ers" ("id" serial primary key, "price_date" date, "quote" text, "ereport_id" integer, "volume" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+D, [2015-05-12T15:17:23.543386 #23753] DEBUG -- :   [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150505175931"]]
+D, [2015-05-12T15:17:23.544158 #23753] DEBUG -- :   [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+I, [2015-05-12T15:17:23.544248 #23753]  INFO -- : Migrating to CreatePriceOnErs (20150505180016)
+D, [2015-05-12T15:17:23.550966 #23753] DEBUG -- :   [1m[35m (5.7ms)[0m  BEGIN
+D, [2015-05-12T15:17:23.567280 #23753] DEBUG -- :   [1m[36m (15.1ms)[0m  [1mCREATE TABLE "price_on_ers" ("id" serial primary key, "price_date" date, "quote" text, "ereport_id" integer, "volume" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+D, [2015-05-12T15:17:23.569898 #23753] DEBUG -- :   [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150505180016"]]
+D, [2015-05-12T15:17:23.570529 #23753] DEBUG -- :   [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+I, [2015-05-12T15:17:23.570591 #23753]  INFO -- : Migrating to AddStockVolumesToStock (20150506192209)
+D, [2015-05-12T15:17:23.577486 #23753] DEBUG -- :   [1m[35m (6.1ms)[0m  BEGIN
+D, [2015-05-12T15:17:23.585141 #23753] DEBUG -- :   [1m[36m (6.8ms)[0m  [1mALTER TABLE "stocks" ADD "stock_volume" integer[0m
+D, [2015-05-12T15:17:23.587621 #23753] DEBUG -- :   [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150506192209"]]
+D, [2015-05-12T15:17:23.594350 #23753] DEBUG -- :   [1m[36m (6.4ms)[0m  [1mCOMMIT[0m
+I, [2015-05-12T15:17:23.594487 #23753]  INFO -- : Migrating to CreateEarningCalendars (20150506195535)
+D, [2015-05-12T15:17:23.595773 #23753] DEBUG -- :   [1m[35m (0.2ms)[0m  BEGIN
+D, [2015-05-12T15:17:23.611826 #23753] DEBUG -- :   [1m[36m (15.0ms)[0m  [1mCREATE TABLE "earning_calendars" ("id" serial primary key, "company_name" character varying, "symbol" character varying, "stock_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+D, [2015-05-12T15:17:23.614856 #23753] DEBUG -- :   [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150506195535"]]
+D, [2015-05-12T15:17:23.620477 #23753] DEBUG -- :   [1m[36m (5.1ms)[0m  [1mCOMMIT[0m
+I, [2015-05-12T15:17:23.620610 #23753]  INFO -- : Migrating to AddTimeToEarningCalendar (20150508225359)
+D, [2015-05-12T15:17:23.627777 #23753] DEBUG -- :   [1m[35m (6.1ms)[0m  BEGIN
+D, [2015-05-12T15:17:23.628848 #23753] DEBUG -- :   [1m[36m (0.3ms)[0m  [1mALTER TABLE "earning_calendars" ADD "time" character varying[0m
+D, [2015-05-12T15:17:23.629284 #23753] DEBUG -- :   [1m[35m (0.2ms)[0m  ALTER TABLE "earning_calendars" ADD "day" date
+D, [2015-05-12T15:17:23.629952 #23753] DEBUG -- :   [1m[36m (0.3ms)[0m  [1mALTER TABLE "earning_calendars" ADD "eps" character varying[0m
+D, [2015-05-12T15:17:23.632030 #23753] DEBUG -- :   [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150508225359"]]
+D, [2015-05-12T15:17:23.638709 #23753] DEBUG -- :   [1m[36m (6.4ms)[0m  [1mCOMMIT[0m
+I, [2015-05-12T15:17:23.638839 #23753]  INFO -- : Migrating to AddNamesToStocks (20150509015011)
+D, [2015-05-12T15:17:23.640000 #23753] DEBUG -- :   [1m[35m (0.2ms)[0m  BEGIN
+D, [2015-05-12T15:17:23.641088 #23753] DEBUG -- :   [1m[36m (0.4ms)[0m  [1mALTER TABLE "stocks" ADD "name" character varying[0m
+D, [2015-05-12T15:17:23.641687 #23753] DEBUG -- :   [1m[35m (0.3ms)[0m  ALTER TABLE "stocks" ADD "lastsale" character varying
+D, [2015-05-12T15:17:23.642255 #23753] DEBUG -- :   [1m[36m (0.2ms)[0m  [1mALTER TABLE "stocks" ADD "market_cap" character varying[0m
+D, [2015-05-12T15:17:23.642984 #23753] DEBUG -- :   [1m[35m (0.4ms)[0m  ALTER TABLE "stocks" ADD "ipo_year" integer
+D, [2015-05-12T15:17:23.643697 #23753] DEBUG -- :   [1m[36m (0.4ms)[0m  [1mALTER TABLE "stocks" ADD "sector" character varying[0m
+D, [2015-05-12T15:17:23.644318 #23753] DEBUG -- :   [1m[35m (0.3ms)[0m  ALTER TABLE "stocks" ADD "industry" character varying
+D, [2015-05-12T15:17:23.644883 #23753] DEBUG -- :   [1m[36m (0.2ms)[0m  [1mALTER TABLE "stocks" ADD "summary_quote" character varying[0m
+D, [2015-05-12T15:17:23.647301 #23753] DEBUG -- :   [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150509015011"]]
+D, [2015-05-12T15:17:23.653873 #23753] DEBUG -- :   [1m[36m (6.2ms)[0m  [1mCOMMIT[0m
+I, [2015-05-12T15:17:23.654044 #23753]  INFO -- : Migrating to CreatePutCallRatios (20150509045034)
+D, [2015-05-12T15:17:23.659623 #23753] DEBUG -- :   [1m[35m (0.2ms)[0m  BEGIN
+D, [2015-05-12T15:17:23.674513 #23753] DEBUG -- :   [1m[36m (14.0ms)[0m  [1mCREATE TABLE "put_call_ratios" ("id" serial primary key, "date" date, "calls" integer, "puts" integer, "total" integer, "pcratio" decimal, "symbol" character varying, "stock_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+D, [2015-05-12T15:17:23.676535 #23753] DEBUG -- :   [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150509045034"]]
+D, [2015-05-12T15:17:23.681920 #23753] DEBUG -- :   [1m[36m (5.0ms)[0m  [1mCOMMIT[0m
+D, [2015-05-12T16:31:32.327108 #26448] DEBUG -- :   [1m[36m (3.0ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+D, [2015-05-12T16:31:32.350057 #26448] DEBUG -- :   [1m[35m (13.1ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+D, [2015-05-12T16:31:32.352249 #26448] DEBUG -- :   [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+I, [2015-05-12T16:31:32.356448 #26448]  INFO -- : Migrating to CreateStocks (20150504020558)
+D, [2015-05-12T16:31:32.357660 #26448] DEBUG -- :   [1m[35m (0.2ms)[0m  BEGIN
+D, [2015-05-12T16:31:32.374921 #26448] DEBUG -- :   [1m[36m (15.7ms)[0m  [1mCREATE TABLE "stocks" ("id" serial primary key, "symbol" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+D, [2015-05-12T16:31:32.387287 #26448] DEBUG -- :   [1m[35mSQL (0.5ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150504020558"]]
+D, [2015-05-12T16:31:32.393943 #26448] DEBUG -- :   [1m[36m (6.1ms)[0m  [1mCOMMIT[0m
+I, [2015-05-12T16:31:32.394107 #26448]  INFO -- : Migrating to CreateEreports (20150504020720)
+D, [2015-05-12T16:31:32.400910 #26448] DEBUG -- :   [1m[35m (5.7ms)[0m  BEGIN
+D, [2015-05-12T16:31:32.418609 #26448] DEBUG -- :   [1m[36m (16.7ms)[0m  [1mCREATE TABLE "ereports" ("id" serial primary key, "symbol" character varying, "date" date, "before_or_after_hour" boolean, "stock_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+D, [2015-05-12T16:31:32.421654 #26448] DEBUG -- :   [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150504020720"]]
+D, [2015-05-12T16:31:32.422581 #26448] DEBUG -- :   [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+I, [2015-05-12T16:31:32.422679 #26448]  INFO -- : Migrating to CreatePriceBeforeErs (20150505162506)
+D, [2015-05-12T16:31:32.429819 #26448] DEBUG -- :   [1m[35m (6.2ms)[0m  BEGIN
+D, [2015-05-12T16:31:32.447439 #26448] DEBUG -- :   [1m[36m (16.5ms)[0m  [1mCREATE TABLE "price_before_ers" ("id" serial primary key, "price_date" date, "quote" text, "ereport_id" integer, "volume" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+D, [2015-05-12T16:31:32.449894 #26448] DEBUG -- :   [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150505162506"]]
+D, [2015-05-12T16:31:32.450671 #26448] DEBUG -- :   [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+I, [2015-05-12T16:31:32.450781 #26448]  INFO -- : Migrating to CreatePriceAfterErs (20150505175931)
+D, [2015-05-12T16:31:32.457252 #26448] DEBUG -- :   [1m[35m (5.6ms)[0m  BEGIN
+D, [2015-05-12T16:31:32.473224 #26448] DEBUG -- :   [1m[36m (15.2ms)[0m  [1mCREATE TABLE "price_after_ers" ("id" serial primary key, "price_date" date, "quote" text, "ereport_id" integer, "volume" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+D, [2015-05-12T16:31:32.475518 #26448] DEBUG -- :   [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150505175931"]]
+D, [2015-05-12T16:31:32.476391 #26448] DEBUG -- :   [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+I, [2015-05-12T16:31:32.476460 #26448]  INFO -- : Migrating to CreatePriceOnErs (20150505180016)
+D, [2015-05-12T16:31:32.483388 #26448] DEBUG -- :   [1m[35m (6.2ms)[0m  BEGIN
+D, [2015-05-12T16:31:32.499392 #26448] DEBUG -- :   [1m[36m (15.0ms)[0m  [1mCREATE TABLE "price_on_ers" ("id" serial primary key, "price_date" date, "quote" text, "ereport_id" integer, "volume" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+D, [2015-05-12T16:31:32.501777 #26448] DEBUG -- :   [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150505180016"]]
+D, [2015-05-12T16:31:32.503125 #26448] DEBUG -- :   [1m[36m (0.7ms)[0m  [1mCOMMIT[0m
+I, [2015-05-12T16:31:32.503320 #26448]  INFO -- : Migrating to AddStockVolumesToStock (20150506192209)
+D, [2015-05-12T16:31:32.510876 #26448] DEBUG -- :   [1m[35m (6.2ms)[0m  BEGIN
+D, [2015-05-12T16:31:32.512126 #26448] DEBUG -- :   [1m[36m (0.4ms)[0m  [1mALTER TABLE "stocks" ADD "stock_volume" integer[0m
+D, [2015-05-12T16:31:32.513854 #26448] DEBUG -- :   [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150506192209"]]
+D, [2015-05-12T16:31:32.519803 #26448] DEBUG -- :   [1m[36m (5.6ms)[0m  [1mCOMMIT[0m
+I, [2015-05-12T16:31:32.519970 #26448]  INFO -- : Migrating to CreateEarningCalendars (20150506195535)
+D, [2015-05-12T16:31:32.521276 #26448] DEBUG -- :   [1m[35m (0.2ms)[0m  BEGIN
+D, [2015-05-12T16:31:32.536356 #26448] DEBUG -- :   [1m[36m (14.0ms)[0m  [1mCREATE TABLE "earning_calendars" ("id" serial primary key, "company_name" character varying, "symbol" character varying, "stock_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+D, [2015-05-12T16:31:32.538929 #26448] DEBUG -- :   [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150506195535"]]
+D, [2015-05-12T16:31:32.545770 #26448] DEBUG -- :   [1m[36m (6.5ms)[0m  [1mCOMMIT[0m
+I, [2015-05-12T16:31:32.545903 #26448]  INFO -- : Migrating to AddTimeToEarningCalendar (20150508225359)
+D, [2015-05-12T16:31:32.553047 #26448] DEBUG -- :   [1m[35m (6.1ms)[0m  BEGIN
+D, [2015-05-12T16:31:32.554464 #26448] DEBUG -- :   [1m[36m (0.5ms)[0m  [1mALTER TABLE "earning_calendars" ADD "time" character varying[0m
+D, [2015-05-12T16:31:32.555219 #26448] DEBUG -- :   [1m[35m (0.4ms)[0m  ALTER TABLE "earning_calendars" ADD "day" date
+D, [2015-05-12T16:31:32.555976 #26448] DEBUG -- :   [1m[36m (0.4ms)[0m  [1mALTER TABLE "earning_calendars" ADD "eps" character varying[0m
+D, [2015-05-12T16:31:32.559160 #26448] DEBUG -- :   [1m[35mSQL (0.5ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150508225359"]]
+D, [2015-05-12T16:31:32.565502 #26448] DEBUG -- :   [1m[36m (5.8ms)[0m  [1mCOMMIT[0m
+I, [2015-05-12T16:31:32.565639 #26448]  INFO -- : Migrating to AddNamesToStocks (20150509015011)
+D, [2015-05-12T16:31:32.572033 #26448] DEBUG -- :   [1m[35m (0.3ms)[0m  BEGIN
+D, [2015-05-12T16:31:32.573098 #26448] DEBUG -- :   [1m[36m (0.3ms)[0m  [1mALTER TABLE "stocks" ADD "name" character varying[0m
+D, [2015-05-12T16:31:32.573677 #26448] DEBUG -- :   [1m[35m (0.2ms)[0m  ALTER TABLE "stocks" ADD "lastsale" character varying
+D, [2015-05-12T16:31:32.574209 #26448] DEBUG -- :   [1m[36m (0.2ms)[0m  [1mALTER TABLE "stocks" ADD "market_cap" character varying[0m
+D, [2015-05-12T16:31:32.574686 #26448] DEBUG -- :   [1m[35m (0.2ms)[0m  ALTER TABLE "stocks" ADD "ipo_year" integer
+D, [2015-05-12T16:31:32.575239 #26448] DEBUG -- :   [1m[36m (0.3ms)[0m  [1mALTER TABLE "stocks" ADD "sector" character varying[0m
+D, [2015-05-12T16:31:32.575765 #26448] DEBUG -- :   [1m[35m (0.3ms)[0m  ALTER TABLE "stocks" ADD "industry" character varying
+D, [2015-05-12T16:31:32.576236 #26448] DEBUG -- :   [1m[36m (0.2ms)[0m  [1mALTER TABLE "stocks" ADD "summary_quote" character varying[0m
+D, [2015-05-12T16:31:32.578217 #26448] DEBUG -- :   [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150509015011"]]
+D, [2015-05-12T16:31:32.584733 #26448] DEBUG -- :   [1m[36m (6.3ms)[0m  [1mCOMMIT[0m
+I, [2015-05-12T16:31:32.584866 #26448]  INFO -- : Migrating to CreatePutCallRatios (20150509045034)
+D, [2015-05-12T16:31:32.586067 #26448] DEBUG -- :   [1m[35m (0.2ms)[0m  BEGIN
+D, [2015-05-12T16:31:32.602000 #26448] DEBUG -- :   [1m[36m (14.9ms)[0m  [1mCREATE TABLE "put_call_ratios" ("id" serial primary key, "date" date, "calls" integer, "puts" integer, "total" integer, "pcratio" decimal, "symbol" character varying, "stock_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+D, [2015-05-12T16:31:32.605872 #26448] DEBUG -- :   [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150509045034"]]
+D, [2015-05-12T16:31:32.611547 #26448] DEBUG -- :   [1m[36m (5.1ms)[0m  [1mCOMMIT[0m
