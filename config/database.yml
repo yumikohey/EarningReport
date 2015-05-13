@@ -37,10 +37,12 @@ test: &TEST
   encoding: utf8
   database: EarningReports_test
   pool: 5
-
+  
 
 production:
-  adapter: postgresql
-  encoding: utf8
+  <<: *default
+  host: options.cuzwdaednosd.us-west-2.rds.amazonaws.com
+  port: 5432
   database: EarningReports_production
-  pool: 5
+  username: zoeshoptions
+  password: <%= ENV['OPTIONS_DATABASE_PASSWORD'] %>
