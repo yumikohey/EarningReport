@@ -37,7 +37,7 @@ test: &TEST
   encoding: utf8
   database: EarningReports_test
   pool: 5
-
+  
 
 production:
   <<: *default
