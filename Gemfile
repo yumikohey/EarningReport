@@ -31,7 +31,6 @@ gem 'active_model_serializers'
 
 gem 'dotenv-rails'
 
-
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
