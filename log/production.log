@@ -120,3 +120,5 @@ D, [2015-05-12T16:31:32.586067 #26448] DEBUG -- :   [1m[35m (0.2ms)[0m  BEGIN
 D, [2015-05-12T16:31:32.602000 #26448] DEBUG -- :   [1m[36m (14.9ms)[0m  [1mCREATE TABLE "put_call_ratios" ("id" serial primary key, "date" date, "calls" integer, "puts" integer, "total" integer, "pcratio" decimal, "symbol" character varying, "stock_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
 D, [2015-05-12T16:31:32.605872 #26448] DEBUG -- :   [1m[35mSQL (0.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150509045034"]]
 D, [2015-05-12T16:31:32.611547 #26448] DEBUG -- :   [1m[36m (5.1ms)[0m  [1mCOMMIT[0m
+D, [2015-05-13T17:56:23.173960 #12477] DEBUG -- :   [1m[36mStock Load (28.7ms)[0m  [1mSELECT  "stocks".* FROM "stocks"  ORDER BY "stocks"."id" ASC LIMIT 1[0m
+D, [2015-05-13T17:56:29.901847 #12477] DEBUG -- :   [1m[35m (27.9ms)[0m  SELECT COUNT(*) FROM "stocks"
