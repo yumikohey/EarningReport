@@ -32,6 +32,7 @@ module EreportsHelper
 		elsif tomorrow == Date.today
 			history = YahooStock::History.new(:stock_symbol => stock_symbol, :start_date => yesterday, :end_date => date)
 			quote = YahooStock::Quote.new(:stock_symbols => [stock_symbol])
+			price_quotes = history.results(:to_array).output
 			quote.use_all_parameters
 			all_data = quote.results(:to_hash).output
 			open = all_data[0][:open].to_f
