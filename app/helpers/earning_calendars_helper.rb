@@ -1,6 +1,6 @@
 module EarningCalendarsHelper
 		require 'csv'
-		def self.import(filename=File.expand_path(".")+ "/db/data/nasdaq.csv")
+		def self.import(filename=File.expand_path(".")+ "/db/data/amex.csv")
 	    field_names = nil
 	    EarningCalendar.transaction do
 	      File.open(filename).each do |line|
