@@ -19,18 +19,23 @@ class EarningCalendarsController < ApplicationController
 			date = Date.today - counter
 			date_str = date.to_s.split("-").join("")
 			url = "http://biz.yahoo.com/research/earncal/#{date_str}.html"
-			page = Nokogiri::HTML(open(url))
 			h = {}
-			page.xpath('//a[@href]').each do |link|
-			  h[link.text.strip] = link['href']
-			end
-			h.each do |key, value|
-				if !Stock.where(symbol:key).empty?
-					stock = Stock.where(symbol:key)[0]
-					Ereport.create(symbol:key, date:date, stock_id:stock.id)
+			begin
+				page = Nokogiri::HTML(open(url))
+			rescue
+				p "404 page"
+			else
+				page.xpath('//a[@href]').each do |link|
+				  h[link.text.strip] = link['href']
+				end
+				h.each do |key, value|
+					if !Stock.where(symbol:key).empty?
+						stock = Stock.where(symbol:key)[0]
+						Ereport.create(symbol:key, date:date, stock_id:stock.id)
+					end
 				end
 			end
-			counter += 1
+		counter += 1
 		end
 		render 'text'
 	end
