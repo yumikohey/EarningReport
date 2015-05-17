@@ -14,8 +14,8 @@ class EarningCalendarsController < ApplicationController
 		# require 'yahoo_stock'
 		# quote = YahooStock::Quote.new(:stock_symbols => ['AAPL'])
 		# history = YahooStock::History.new(:stock_symbol => 'AAPL', :start_date => Date.today-20, :end_date => Date.today-2)
-		counter = 143
-		while(counter < 150)
+		counter = 150
+		while(counter < 1596)
 			date = Date.today - counter
 			date_str = date.to_s.split("-").join("")
 			url = "http://biz.yahoo.com/research/earncal/#{date_str}.html"
