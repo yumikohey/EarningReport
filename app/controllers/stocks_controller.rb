@@ -9,7 +9,6 @@ class StocksController < ApplicationController
 	def create
 		stock_symbol = params[:symbol].upcase
 		stock = Stock.where(symbol:stock_symbol)[0]
-		# all_reports = stock.ereports
  		@all_ers = stock.ereports
  		@all_ers.each do |earning|
  			EreportsHelper.earning_report_dates_data(stock_symbol, earning)
@@ -17,7 +16,6 @@ class StocksController < ApplicationController
  		this_stock = Stock.where(symbol:stock_symbol)[0]
  		@all_reports = this_stock.ereports
  	  redirect_to "/stocks/#{stock_symbol}"
- 	# end
  end
 
  def show

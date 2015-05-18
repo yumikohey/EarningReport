@@ -21,50 +21,51 @@ module EreportsHelper
 	end
 
 	def self.earning_report_dates_data(stock_symbol, earning)
-		date = earning.date
-		require 'yahoo_stock'
-		yesterday = date - 1
-		tomorrow = date+1
-		price_quotes = []
-		if tomorrow < Date.today
-			history = YahooStock::History.new(:stock_symbol => stock_symbol, :start_date => yesterday, :end_date => tomorrow)
-			price_quotes = history.results(:to_array).output
-		elsif tomorrow == Date.today
-			history = YahooStock::History.new(:stock_symbol => stock_symbol, :start_date => yesterday, :end_date => date)
-			quote = YahooStock::Quote.new(:stock_symbols => [stock_symbol])
-			price_quotes = history.results(:to_array).output
-			quote.use_all_parameters
-			all_data = quote.results(:to_hash).output
-			open = all_data[0][:open].to_f
-			high = all_data[0][:day_high].to_f
-			low = all_data[0][:day_low].to_f
-			close = all_data[0][:last_trade_price_only].to_f
-			volume = all_data[0][:volume].to_i
-			tomorrow_price = []
-			tomorrow_price.push(open)
-			tomorrow_price.push(high)
-			tomorrow_price.push(low)
-			tomorrow_price.push(close)
-			tomorrow_price.push(volume)
-			price_quotes.unshift(tomorrow_price)			
+		if PriceBeforeEr.where(ereport_id:earning.id).empty?
+			date = earning.date
+			require 'yahoo_stock'
+			yesterday = date - 1
+			tomorrow = date + 1
+			price_quotes = []
+			if tomorrow < Date.today
+				history = YahooStock::History.new(:stock_symbol => stock_symbol, :start_date => yesterday, :end_date => tomorrow)
+				price_quotes = history.results(:to_array).output
+			elsif tomorrow == Date.today
+				history = YahooStock::History.new(:stock_symbol => stock_symbol, :start_date => yesterday, :end_date => date)
+				quote = YahooStock::Quote.new(:stock_symbols => [stock_symbol])
+				price_quotes = history.results(:to_array).output
+				quote.use_all_parameters
+				all_data = quote.results(:to_hash).output
+				open = all_data[0][:open].to_f
+				high = all_data[0][:day_high].to_f
+				low = all_data[0][:day_low].to_f
+				close = all_data[0][:last_trade_price_only].to_f
+				volume = all_data[0][:volume].to_i
+				tomorrow_price = []
+				tomorrow_price.push(open)
+				tomorrow_price.push(high)
+				tomorrow_price.push(low)
+				tomorrow_price.push(close)
+				tomorrow_price.push(volume)
+				price_quotes.unshift(tomorrow_price)			
+			end
+			p price_quotes[2]
+			price_before_er = PriceBeforeEr.create(ereport_id:earning.id)
+			price_on_er = PriceOnEr.create(ereport_id:earning.id)
+			price_after_er = PriceAfterEr.create(ereport_id:earning.id)
+			price_before_er.price_date = yesterday
+			price_before_er.save
+			price_on_er.price_date = date
+			price_on_er.save
+			price_after_er.price_date = tomorrow
+			price_after_er.save
+			price_before_er.quote = price_quotes[2]
+			price_before_er.save
+			price_on_er.quote = price_quotes[1]
+			price_on_er.save
+			price_after_er.quote = price_quotes[0]
+			price_after_er.save
 		end
-		binding.pry
-		p price_quotes[2]
-		price_before_er = PriceBeforeEr.create(ereport_id:earning.id)
-		price_on_er = PriceOnEr.create(ereport_id:earning.id)
-		price_after_er = PriceAfterEr.create(ereport_id:earning.id)
-		price_before_er.price_date = yesterday
-		price_before_er.save
-		price_on_er.price_date = date
-		price_on_er.save
-		price_after_er.price_date = tomorrow
-		price_after_er.save
-		price_before_er.quote = price_quotes[2]
-		price_before_er.save
-		price_on_er.quote = price_quotes[1]
-		price_on_er.save
-		price_after_er.quote = price_quotes[0]
-		price_after_er.save
 	end
 
 end
