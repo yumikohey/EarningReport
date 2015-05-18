@@ -40,13 +40,15 @@ module EreportsHelper
 			low = all_data[0][:day_low].to_f
 			close = all_data[0][:last_trade_price_only].to_f
 			volume = all_data[0][:volume].to_i
-			price_quotes[2] = []
-			price_quotes[2].push(open)
-			price_quotes[2].push(high)
-			price_quotes[2].push(low)
-			price_quotes[2].push(close)
-			price_quotes[2].push(volume)			
+			tomorrow_price = []
+			tomorrow_price.push(open)
+			tomorrow_price.push(high)
+			tomorrow_price.push(low)
+			tomorrow_price.push(close)
+			tomorrow_price.push(volume)
+			price_quotes.unshift(tomorrow_price)			
 		end
+		binding.pry
 		p price_quotes[2]
 		price_before_er = PriceBeforeEr.create(ereport_id:earning.id)
 		price_on_er = PriceOnEr.create(ereport_id:earning.id)
@@ -57,11 +59,11 @@ module EreportsHelper
 		price_on_er.save
 		price_after_er.price_date = tomorrow
 		price_after_er.save
-		price_before_er.quote = price_quotes[0]
+		price_before_er.quote = price_quotes[2]
 		price_before_er.save
 		price_on_er.quote = price_quotes[1]
 		price_on_er.save
-		price_after_er.quote = price_quotes[2]
+		price_after_er.quote = price_quotes[0]
 		price_after_er.save
 	end
 
