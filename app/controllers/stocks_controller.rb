@@ -14,7 +14,7 @@ class StocksController < ApplicationController
  			EreportsHelper.earning_report_dates_data(stock_symbol, earning)
  		end
  		this_stock = Stock.where(symbol:stock_symbol)[0]
- 		@all_reports = this_stock.ereports
+ 		@all_reports = this_stock.ereports.order('date DESC')
  	  redirect_to "/stocks/#{stock_symbol}"
  end
 
@@ -25,7 +25,7 @@ class StocksController < ApplicationController
 		@all_ers.each do |earning|
 			EreportsHelper.earning_report_dates_data(stock.symbol, earning)
 		end			
-		@all_reports = stock.ereports
+		@all_reports = stock.ereports.order('date DESC')
 		render 'show'
 	end
 

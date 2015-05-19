@@ -245,3 +245,4 @@ D, [2015-05-16T23:05:43.480855 #8766] DEBUG -- :   [1m[36m (55.1ms)[0m  [1mC
 D, [2015-05-16T23:05:43.589088 #8766] DEBUG -- :   [1m[35mSQL (40.8ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150509045034"]]
 D, [2015-05-16T23:05:43.632470 #8766] DEBUG -- :   [1m[36m (42.9ms)[0m  [1mCOMMIT[0m
 D, [2015-05-18T13:41:33.685351 #30849] DEBUG -- :   [1m[36m (49.2ms)[0m  [1mSELECT COUNT(*) FROM "ereports"[0m
+D, [2015-05-18T19:26:59.723677 #40882] DEBUG -- :   [1m[36mEreport Load (35.6ms)[0m  [1mSELECT  "ereports".* FROM "ereports"  ORDER BY "ereports"."id" DESC LIMIT 1[0m

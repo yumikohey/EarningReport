@@ -15,6 +15,7 @@ class EarningCalendarsController < ApplicationController
 		date_str = date.to_s.split("-").join("")
 		url = "http://biz.yahoo.com/research/earncal/#{date_str}.html"
 		h = {}
+		array = []
 		begin
 			page = Nokogiri::HTML(open(url))
 		rescue
@@ -27,9 +28,11 @@ class EarningCalendarsController < ApplicationController
 				if !Stock.where(symbol:key).empty?
 					stock = Stock.where(symbol:key)[0]
 					Ereport.create(symbol:key, date:date, stock_id:stock.id)
+					array.push(key)
 				end
 			end
 		end
+		p array
 		render 'text'
 	end
 

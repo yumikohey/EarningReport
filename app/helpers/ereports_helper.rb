@@ -21,7 +21,7 @@ module EreportsHelper
 	end
 
 	def self.earning_report_dates_data(stock_symbol, earning)
-		if PriceAfterEr.where(ereport_id:earning.id).empty?
+		if PriceAfterEr.where(ereport_id:earning.id).empty? || PriceAfterEr.where(ereport_id:earning.id)[0].quote.empty?
 			date = earning.date
 			yesterday = date - 1
 			tomorrow = date + 1
@@ -48,7 +48,30 @@ module EreportsHelper
 					history = YahooStock::History.new(:stock_symbol => stock_symbol, :start_date => yesterday, :end_date => tomorrow)
 					price_quotes = history.results(:to_array).output	
 				end
-			elsif tomorrow == Date.today
+			elsif date == Date.today && (PriceOnEr.where(ereport_id:earning.id).empty? || PriceOnEr.where(ereport_id:earning.id)[0].quote.empty?)
+				history = YahooStock::History.new(:stock_symbol => stock_symbol, :start_date => yesterday, :end_date => yesterday)
+				price_quotes = history.results(:to_array).output
+				quote = YahooStock::Quote.new(:stock_symbols => [stock_symbol])
+				quote.use_all_parameters
+				today_data = quote.results(:to_hash).output
+				open = today_data[0][:open].to_f
+				high = today_data[0][:day_high].to_f
+				low = today_data[0][:day_low].to_f
+				close = today_data[0][:last_trade_price_only].to_f
+				volume = today_data[0][:volume].to_i
+				today_price = []	
+				today_price.push(date)
+				today_price.push(open)
+				today_price.push(high)
+				today_price.push(low)
+				today_price.push(close)
+				today_price.push(volume)
+				price_quotes.unshift(today_price)
+				p "today price #{today_price}"
+				tomorrow_price = []
+				price_quotes.unshift(tomorrow_price)
+				p "price_quotes array: #{price_quotes}"
+			elsif tomorrow == Date.today && (PriceAfterEr.where(ereport_id:earning.id, date:tomorrow).empty? || PriceAfterEr.where(ereport_id:earning.id, date:tomorrow)[0].quote.empty?)
 				history = YahooStock::History.new(:stock_symbol => stock_symbol, :start_date => yesterday, :end_date => date)
 				quote = YahooStock::Quote.new(:stock_symbols => [stock_symbol])
 				price_quotes = history.results(:to_array).output
@@ -60,6 +83,7 @@ module EreportsHelper
 				close = all_data[0][:last_trade_price_only].to_f
 				volume = all_data[0][:volume].to_i
 				tomorrow_price = []
+				today_price.push(tomorrow)
 				tomorrow_price.push(open)
 				tomorrow_price.push(high)
 				tomorrow_price.push(low)

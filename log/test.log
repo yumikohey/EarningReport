@@ -146,3 +146,4 @@ WHERE c.contype = 'f'
   AND t3.nspname = ANY (current_schemas(false))
 ORDER BY c.conname
 [0m
+  [1m[36mEreport Load (1.4ms)[0m  [1mSELECT  "ereports".* FROM "ereports"  ORDER BY "ereports"."id" DESC LIMIT 1[0m
