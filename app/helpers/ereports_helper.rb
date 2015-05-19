@@ -21,6 +21,7 @@ module EreportsHelper
 	end
 
 	def self.earning_report_dates_data(stock_symbol, earning)
+		today_date = Date.today
 		if PriceAfterEr.where(ereport_id:earning.id).empty? || PriceAfterEr.where(ereport_id:earning.id)[0].quote.empty?
 			date = earning.date
 			yesterday = date - 1
@@ -32,7 +33,7 @@ module EreportsHelper
 				yesterday -= 2
 			end
 			price_quotes = []
-			if tomorrow < Date.today
+			if tomorrow < today_date - 1
 				history = YahooStock::History.new(:stock_symbol => stock_symbol, :start_date => yesterday, :end_date => tomorrow)
 				price_quotes = history.results(:to_array).output
 				if price_quotes.length < 3
@@ -48,7 +49,7 @@ module EreportsHelper
 					history = YahooStock::History.new(:stock_symbol => stock_symbol, :start_date => yesterday, :end_date => tomorrow)
 					price_quotes = history.results(:to_array).output	
 				end
-			elsif date == Date.today && (PriceOnEr.where(ereport_id:earning.id).empty? || PriceOnEr.where(ereport_id:earning.id)[0].quote.empty?)
+			elsif date == today_date - 1 && (PriceOnEr.where(ereport_id:earning.id).empty? || PriceOnEr.where(ereport_id:earning.id)[0].quote.empty?)
 				history = YahooStock::History.new(:stock_symbol => stock_symbol, :start_date => yesterday, :end_date => yesterday)
 				price_quotes = history.results(:to_array).output
 				quote = YahooStock::Quote.new(:stock_symbols => [stock_symbol])
@@ -71,7 +72,7 @@ module EreportsHelper
 				tomorrow_price = []
 				price_quotes.unshift(tomorrow_price)
 				p "price_quotes array: #{price_quotes}"
-			elsif tomorrow == Date.today && (PriceAfterEr.where(ereport_id:earning.id, date:tomorrow).empty? || PriceAfterEr.where(ereport_id:earning.id, date:tomorrow)[0].quote.empty?)
+			elsif tomorrow == today_date - 1 && (PriceAfterEr.where(ereport_id:earning.id, date:tomorrow).empty? || PriceAfterEr.where(ereport_id:earning.id, date:tomorrow)[0].quote.empty?)
 				history = YahooStock::History.new(:stock_symbol => stock_symbol, :start_date => yesterday, :end_date => date)
 				quote = YahooStock::Quote.new(:stock_symbols => [stock_symbol])
 				price_quotes = history.results(:to_array).output
