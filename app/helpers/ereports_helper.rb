@@ -21,7 +21,7 @@ module EreportsHelper
 	end
 
 	def self.earning_report_dates_data(stock_symbol, earning)
-		if PriceBeforeEr.where(ereport_id:earning.id).empty?
+		if PriceAfterEr.where(ereport_id:earning.id).empty?
 			date = earning.date
 			yesterday = date - 1
 			tomorrow = date + 1
