@@ -1,5 +1,13 @@
 <div class="col-md-8">
-<h1><%= @stock %></h1>
+<div class="symbol">
+	<div class="row">
+		<div class="col-md-1"><%= @stock %></div>
+		<div class="col-md-1"></div>
+		<div class="col-md-1">
+			<span class="stock_price text-success">$<%=@current_price[0][1]%></span>
+		</div>
+	</div>	
+</div>
 <% upcoming_dates = [] %>
 <% @all_reports.each_with_index do |earning, idx| %>
 <% if earning.price_before_er %>
