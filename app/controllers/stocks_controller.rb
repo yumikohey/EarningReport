@@ -33,6 +33,13 @@ class StocksController < ApplicationController
 		StocksHelper.read_yahoo_data
 	end
 
+	def upcoming_earnings
+		if !Ereport.where(date:Date.today).empty?
+			@earnings = Ereport.where(date:Date.today)
+		end
+		render 'upcoming_earnings'
+	end
+
 	private
 	  def ereports_params
 	    params.require(:ereport).permit(:symbol, :date, :before_or_after_hour, :stock_id)
