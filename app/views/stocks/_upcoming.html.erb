@@ -1,9 +1,11 @@
-<div class="container">
- <% @earnings.each do |earning| %>
-	<div class="col-md-4">
-		<%= earning.symbol %>
+<% @earnings.each do |earning| %>
+<div class="row">
+<div class="col-md-3"></div>
+	<div class="col-md-6">
+		<a href="/stocks/<%=earning.symbol%>"><%= earning.symbol %></a>
 	</div>
-	<div class="col-md-4"></div>
-	<div class="col-md-4"></div>
-	<% end %>
+<div class="col-md-3"></div>
 </div>
+<% end %>
+
+

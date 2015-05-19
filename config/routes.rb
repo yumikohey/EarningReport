@@ -22,7 +22,6 @@ Rails.application.routes.draw do
 
   get '/earning_calendars/yahoo', to: 'earning_calendars#record_earning_dates'
 
-  get '/stocks/upcoming_earnings', to: 'stocks#upcoming_earnings', as: 'earnings'
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
