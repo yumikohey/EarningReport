@@ -11,7 +11,7 @@ class EarningCalendarsController < ApplicationController
 	end
 
 	def record_earning_dates
-		date = Date.today
+		date = Date.today - 1
 		date_str = date.to_s.split("-").join("")
 		url = "http://biz.yahoo.com/research/earncal/#{date_str}.html"
 		h = {}
