@@ -16,26 +16,26 @@
 			</tr>
 			<tr>
 				<td><%= earning.price_before_er.price_date if earning.price_before_er %></td>
-			  <td><%= earning.price_before_er.quote[1] if earning.price_before_er %></td>
-			  <td><%= earning.price_before_er.quote[2] if earning.price_before_er %></td>
-			  <td><%= earning.price_before_er.quote[3] if earning.price_before_er %></td>
-			  <td><%= earning.price_before_er.quote[4] if earning.price_before_er %></td>
+			  <td><%= earning.price_before_er.quote[1].to_f.round(2) if earning.price_before_er %></td>
+			  <td><%= earning.price_before_er.quote[2].to_f.round(2) if earning.price_before_er %></td>
+			  <td><%= earning.price_before_er.quote[3].to_f.round(2) if earning.price_before_er %></td>
+			  <td><%= earning.price_before_er.quote[4].to_f.round(2) if earning.price_before_er %></td>
 			  <td><%= earning.price_before_er.quote[5] if earning.price_before_er %></td>
 			</tr>
 			<tr class="info">
 				<td><%= earning.price_on_er.price_date if earning.price_on_er %></td>
-			  <td><%= earning.price_on_er.quote[1] if earning.price_on_er %></td>
-			  <td><%= earning.price_on_er.quote[2] if earning.price_on_er %></td>
-			  <td><%= earning.price_on_er.quote[3] if earning.price_on_er %></td>
-			  <td><%= earning.price_on_er.quote[4] if earning.price_on_er %></td>
+			  <td><%= earning.price_on_er.quote[1].to_f.round(2) if earning.price_on_er %></td>
+			  <td><%= earning.price_on_er.quote[2].to_f.round(2) if earning.price_on_er %></td>
+			  <td><%= earning.price_on_er.quote[3].to_f.round(2) if earning.price_on_er %></td>
+			  <td><%= earning.price_on_er.quote[4].to_f.round(2) if earning.price_on_er %></td>
 			  <td><%= earning.price_on_er.quote[5] if earning.price_on_er %></td>
 			</tr>
 			<tr>
 				<td><%= earning.price_after_er.price_date if earning.price_after_er %></td>
-			  <td><%= earning.price_after_er.quote[1] if earning.price_after_er %></td>
-			  <td><%= earning.price_after_er.quote[2] if earning.price_after_er %></td>
-			  <td><%= earning.price_after_er.quote[3] if earning.price_after_er %></td>
-			  <td><%= earning.price_after_er.quote[4] if earning.price_after_er %></td>
+			  <td><%= earning.price_after_er.quote[1].to_f.round(2) if earning.price_after_er %></td>
+			  <td><%= earning.price_after_er.quote[2].to_f.round(2) if earning.price_after_er %></td>
+			  <td><%= earning.price_after_er.quote[3].to_f.round(2) if earning.price_after_er %></td>
+			  <td><%= earning.price_after_er.quote[4].to_f.round(2) if earning.price_after_er %></td>
 			  <td><%= earning.price_after_er.quote[5] if earning.price_after_er %></td>
 			</tr>
 			<tr class="primary">

@@ -23,13 +23,31 @@ module EreportsHelper
 	def self.earning_report_dates_data(stock_symbol, earning)
 		if PriceBeforeEr.where(ereport_id:earning.id).empty?
 			date = earning.date
-			require 'yahoo_stock'
 			yesterday = date - 1
 			tomorrow = date + 1
+			require 'yahoo_stock'
+			if (date.tomorrow.saturday?)
+				tomorrow += 2
+			elsif (date.yesterday.sunday?)
+				yesterday -= 2
+			end
 			price_quotes = []
 			if tomorrow < Date.today
 				history = YahooStock::History.new(:stock_symbol => stock_symbol, :start_date => yesterday, :end_date => tomorrow)
 				price_quotes = history.results(:to_array).output
+				if price_quotes.length < 3
+					if Date.parse(price_quotes[0][0]) != date && date.prev_day.monday?
+						yesterday -= 3
+					elsif Date.parse(price_quotes[0][0]) == date && date.next_day.friday?
+						tomorrow += 3
+					elsif Date.parse(price_quotes[0][0]) == date 
+						tomorrow += 1
+					elsif Date.parse(price_quotes[0][0]) != date
+						yesterday -= 1
+					end
+					history = YahooStock::History.new(:stock_symbol => stock_symbol, :start_date => yesterday, :end_date => tomorrow)
+					price_quotes = history.results(:to_array).output	
+				end
 			elsif tomorrow == Date.today
 				history = YahooStock::History.new(:stock_symbol => stock_symbol, :start_date => yesterday, :end_date => date)
 				quote = YahooStock::Quote.new(:stock_symbols => [stock_symbol])
