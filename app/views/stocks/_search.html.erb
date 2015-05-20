@@ -1,6 +1,6 @@
 <div class="search_box">
-	<%= form_tag("/stocks/create", method: "post", :class => 'searchform cf') do %>
+	<%= form_tag("/stocks/create", method: "post", :class => 'search') do %>
 	  <%= text_field_tag(:symbol) %>
-	  <%= submit_tag("Search Stock") %>
+	  		  <%= submit_tag "Search Stock", class: "search_button" %>
 	<% end %>
 </div>
