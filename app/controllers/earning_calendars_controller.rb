@@ -11,7 +11,7 @@ class EarningCalendarsController < ApplicationController
 	end
 
 	def record_earning_dates
-		date = Time.zone.today + 1
+		date = Time.zone.today 
 		date_str = date.to_s.split("-").join("")
 		url = "http://biz.yahoo.com/research/earncal/#{date_str}.html"
 		h = {}
@@ -27,7 +27,7 @@ class EarningCalendarsController < ApplicationController
 			h.each do |key, value|
 				if !Stock.where(symbol:key).empty?
 					stock = Stock.where(symbol:key)[0]
-					Ereport.create(symbol:key, date:date, stock_id:stock.id)
+					Ereport.create!(symbol:key, date:date, stock_id:stock.id)
 					array.push(key)
 				end
 			end

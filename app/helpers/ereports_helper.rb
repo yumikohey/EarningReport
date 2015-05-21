@@ -6,7 +6,8 @@ module EreportsHelper
 
 	def self.earning_report_dates_data(stock_symbol, earning)
 		today_date = Time.zone.today
-		if ( PriceAfterEr.where(ereport_id:earning.id).empty? || PriceAfterEr.where(ereport_id:earning.id, quote:nil).count != 0)
+		@upcoming_earning_dates = []
+		if ((PriceAfterEr.where(ereport_id:earning.id).empty? || PriceAfterEr.where(ereport_id:earning.id, quote:nil).count != 0) && earning.date < Time.zone.today)
 			date = earning.date
 			yesterday = date - 1
 			tomorrow = date + 1
