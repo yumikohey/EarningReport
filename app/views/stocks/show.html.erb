@@ -64,7 +64,7 @@
 			</tr>
 		</table>
 		</div>
-		<% elsif earning.date > Date.today %>
+		<% elsif earning.date > Time.zone.today %>
 		<% upcoming_dates.push(earning.date.strftime("%b %d, %Y"))%>
 		<%end%>
 <% end %>

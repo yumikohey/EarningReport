@@ -3,8 +3,8 @@ class StocksController < ApplicationController
 	include StocksHelper
 
 	def index
-		if !Ereport.where(date:Date.today).empty?
-			@earnings = Ereport.where(date:Date.today)
+		if !Ereport.where(date:Time.zone.today).empty?
+			@earnings = Ereport.where(date:Time.zone.today)
 		end
 		p @earnings
 		render 'index'

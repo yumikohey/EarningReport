@@ -6,12 +6,12 @@ class EarningCalendarsController < ApplicationController
 	end
 
 	def index
-		@stocks = EarningCalendar.where(day:Date.today.next_day)
+		@stocks = EarningCalendar.where(day:Time.zone.today.next_day)
 		render 'index'
 	end
 
 	def record_earning_dates
-		date = Date.today 
+		date = Time.zone.today + 1
 		date_str = date.to_s.split("-").join("")
 		url = "http://biz.yahoo.com/research/earncal/#{date_str}.html"
 		h = {}
@@ -38,10 +38,10 @@ class EarningCalendarsController < ApplicationController
 	# def record_earning_dates
 	# 	# require 'yahoo_stock'
 	# 	# quote = YahooStock::Quote.new(:stock_symbols => ['AAPL'])
-	# 	# history = YahooStock::History.new(:stock_symbol => 'AAPL', :start_date => Date.today-20, :end_date => Date.today-2)
+	# 	# history = YahooStock::History.new(:stock_symbol => 'AAPL', :start_date => Time.zone.today-20, :end_date => Time.zone.today-2)
 	# 	counter = 1597
 	# 	while(counter < 1596)
-	# 		date = Date.today - counter
+	# 		date = Time.zone.today - counter
 	# 		date_str = date.to_s.split("-").join("")
 	# 		url = "http://biz.yahoo.com/research/earncal/#{date_str}.html"
 	# 		h = {}

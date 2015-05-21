@@ -1,6 +1,6 @@
 module StocksHelper
 	def self.read_yahoo_data
-		tomorrow_str = Date.today.next_day.to_s.split("-").join("")
+		tomorrow_str = Time.zone.today.next_day.to_s.split("-").join("")
 		url = "http://biz.yahoo.com/research/earncal/#{tomorrow_str}.html"
 		page = Nokogiri::HTML(open(url))
 		page.search('.date').map do |element|

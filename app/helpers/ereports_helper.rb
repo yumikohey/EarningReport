@@ -5,7 +5,7 @@ module EreportsHelper
 	end
 
 	def self.earning_report_dates_data(stock_symbol, earning)
-		today_date = Date.today
+		today_date = Time.zone.today
 		if ( PriceAfterEr.where(ereport_id:earning.id).empty? || PriceAfterEr.where(ereport_id:earning.id, quote:nil).count != 0)
 			date = earning.date
 			yesterday = date - 1
