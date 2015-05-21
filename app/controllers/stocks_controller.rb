@@ -28,7 +28,8 @@ class StocksController < ApplicationController
  def show
 		@stock = params[:symbol].upcase
 		stock = Stock.where(symbol:params[:symbol])[0]
-		@all_ers = stock.ereports
+		@all_ers = stock.ereports.order('date DESC')
+		p @all_ers.first
 		@all_ers.each do |earning|
 			EreportsHelper.earning_report_dates_data(stock.symbol, earning)
 		end			
