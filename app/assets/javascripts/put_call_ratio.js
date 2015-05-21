@@ -1,4 +1,48 @@
 $(function(){
+  console.log("hi");
+  var format_data, data_obj, option_symbol;
+
+  $('.option_chains').on('click', function(){
+    option_symbol = $('#option_symbol').val();
+    console.log(option_symbol);
+    directToOpts(option_symbol);
+  });
+
+  var directToOpts = function(option_symbol){
+    $.ajax({
+                type: "GET",
+                url: '/option_chains/' + option_symbol,
+                dataType: 'json',
+                success: function (data) {
+                   console.log('hello');
+                   format_data = JSON.stringify(eval("(" + data + ")"));
+                   data_obj = JSON.parse(format_data);
+                   expiration_date = data_obj.calls[0].expiry;
+                   downloadOptionsChains(data_obj, option_symbol, expiration_date);
+                },
+                error: function (result) {
+                    console.log('world');
+                    error();
+                }
+    });
+  }
+
+  var downloadOptionsChains = function(data_obj, option_symbol, expiration_date){
+              $.ajax({
+                          type: "POST",
+                          url: '/download_option_chains',
+                          data: { option_chain: {symbol: option_symbol, option_chains: data_obj, expiration_date: expiration_date}},
+                          dataType: 'json',
+                          success: function (data) {
+                             console.log('success');
+                          },
+                          error: function (result) {
+                              console.log('bad');
+                              error();
+                          }
+              });
+  }
+
   $.ajax({
              type: "GET",
              contentType: "application/json; charset=utf-8",
@@ -11,7 +55,7 @@ $(function(){
              error: function (result) {
                  error();
              }
-         });
+  });
    
   function draw(data) {
       var margin = {top: 20, right: 20, bottom: 30, left: 50},

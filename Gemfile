@@ -33,6 +33,12 @@ gem 'dotenv-rails'
 
 gem 'nas-yahoo_stock'
 
+gem 'httparty'
+
+gem 'gon'
+
+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

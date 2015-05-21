@@ -22,6 +22,12 @@ Rails.application.routes.draw do
 
   get '/earning_calendars/yahoo', to: 'earning_calendars#record_earning_dates'
 
+  get '/option_chains/:symbol', to: 'stocks#options', as: 'stock_options'
+
+  post '/download_option_chains', to: 'stocks#download_options', as: 'download_options'
+
+  get '/current_pain', to: 'stocks#current_pain', as: 'current_pain'
+
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

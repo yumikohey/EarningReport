@@ -5,4 +5,5 @@ class Stock < ActiveRecord::Base
 	has_many :price_after_ers, through: :ereport
 	has_many :earning_calendars
 	has_many :put_call_ratios
+	has_many :option_chains
 end
