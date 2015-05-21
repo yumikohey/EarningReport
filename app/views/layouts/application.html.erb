@@ -10,12 +10,19 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body class="stretched">
-		<div class="col-md-2 pull-left">
-			<h1 class="text-primary">
-				<a href="/">Home</a>
-			</h1>
-		</div>
-<%=yield %>
+<body>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-2 col-md-2 col-xs-2">
+      <h1 class="text-primary">
+        <a href="/">Home</a>
+      </h1>
+    </div>
+    <div class="col-xs-1"></div>
+    <div class="col-lg-10 col-md-10 col-xs-9">
+      <%=yield %>
+    </div>
+  </div>
+</div>
 </body>
 </html>
