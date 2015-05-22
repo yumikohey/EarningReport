@@ -46,7 +46,7 @@ class StocksController < ApplicationController
 
 	def options
 		symbol = params[:symbol]
-		url = "http://www.google.com/finance/option_chain?q=#{symbol}&output=json&expy=2015&expm=5&expd=22"
+		url = "http://www.google.com/finance/option_chain?q=#{symbol}&output=json"
 		response = HTTParty.get(url)
 		json_data = response.body
 		render json: json_data.to_json
