@@ -58,14 +58,8 @@ class StocksController < ApplicationController
 		stock_id = Stock.where(symbol:stock_symbol)[0].id if !Stock.where(symbol:stock_symbol).empty?
 		params[:stock_id] = stock_id
 		option_chains = params[:option_chain][:option_chains]
-		if OptionChain.where(symbol:stock_symbol, expiration_date:expiry).empty?
-			OptionChain.create!(symbol:stock_symbol, stock_id:stock_id, expiration_date:expiry, option_chains:option_chains)
-		end
-			@option_chain = OptionChain.where(stock_id:stock_id, expiration_date:expiry)[0].option_chains
-		# respond_to do |format|
-		# 	format.html
-		# 	format.json { render json: @option_chain }
-		# end
+		OptionChain.create!(symbol:stock_symbol, stock_id:stock_id, expiration_date:expiry, option_chains:option_chains)
+    @option_chain = OptionChain.where(stock_id:stock_id, expiration_date:expiry)[0].option_chains
 		render 'option'
 	end
 

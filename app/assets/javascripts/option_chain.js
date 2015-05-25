@@ -92,8 +92,7 @@ $(function(){
 		      .attr("transform", "rotate(-90)")
 		      .attr("y", 6)
 		      .attr("dy", ".71em")
-		      .style("text-anchor", "end")
-		      .text("Population");
+		      .style("text-anchor", "end");
 
 		  var strike = svg.selectAll(".strike")
 		      .data(data)
@@ -145,16 +144,16 @@ $(function(){
 			var close_price = 0, strike_price = 0, open_interest = 0, oi;
 			call_sum = 0, put_sum = 0;
 
-			strike_price_array.push(parseInt(calls[close].strike, 10));
+			strike_price_array.push(parseFloat(calls[close].strike, 10));
 
 			for(var strike = 0; strike < strike_levels; strike++){
 
-				close_price = parseInt(calls[close].strike, 10);
-				strike_price = parseInt(calls[strike].strike, 10);
+				close_price = parseFloat(calls[close].strike, 10);
+				strike_price = parseFloat(calls[strike].strike, 10);
 				oi = calls[strike].oi;
 
 				if ( oi !== "-"){
-					open_interest = parseInt(oi, 10);
+					open_interest = parseFloat(oi, 10);
 				}
 
 				if ( close_price > strike_price ){
@@ -171,12 +170,6 @@ $(function(){
 
 		console.log( "call: " + call_volumes); 
 		console.log( "put: " + put_volumes);
-
-		for(var idx=0; idx < strike_levels; idx++){
-			if(strike_price_array[idx] == strike_price_array[idx+1]){
-				strike_price_array[idx+1] += 0.5;
-			}
-		}
 
 		for(var k = 0; k < strike_levels; k++){
 			call_put_volumes.push(
@@ -197,8 +190,6 @@ $(function(){
 					total: call_volumes[k] + put_volumes[k]
 				});
 		}
-
-
 
 		stacked_chart(call_put_volumes, strike_price_array, strike_levels);
 		console.log(call_put_volumes);
