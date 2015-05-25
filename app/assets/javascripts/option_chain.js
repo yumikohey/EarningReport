@@ -47,49 +47,27 @@ $(function(){
 	}
 
 	var stacked_chart = function(call_put_volumes, strike_price_array, strike_levels){
-		var dataset = call_put_volumes;
-
-		var n = 2, // number of layers
-		    m = strike_levels, // number of samples per layer
-		    stack = d3.layout.stack(),
-		    //layers = stack(d3.range(n).map(function() { return bumpLayer(m, .1); })),
-		    layers = stack(d3.range(n).map(function(dat, idx1){
-		    	return dataset.map(function(d,idx2){
-		    		return {
-		    			x: idx2,
-		    			y: d[idx1],
-		    		};
-		    	});
-		    })
-		    );
-
-		    yGroupMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y; }); }),
-		    yStackMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y0 + d.y; }); });
-
-		console.log(layers);
-
-
-		var margin = {top: 40, right: 10, bottom: 20, left: 10},
+		var margin = {top: 20, right: 20, bottom: 30, left: 40},
 		    width = 960 - margin.left - margin.right,
 		    height = 500 - margin.top - margin.bottom;
 
 		var x = d3.scale.ordinal()
-				.domain(d3.range(m))
-		    .rangeRoundBands([0, width], 0.1);
+		    .rangeRoundBands([0, width], .1);
 
 		var y = d3.scale.linear()
-		    .domain([0, yStackMax])
-		    .range([height, 0]);
+		    .rangeRound([height, 0]);
 
-		var color = d3.scale.linear()
-		    .domain([0, n - 1])
-		    .range(["#aad", "#556"]);
+		var color = d3.scale.ordinal()
+		    .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
 
 		var xAxis = d3.svg.axis()
 		    .scale(x)
-		    .tickSize(0)
-		    .tickPadding(6)
 		    .orient("bottom");
+
+		var yAxis = d3.svg.axis()
+		    .scale(y)
+		    .orient("left")
+		    .tickFormat(d3.format(".2s"));
 
 		var svg = d3.select(".current_pain_diagram").append("svg")
 		    .attr("width", width + margin.left + margin.right)
@@ -97,87 +75,59 @@ $(function(){
 		    .append("g")
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-		var layer = svg.selectAll(".layer")
-		    .data(layers)
-		    .enter().append("g")
-		    .attr("class", "layer")
-		    .style("fill", function(d, i) { return color(i); });
+	var data = call_put_volumes;
 
-		var rect = layer.selectAll("rect")
-		    .data(function(d) { return d; })
-		  .enter().append("rect")
-		    .attr("x", function(d) { return x(d.x); })
-		    .attr("y", height)
-		    .attr("width", x.rangeBand())
-		    .attr("height", 0);
+		  x.domain(data.map(function(d) { return d.strike; }));
+		  y.domain([0, d3.max(data, function(d) { return d.total; })]);
 
-		rect.transition()
-		    .delay(function(d, i) { return i * 10; })
-		    .attr("y", function(d) { return y(d.y0 + d.y); })
-		    .attr("height", function(d) { return y(d.y0) - y(d.y0 + d.y); });
+		  svg.append("g")
+		      .attr("class", "x axis")
+		      .attr("transform", "translate(0," + height + ")")
+		      .call(xAxis);
 
-		svg.append("g")
-		    .attr("class", "x axis")
-		    .attr("transform", "translate(0," + height + ")")
-		    .call(xAxis);
+		  svg.append("g")
+		      .attr("class", "y axis")
+		      .call(yAxis)
+		    .append("text")
+		      .attr("transform", "rotate(-90)")
+		      .attr("y", 6)
+		      .attr("dy", ".71em")
+		      .style("text-anchor", "end")
+		      .text("Population");
 
-		d3.selectAll("input").on("change", change);
+		  var strike = svg.selectAll(".strike")
+		      .data(data)
+		      .enter().append("g")
+		      .attr("class", "g")
+		      .attr("transform", function(d) { return "translate(" + x(d.strike) + ",0)"; });
 
-		var timeout = setTimeout(function() {
-		  d3.select("input[value=\"grouped\"]").property("checked", true).each(change);
-		}, 2000);
+		  strike.selectAll("rect")
+		      .data(function(d) { return d.call_and_put; })
+		      .enter().append("rect")
+		      .attr("width", x.rangeBand())
+		      .attr("y", function(d) { return y(d.y1); })
+		      .attr("height", function(d) { return y(d.y0) - y(d.y1); })
+		      .style("fill", function(d) { return color(d.type); });
 
-		function change() {
-		  clearTimeout(timeout);
-		  if (this.value === "grouped") transitionGrouped();
-		  else transitionStacked();
-		}
+		  var legend = svg.selectAll(".legend")
+		      .data(color.domain().slice().reverse())
+		      .enter().append("g")
+		      .attr("class", "legend")
+		      .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 
-		function transitionGrouped() {
-		  y.domain([0, yGroupMax]);
+		  legend.append("rect")
+		      .attr("x", width - 18)
+		      .attr("width", 18)
+		      .attr("height", 18)
+		      .style("fill", color);
 
-		  rect.transition()
-		      .duration(500)
-		      .delay(function(d, i) { return i * 10; })
-		      .attr("x", function(d, i, j) { return x(d.x) + x.rangeBand() / n * j; })
-		      .attr("width", x.rangeBand() / n)
-		      .transition()
-		      .attr("y", function(d) { return y(d.y); })
-		      .attr("height", function(d) { return height - y(d.y); });
-		}
+		  legend.append("text")
+		      .attr("x", width - 24)
+		      .attr("y", 9)
+		      .attr("dy", ".35em")
+		      .style("text-anchor", "end")
+		      .text(function(d) { return d; });
 
-		function transitionStacked() {
-		  y.domain([0, yStackMax]);
-
-		  rect.transition()
-		      .duration(500)
-		      .delay(function(d, i) { return i * 10; })
-		      .attr("y", function(d) { return y(d.y0 + d.y); })
-		      .attr("height", function(d) { return y(d.y0) - y(d.y0 + d.y); })
-		      .transition()
-		      .attr("x", function(d) { return x(d.x); })
-		      .attr("width", x.rangeBand());
-		}
-
-		// Inspired by Lee Byron's test data generator.
-		function bumpLayer(n, o) {
-
-		  function bump(a) {
-		    var x = 1 / (.1 + Math.random()),
-		        y = 2 * Math.random() - .5,
-		        z = 10 / (.1 + Math.random());
-		    for (var i = 0; i < n; i++) {
-		      var w = (i / n - y) * z;
-		      a[i] += x * Math.exp(-w * w);
-		    }
-		  }
-
-		  var a = [], i;
-		  for (i = 0; i < n; ++i) a[i] = o + o * Math.random();
-		  for (i = 0; i < 5; ++i) bump(a);
-		  console.log("this is " + a);
-		  return a.map(function(d, i) { return {x: i, y: Math.max(0, d)}; });
-		}
 	}
 
 	var calculateVolumes = function(data_obj, strike_levels){
@@ -222,18 +172,37 @@ $(function(){
 		console.log( "call: " + call_volumes); 
 		console.log( "put: " + put_volumes);
 
-		for(var k = 0; k < strike_levels; k++){
-			call_put_volumes.push([call_volumes[k],put_volumes[k]]);
+		for(var idx=0; idx < strike_levels; idx++){
+			if(strike_price_array[idx] == strike_price_array[idx+1]){
+				strike_price_array[idx+1] += 0.5;
+			}
 		}
 
-		stacked_chart(call_put_volumes, strike_price_array, strike_levels);
-		console.log(strike_price_array[47]);
-	}
+		for(var k = 0; k < strike_levels; k++){
+			call_put_volumes.push(
+				{
+					strike: strike_price_array[k],
+					call_and_put: [
+						{
+							type: "Call",
+							y0: 0,
+							y1: parseInt(call_volumes[k])
+						},
+						{
+							type: "Put",
+							y0: parseInt(call_volumes[k]),
+							y1: parseInt(call_volumes[k])+parseInt(put_volumes[k])
+						}
+					],
+					total: call_volumes[k] + put_volumes[k]
+				});
+		}
 
-	// var PutCallObj = function(strike, dollar){
-	// 	this.x:strike,
-	// 	this.y:dollar,
-	// };
+
+
+		stacked_chart(call_put_volumes, strike_price_array, strike_levels);
+		console.log(call_put_volumes);
+	}
 
 	// var put_call_objects = function(call_volumes, put_volumes, strike_price_arrays, strike_levels){
 	// 	var call_volumes_objs = [],
