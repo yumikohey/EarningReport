@@ -1,11 +1,4 @@
 .current_pain_diagram {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  margin: auto;
-  position: relative;
-  width: 960px;
-}
-
-text {
   font: 10px sans-serif;
 }
 
@@ -16,18 +9,10 @@ text {
   shape-rendering: crispEdges;
 }
 
-form.radio_btns {
-  position: absolute;
-  top:10px;
-  right: 10px;
+.bar {
+  fill: steelblue;
 }
 
-form.radio_btns label{
-	width: 150px;
-}
-
-form.radio_btns input{
-	width: 10px;
-	margin-right: 10px;
-	height: 15px;
+.x.axis path {
+  display: none;
 }
