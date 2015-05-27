@@ -3,6 +3,10 @@ Even Yahoo! Finance or TD Ameritrade doesn't come with such fancy services, so I
 
 As an options trader, it's very important to know how much percentage changes after earning report released on a specific equity. It helps options traders construct the option trading strategies. 
 
+# Updates
+- Current Pain <a href="options-er.herokuapp.com">options-er.herokuapp.com</a> is up. Current Pain is trying to predict what price a certain equity is going to land at the end of the trading day.
+
+
 # Stretch Goals
 
 - Based on historical data, providing optimal options trading strategies;
