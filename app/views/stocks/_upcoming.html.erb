@@ -1,11 +1,15 @@
-<% @earnings.each do |earning| %>
-<div class="row">
-<div class="col-md-3"></div>
-	<div class="col-md-6">
-		<a href="/stocks/<%=earning.symbol%>"><%= earning.symbol %></a>
+<% if @earnings %>
+	<% @earnings.each do |earning| %>
+	<div class="row">
+	<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<a href="/stocks/<%=earning.symbol%>"><%= earning.symbol %></a>
+		</div>
+	<div class="col-md-3"></div>
 	</div>
-<div class="col-md-3"></div>
-</div>
+	<% end %>
+<% else %>
+	<div> No stocks release ER tomorrow </div>
 <% end %>
 
 
