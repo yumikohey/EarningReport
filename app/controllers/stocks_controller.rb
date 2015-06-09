@@ -6,7 +6,7 @@ class StocksController < ApplicationController
 		if !Ereport.where(date:Time.zone.today).empty?
 			@earnings = Ereport.where(date:Time.zone.today)
 		end
-		p @earnings
+		#DailyOptionChainJob.perform_at(1.minute.from_now, 'symbol', 1)
 		render 'index'
 	end
 

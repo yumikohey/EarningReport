@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   get '/current_pain', to: 'stocks#current_pain', as: 'current_pain'
 
 
+
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
