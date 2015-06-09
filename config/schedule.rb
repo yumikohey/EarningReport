@@ -1,8 +1,8 @@
-# every 1.day, :at => '1:14 am' do
-#   runner 'DailyOptionChainJob.perform_later("symbol")'
-# end
+# every :day, :at => '3:25 pm' do
 
-# every :minute do
-#   runner "DailyOptionChainJob.perform_later('hello')"
-#   command "echo 'hello'"
-# end
+set :environment, "production"
+set :output, {:error => "log/cron_error_log.log", :standard => "log/cron_log.log"}
+
+every :day, :at => '10:00 pm' do
+  rake 'daily_option_chains'
+end
