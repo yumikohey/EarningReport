@@ -37,6 +37,11 @@ gem 'httparty'
 
 gem 'gon'
 
+gem 'sidekiq'
+
+gem 'whenever', :require => false
+
+
 
 
 # Use ActiveModel has_secure_password

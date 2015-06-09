@@ -246,3 +246,37 @@ D, [2015-05-16T23:05:43.589088 #8766] DEBUG -- :   [1m[35mSQL (40.8ms)[0m  IN
 D, [2015-05-16T23:05:43.632470 #8766] DEBUG -- :   [1m[36m (42.9ms)[0m  [1mCOMMIT[0m
 D, [2015-05-18T13:41:33.685351 #30849] DEBUG -- :   [1m[36m (49.2ms)[0m  [1mSELECT COUNT(*) FROM "ereports"[0m
 D, [2015-05-18T19:26:59.723677 #40882] DEBUG -- :   [1m[36mEreport Load (35.6ms)[0m  [1mSELECT  "ereports".* FROM "ereports"  ORDER BY "ereports"."id" DESC LIMIT 1[0m
+E, [2015-06-08T23:02:46.562898 #36116] ERROR -- : PG::UndefinedTable: ERROR:  relation "option_chains" does not exist
+LINE 5:                WHERE a.attrelid = '"option_chains"'::regclas...
+                                          ^
+:               SELECT a.attname, format_type(a.atttypid, a.atttypmod),
+                     pg_get_expr(d.adbin, d.adrelid), a.attnotnull, a.atttypid, a.atttypmod
+                FROM pg_attribute a LEFT JOIN pg_attrdef d
+                  ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+               WHERE a.attrelid = '"option_chains"'::regclass
+                 AND a.attnum > 0 AND NOT a.attisdropped
+               ORDER BY a.attnum
+
+D, [2015-06-08T23:03:07.330065 #36116] DEBUG -- :   [1m[36mOptionChain Load (38.0ms)[0m  [1mSELECT "option_chains".* FROM "option_chains"[0m
+E, [2015-06-08T23:03:07.330360 #36116] ERROR -- : PG::UndefinedTable: ERROR:  relation "option_chains" does not exist
+LINE 1: SELECT "option_chains".* FROM "option_chains"
+                                      ^
+: SELECT "option_chains".* FROM "option_chains"
+D, [2015-06-08T23:03:41.028524 #36124] DEBUG -- :   [1m[36mActiveRecord::SchemaMigration Load (38.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+I, [2015-06-08T23:03:41.075884 #36124]  INFO -- : Migrating to CreateOptionChains (20150521224618)
+D, [2015-06-08T23:03:41.125459 #36124] DEBUG -- :   [1m[35m (40.3ms)[0m  BEGIN
+D, [2015-06-08T23:03:41.197256 #36124] DEBUG -- :   [1m[36m (70.1ms)[0m  [1mCREATE TABLE "option_chains" ("id" serial primary key, "symbol" character varying, "stock_id" integer, "expiration_date" date, "option_chains" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+D, [2015-06-08T23:03:41.421268 #36124] DEBUG -- :   [1m[35mSQL (52.8ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150521224618"]]
+D, [2015-06-08T23:03:41.463208 #36124] DEBUG -- :   [1m[36m (41.4ms)[0m  [1mCOMMIT[0m
+I, [2015-06-09T00:18:08.253805 #36782]  INFO -- : [ActiveJob] Enqueued DailyOptionChainJob (Job ID: 77c13c0a-b7a0-4d16-95da-8eee8370318e) to DelayedJob(default) with arguments: "hello"
+E, [2015-06-09T00:18:09.385762 #36782] ERROR -- : [ActiveJob] PG::UndefinedTable: ERROR:  relation "delayed_jobs" does not exist
+LINE 5:                WHERE a.attrelid = '"delayed_jobs"'::regclass
+                                          ^
+:               SELECT a.attname, format_type(a.atttypid, a.atttypmod),
+                     pg_get_expr(d.adbin, d.adrelid), a.attnotnull, a.atttypid, a.atttypmod
+                FROM pg_attribute a LEFT JOIN pg_attrdef d
+                  ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+               WHERE a.attrelid = '"delayed_jobs"'::regclass
+                 AND a.attnum > 0 AND NOT a.attisdropped
+               ORDER BY a.attnum
+

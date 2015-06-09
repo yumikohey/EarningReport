@@ -6,7 +6,7 @@ class StocksController < ApplicationController
 		if !Ereport.where(date:Time.zone.today).empty?
 			@earnings = Ereport.where(date:Time.zone.today)
 		end
-		p @earnings
+		#DailyOptionChainJob.perform_at(1.minute.from_now, 'symbol', 1)
 		render 'index'
 	end
 
@@ -65,6 +65,31 @@ class StocksController < ApplicationController
 
 	def current_pain
 		render 'option'
+	end
+
+	def weekly_pain
+		stock_list = ["aapl", "spy", "spx", "fb", "tsla", "nflx", "bidu", "twtr", "lnkd"]
+		stock_list.each do |symbol|
+			symbol.upcase!
+			date_unix = DateTime.parse("2015-06-11 17:00:00 -0700").to_time.to_i
+			url = "http://finance.yahoo.com/q/op?s=#{symbol}&straddle=true&date=#{date_unix}"
+			puts url
+			doc = Nokogiri::HTML(open(url))
+			table = doc.css("div.quote-table-overflow td.straddle-strike")
+			option_chain = []
+			table.each do |strike_price|
+				strike_hash = Hash.new
+				call_oi = strike_price.previous_element.text
+				put_oi = strike_price.next_element.next_element.next_element.next_element.next_element.text
+				strike_hash["call_oi"] = call_oi.to_i
+				strike_hash["strike_price"] = strike_price.text.to_f
+				strike_hash["put_oi"] = put_oi.to_i
+				option_chain.push(strike_hash)
+			end
+			p option_chain
+			DailyOption.create!(symbol:symbol, expiration_date:Date.parse("2015-06-11 17:00:00 -0700").next, option_chains:option_chain)
+		end
+		render 'weekly'
 	end
 
 	private

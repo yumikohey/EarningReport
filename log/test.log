@@ -147,3 +147,27 @@ WHERE c.contype = 'f'
 ORDER BY c.conname
 [0m
   [1m[36mEreport Load (1.4ms)[0m  [1mSELECT  "ereports".* FROM "ereports"  ORDER BY "ereports"."id" DESC LIMIT 1[0m
+[ActiveJob] Enqueued DailyOptionChainJob (Job ID: 10c619c4-ce03-4b59-a969-510c7d7ecd70) to DelayedJob(default) with arguments: "hello"
+[ActiveJob] PG::UndefinedTable: ERROR:  relation "delayed_jobs" does not exist
+LINE 5:                WHERE a.attrelid = '"delayed_jobs"'::regclass
+                                          ^
+:               SELECT a.attname, format_type(a.atttypid, a.atttypmod),
+                     pg_get_expr(d.adbin, d.adrelid), a.attnotnull, a.atttypid, a.atttypmod
+                FROM pg_attribute a LEFT JOIN pg_attrdef d
+                  ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+               WHERE a.attrelid = '"delayed_jobs"'::regclass
+                 AND a.attnum > 0 AND NOT a.attisdropped
+               ORDER BY a.attnum
+
+[ActiveJob] Enqueued DailyOptionChainJob (Job ID: 8fbaa633-45c2-4d0d-8f71-9372047a0880) to DelayedJob(default) with arguments: "hello"
+[ActiveJob] PG::UndefinedTable: ERROR:  relation "delayed_jobs" does not exist
+LINE 5:                WHERE a.attrelid = '"delayed_jobs"'::regclass
+                                          ^
+:               SELECT a.attname, format_type(a.atttypid, a.atttypmod),
+                     pg_get_expr(d.adbin, d.adrelid), a.attnotnull, a.atttypid, a.atttypmod
+                FROM pg_attribute a LEFT JOIN pg_attrdef d
+                  ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+               WHERE a.attrelid = '"delayed_jobs"'::regclass
+                 AND a.attnum > 0 AND NOT a.attisdropped
+               ORDER BY a.attnum
+
