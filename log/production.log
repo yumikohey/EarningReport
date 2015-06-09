@@ -280,3 +280,9 @@ LINE 5:                WHERE a.attrelid = '"delayed_jobs"'::regclass
                  AND a.attnum > 0 AND NOT a.attisdropped
                ORDER BY a.attnum
 
+D, [2015-06-09T15:31:36.452750 #43171] DEBUG -- :   [1m[36mActiveRecord::SchemaMigration Load (39.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+I, [2015-06-09T15:31:36.535999 #43171]  INFO -- : Migrating to CreateDailyOptions (20150609204029)
+D, [2015-06-09T15:31:36.575300 #43171] DEBUG -- :   [1m[35m (38.2ms)[0m  BEGIN
+D, [2015-06-09T15:31:36.671996 #43171] DEBUG -- :   [1m[36m (95.0ms)[0m  [1mCREATE TABLE "daily_options" ("id" serial primary key, "symbol" character varying, "stock_id" integer, "expiration_date" date, "option_chains" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+D, [2015-06-09T15:31:36.889778 #43171] DEBUG -- :   [1m[35mSQL (39.8ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150609204029"]]
+D, [2015-06-09T15:31:36.928216 #43171] DEBUG -- :   [1m[36m (37.8ms)[0m  [1mCOMMIT[0m
