@@ -1,6 +1,6 @@
 module DailyOptionHelper
 	def self.option_chains
-			stock_list = ["aapl", "spy", "spx", "fb", "tsla", "nflx", "bidu", "twtr", "lnkd"]
+			stock_list = ["aapl", "spy", "fb", "tsla", "nflx", "bidu", "twtr", "lnkd"]
 			stock_list.each do |symbol|
 				symbol.upcase!
 				date_unix = DateTime.parse("2015-06-11 17:00:00 -0700").to_time.to_i
