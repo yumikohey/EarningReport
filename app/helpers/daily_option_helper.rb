@@ -18,7 +18,6 @@ module DailyOptionHelper
 					strike_hash["put_oi"] = put_oi.to_i
 					option_chain.push(strike_hash)
 				end
-				p option_chain
 				DailyOption.create!(symbol:symbol, expiration_date:Date.parse("2015-06-11 17:00:00 -0700").next, option_chains:option_chain)
 		  end
 	end
