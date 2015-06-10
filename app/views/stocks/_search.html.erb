@@ -1,0 +1,10 @@
+<div class="row">
+	<div class="col-md-1"></div>
+		<div class="col-md-10 search_box">
+			<%= form_tag("/stocks/create", method: "post", :class => 'search') do %>
+			  <%= text_field_tag(:symbol) %>
+			  		  <%= submit_tag "Search Stock", class: "search_button" %>
+			<% end %>
+		</div>
+	<div class="col-md-1"></div>
+</div>

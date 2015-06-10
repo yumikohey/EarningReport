@@ -1,0 +1,83 @@
+<div class="col-md-8">
+<div class="symbol">
+	<div class="row">
+		<div class="col-md-1"><%= @stock %></div>
+		<div class="col-md-1"></div>
+		<div class="col-md-1">
+			<span class="stock_price text-success">$<%=@current_price[0][1]%></span>
+		</div>
+	</div>	
+</div>
+<% upcoming_dates = [] %>
+<% @all_reports.each_with_index do |earning, idx| %>
+<% if earning.price_before_er %>
+<h2><%= earning.date.strftime("%b %d, %Y") %></h2>
+	<div class="table-responsive">
+		<table class="table">
+			<tr class="info">
+				<th>Date</th>
+				<th>Open</th>
+				<th>High</th>
+				<th>Low</th>
+				<th>Close</th>
+				<th>Volume</th>
+				<th>Day Changes</th>
+			</tr>
+			<tr>
+				<td><%= earning.price_before_er.price_date if earning.price_before_er %></td>
+			  <td><%= earning.price_before_er.quote[1].to_f.round(2) if earning.price_before_er %></td>
+			  <td><%= earning.price_before_er.quote[2].to_f.round(2) if earning.price_before_er %></td>
+			  <td><%= earning.price_before_er.quote[3].to_f.round(2) if earning.price_before_er %></td>
+			  <td><%= earning.price_before_er.quote[4].to_f.round(2) if earning.price_before_er %></td>
+			  <td><%= earning.price_before_er.quote[5] if earning.price_before_er %></td>
+			  <td class="text-primary"><%= ((((earning.price_before_er.quote[4].to_f - earning.price_before_er.quote[1].to_f) / earning.price_before_er.quote[1].to_f)) * 100).round(2) if earning.price_before_er %>%</td>
+			</tr>
+			<tr class="info">
+				<td><%= earning.price_on_er.price_date if earning.price_on_er %></td>
+			  <td><%= earning.price_on_er.quote[1].to_f.round(2) if earning.price_on_er %></td>
+			  <td><%= earning.price_on_er.quote[2].to_f.round(2) if earning.price_on_er %></td>
+			  <td><%= earning.price_on_er.quote[3].to_f.round(2) if earning.price_on_er %></td>
+			  <td><%= earning.price_on_er.quote[4].to_f.round(2) if earning.price_on_er %></td>
+			  <td><%= earning.price_on_er.quote[5] if earning.price_on_er %></td>
+			  <td class="text-primary"><%= ((((earning.price_on_er.quote[4].to_f - earning.price_on_er.quote[1].to_f) / earning.price_on_er.quote[1].to_f)) * 100).round(2) if earning.price_on_er %>%</td>
+			</tr>
+			<tr>
+				<td><%= earning.price_after_er.price_date if earning.price_after_er %></td>
+			  <td><%= earning.price_after_er.quote[1].to_f.round(2) if earning.price_after_er %></td>
+			  <td><%= earning.price_after_er.quote[2].to_f.round(2) if earning.price_after_er %></td>
+			  <td><%= earning.price_after_er.quote[3].to_f.round(2) if earning.price_after_er %></td>
+			  <td><%= earning.price_after_er.quote[4].to_f.round(2) if earning.price_after_er %></td>
+			  <td><%= earning.price_after_er.quote[5] if earning.price_after_er %></td>
+			  <td class="text-primary"><%= ((((earning.price_after_er.quote[4].to_f - earning.price_after_er.quote[1].to_f) / earning.price_after_er.quote[1].to_f)) * 100).round(2) if earning.price_after_er %>%</td>
+			</tr>
+			<tr class="primary">
+				<th>Percentage Change After Earning Report Released</th>
+				<% before_market = (((earning.price_on_er.quote[1].to_f - earning.price_before_er.quote[4].to_f) / earning.price_before_er.quote[4].to_f)*100).round(2) %> 
+				<% after_market = (((earning.price_after_er.quote[1].to_f - earning.price_on_er.quote[4].to_f ) / earning.price_on_er.quote[4].to_f)*100).round(2) %> 
+				<td class="danger">
+				<% if before_market.abs > after_market.abs %>
+				<%= before_market %>%
+				<% else %>
+				<%= after_market %>%
+				<% end %>
+				</td>
+			</tr>
+		</table>
+		</div>
+		<% elsif earning.date >= Time.zone.today %>
+		<% upcoming_dates.push(earning.date.strftime("%b %d, %Y"))%>
+		<%end%>
+<% end %>
+<h2> Upcoming Earning Release Dates </h2>
+<% upcoming_dates.each do |date| %>	
+<h4 class="text-success"><%= date %></h4>
+<% end %>
+<% if @stock.is_a? Stock %>
+		<%= @stock.symbol %>
+		<h2> Sorry, this stock's earnings report has not yet been released. </h2>
+<%end%>
+<%if @no_report %>
+		<h2> Sorry, this stock's earnings report has not yet been released. </h2>
+<%end%>
+</div>
+<div class="col-md-2"></div>
