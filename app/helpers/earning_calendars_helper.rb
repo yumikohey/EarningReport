@@ -8,7 +8,6 @@ module EarningCalendarsHelper
 	        ic = Iconv.new('UTF-8//IGNORE', 'UTF-8')
 	        valid_line = ic.iconv(line)
 	        data = valid_line.chomp.split(',')      
-
 	        if field_names.nil?
 	        	p "world"
 	          field_names = data
@@ -16,6 +15,11 @@ module EarningCalendarsHelper
 	          attribute_hash = Hash[field_names.zip(data)]
 	          p "im here"
 	          Stock.create!(attribute_hash)
+          end
+        end
+      end
+    end
+end
 	          # attribute_hash["day"] = "#{attribute_hash["day"]}, 2015"
 	          # stock_symbol = "CBOE"
 	          # stock_id = 6688
@@ -31,8 +35,4 @@ module EarningCalendarsHelper
 	         #  else
 	        	# 	p "not a US stock"
 	        	# end
-	        end
-	      end
-	    end
-	  end
-end
+
