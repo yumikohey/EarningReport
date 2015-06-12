@@ -770,3 +770,23 @@ fieldset[disabled] .btn-primary.active {
 .pace-inactive {
   display: none;
 }
+
+/* SEARCH PAGE */
+
+.search-form {
+  margin-top: 50px;
+}
+
+.search_submit_btn{
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.3333333;
+  border-radius: 6px;
+  margin-top: -46px;
+  width: 150px;
+  float: right;
+}
+
+.form-control{
+  color: #999;
+}
