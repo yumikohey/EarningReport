@@ -66,3 +66,122 @@ rake aborted!
 Don't know how to build task 'testing'
 
 (See full trace by running task with --trace)
+rake aborted!
+PG::ConnectionBad: fe_sendauth: no password supplied
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:651:in `initialize'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:651:in `new'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:651:in `connect'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:242:in `initialize'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:44:in `new'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:44:in `postgresql_connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:438:in `new_connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:448:in `checkout_new_connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:422:in `acquire_connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:349:in `block in checkout'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:348:in `checkout'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:263:in `block in connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:262:in `connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:567:in `retrieve_connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_handling.rb:113:in `retrieve_connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_handling.rb:87:in `connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/attributes.rb:93:in `columns'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/attributes.rb:98:in `columns_hash'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/inheritance.rb:205:in `subclass_from_attributes?'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/inheritance.rb:54:in `new'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/persistence.rb:50:in `create!'
+/home/ubuntu/lib/tasks/weekly_pain.rake:8:in `block in <top (required)>'
+Tasks: TOP => testing
+(See full trace by running task with --trace)
+rake aborted!
+PG::ConnectionBad: fe_sendauth: no password supplied
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:651:in `initialize'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:651:in `new'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:651:in `connect'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:242:in `initialize'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:44:in `new'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:44:in `postgresql_connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:438:in `new_connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:448:in `checkout_new_connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:422:in `acquire_connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:349:in `block in checkout'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:348:in `checkout'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:263:in `block in connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:262:in `connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:567:in `retrieve_connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_handling.rb:113:in `retrieve_connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_handling.rb:87:in `connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/attributes.rb:93:in `columns'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/attributes.rb:98:in `columns_hash'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/inheritance.rb:205:in `subclass_from_attributes?'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/inheritance.rb:54:in `new'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/persistence.rb:50:in `create!'
+/home/ubuntu/lib/tasks/weekly_pain.rake:8:in `block in <top (required)>'
+Tasks: TOP => testing
+(See full trace by running task with --trace)
+rake aborted!
+PG::ConnectionBad: fe_sendauth: no password supplied
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:651:in `initialize'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:651:in `new'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:651:in `connect'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:242:in `initialize'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:44:in `new'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:44:in `postgresql_connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:438:in `new_connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:448:in `checkout_new_connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:422:in `acquire_connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:349:in `block in checkout'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:348:in `checkout'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:263:in `block in connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:262:in `connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:567:in `retrieve_connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_handling.rb:113:in `retrieve_connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_handling.rb:87:in `connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/attributes.rb:93:in `columns'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/attributes.rb:98:in `columns_hash'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/inheritance.rb:205:in `subclass_from_attributes?'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/inheritance.rb:54:in `new'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/persistence.rb:50:in `create!'
+/home/ubuntu/lib/tasks/weekly_pain.rake:8:in `block in <top (required)>'
+Tasks: TOP => testing
+(See full trace by running task with --trace)
+rake aborted!
+PG::ConnectionBad: fe_sendauth: no password supplied
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:651:in `initialize'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:651:in `new'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:651:in `connect'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:242:in `initialize'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:44:in `new'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/postgresql_adapter.rb:44:in `postgresql_connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:438:in `new_connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:448:in `checkout_new_connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:422:in `acquire_connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:349:in `block in checkout'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:348:in `checkout'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:263:in `block in connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:262:in `connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_adapters/abstract/connection_pool.rb:567:in `retrieve_connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_handling.rb:113:in `retrieve_connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/connection_handling.rb:87:in `connection'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/attributes.rb:93:in `columns'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/attributes.rb:98:in `columns_hash'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/inheritance.rb:205:in `subclass_from_attributes?'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/inheritance.rb:54:in `new'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/persistence.rb:50:in `create!'
+/home/ubuntu/lib/tasks/weekly_pain.rake:8:in `block in <top (required)>'
+Tasks: TOP => testing
+(See full trace by running task with --trace)
+rake aborted!
+NameError: uninitialized constant OptionChain
+/home/ubuntu/lib/tasks/weekly_pain.rake:8:in `block in <top (required)>'
+Tasks: TOP => testing
+(See full trace by running task with --trace)
+rake aborted!
+NameError: uninitialized constant OptionChain
+/home/ubuntu/lib/tasks/weekly_pain.rake:8:in `block in <top (required)>'
+Tasks: TOP => testing
+(See full trace by running task with --trace)
+rake aborted!
+NameError: uninitialized constant OptionChain
+/home/ubuntu/lib/tasks/weekly_pain.rake:8:in `block in <top (required)>'
+Tasks: TOP => testing
+(See full trace by running task with --trace)
