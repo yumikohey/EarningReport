@@ -45,7 +45,7 @@ gem 'sidekiq'
 
 gem 'whenever', :require => false
 
-
+gem 'puma'
 
 
 # Use ActiveModel has_secure_password

@@ -1,0 +1,1 @@
+D, [2015-06-12T04:20:04.905458 #29399] DEBUG -- :   [1m[36mStock Load (408.1ms)[0m  [1mSELECT "stocks".* FROM "stocks"[0m
