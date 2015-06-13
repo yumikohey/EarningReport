@@ -47,6 +47,8 @@ gem 'whenever', :require => false
 
 gem 'puma'
 
+gem 'bcrypt', '3.1.7'
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
