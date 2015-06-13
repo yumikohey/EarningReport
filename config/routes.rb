@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -29,6 +30,9 @@ Rails.application.routes.draw do
   post '/download_option_chains', to: 'stocks#download_options', as: 'download_options'
 
   get '/current_pain', to: 'stocks#current_pain', as: 'current_pain'
+
+
+  get 'sign_up'  => 'users#new'
 
   get "dashboards/dashboard_1"
   get "dashboards/dashboard_2"
