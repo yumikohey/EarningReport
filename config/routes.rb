@@ -30,6 +30,7 @@ Rails.application.routes.draw do
 
   get '/current_pain', to: 'stocks#current_pain', as: 'current_pain'
 
+
   get "dashboards/dashboard_1"
   get "dashboards/dashboard_2"
   get "dashboards/dashboard_3"
