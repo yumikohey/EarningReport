@@ -34,6 +34,8 @@ Rails.application.routes.draw do
 
   get 'sign_up'  => 'users#new'
 
+  resources :users
+
   get "dashboards/dashboard_1"
   get "dashboards/dashboard_2"
   get "dashboards/dashboard_3"
