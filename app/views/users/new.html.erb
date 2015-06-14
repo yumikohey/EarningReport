@@ -25,9 +25,9 @@
         		<%= f.password_field :password_confirmation, class: "form-control", :placeholder => "confirm password", :required => true %>
         	</div>
        		<%= f.submit "Register", class: "btn btn-primary block full-width m-b" %>
-       		<p class="text-muted text-center"><small>Already have an account?</small></p>
-       		<%= button_to "Login", "#", class: "btn btn-sm btn-white btn-block" %>
        	<% end %>
+        <p class="text-muted text-center"><small>Already have an account?</small></p>
+        <%= link_to "Login", login_path, class: "btn btn-sm btn-white btn-block" %>
     </div>
 </div>
 
