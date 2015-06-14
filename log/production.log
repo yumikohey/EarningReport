@@ -1214,3 +1214,19 @@ D, [2015-06-12T06:54:02.381003 #31197] DEBUG -- :   [1m[35mSQL (20.6ms)[0m  I
 D, [2015-06-12T06:54:02.403756 #31197] DEBUG -- :   [1m[36m (21.6ms)[0m  [1mCOMMIT[0m
 D, [2015-06-13T01:35:05.102046 #482] DEBUG -- :   [1m[36mStock Load (425.9ms)[0m  [1mSELECT "stocks".* FROM "stocks"[0m
 D, [2015-06-13T03:05:04.879757 #1125] DEBUG -- :   [1m[36mStock Load (436.2ms)[0m  [1mSELECT "stocks".* FROM "stocks"[0m
+D, [2015-06-14T01:32:05.015069 #3968] DEBUG -- :   [1m[36mActiveRecord::SchemaMigration Load (40.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+I, [2015-06-14T01:32:05.061417 #3968]  INFO -- : Migrating to CreateUsers (20150613091536)
+D, [2015-06-14T01:32:05.102861 #3968] DEBUG -- :   [1m[35m (40.7ms)[0m  BEGIN
+D, [2015-06-14T01:32:05.191174 #3968] DEBUG -- :   [1m[36m (86.6ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "name" character varying, "email" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+D, [2015-06-14T01:32:05.429705 #3968] DEBUG -- :   [1m[35mSQL (34.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150613091536"]]
+D, [2015-06-14T01:32:05.471031 #3968] DEBUG -- :   [1m[36m (40.8ms)[0m  [1mCOMMIT[0m
+I, [2015-06-14T01:32:05.471166 #3968]  INFO -- : Migrating to AddIndexToUserEmail (20150613093945)
+D, [2015-06-14T01:32:05.513385 #3968] DEBUG -- :   [1m[35m (41.5ms)[0m  BEGIN
+D, [2015-06-14T01:32:05.648689 #3968] DEBUG -- :   [1m[36m (49.4ms)[0m  [1mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+D, [2015-06-14T01:32:05.727801 #3968] DEBUG -- :   [1m[35mSQL (39.4ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150613093945"]]
+D, [2015-06-14T01:32:05.767606 #3968] DEBUG -- :   [1m[36m (39.2ms)[0m  [1mCOMMIT[0m
+I, [2015-06-14T01:32:05.767754 #3968]  INFO -- : Migrating to AddPasswordDigestToUsers (20150613171445)
+D, [2015-06-14T01:32:05.805541 #3968] DEBUG -- :   [1m[35m (37.1ms)[0m  BEGIN
+D, [2015-06-14T01:32:05.886981 #3968] DEBUG -- :   [1m[36m (43.9ms)[0m  [1mALTER TABLE "users" ADD "password_digest" character varying[0m
+D, [2015-06-14T01:32:06.022257 #3968] DEBUG -- :   [1m[35mSQL (37.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150613171445"]]
+D, [2015-06-14T01:32:06.061976 #3968] DEBUG -- :   [1m[36m (39.3ms)[0m  [1mCOMMIT[0m

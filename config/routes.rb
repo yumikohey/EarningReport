@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'sessions/new'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -32,8 +34,10 @@ Rails.application.routes.draw do
   get '/current_pain', to: 'stocks#current_pain', as: 'current_pain'
 
 
-  get 'sign_up'  => 'users#new'
-
+  get    'sign_up'   => 'users#new'
+  get    'login'     => 'sessions#new'
+  post   'login'     => 'sessions#create'
+  delete 'logout'    => 'sessions#destroy'
   resources :users
 
   get "dashboards/dashboard_1"
