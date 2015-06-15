@@ -7,4 +7,5 @@ class Stock < ActiveRecord::Base
 	has_many :put_call_ratios
 	has_many :option_chains
 	has_many :daily_options
+	has_many :history_quotes
 end

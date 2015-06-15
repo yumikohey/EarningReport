@@ -1,8 +1,8 @@
 module EreportsHelper
 
-	def self.yahoo_url(stock_symbol, date_one, date_two, month_one, month_two, year)
-		"http://finance.yahoo.com/q/hp?s=#{stock_symbol}&a=#{month_one}&b=#{date_one}&c=#{year}&d=#{month_two}&e=#{date_two}&f=#{year}&g=d"
-	end
+	# def self.yahoo_url(stock_symbol, date_one, date_two, month_one, month_two, year)
+	# 	"http://finance.yahoo.com/q/hp?s=#{stock_symbol}&a=#{month_one}&b=#{date_one}&c=#{year}&d=#{month_two}&e=#{date_two}&f=#{year}&g=d"
+	# end
 
 	def self.earning_report_dates_data(stock_symbol, earning)
 		today_date = Time.zone.today

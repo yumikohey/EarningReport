@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150614132205) do
+ActiveRecord::Schema.define(version: 20150615051906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,19 @@ ActiveRecord::Schema.define(version: 20150614132205) do
     t.integer  "stock_id"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+  end
+
+  create_table "history_quotes", force: :cascade do |t|
+    t.string   "stock"
+    t.date     "date"
+    t.float    "open"
+    t.float    "high"
+    t.float    "low"
+    t.float    "close"
+    t.integer  "volume"
+    t.integer  "stock_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "option_chains", force: :cascade do |t|
@@ -106,6 +119,7 @@ ActiveRecord::Schema.define(version: 20150614132205) do
     t.string   "industry"
     t.string   "summary_quote"
     t.string   "option_chains"
+    t.date     "ipodate"
   end
 
   create_table "users", force: :cascade do |t|

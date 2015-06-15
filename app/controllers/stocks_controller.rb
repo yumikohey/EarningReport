@@ -34,7 +34,6 @@ class StocksController < ApplicationController
 			EreportsHelper.earning_report_dates_data(stock.symbol, earning)
 		end			
 		@all_reports = stock.ereports.order('date DESC')
-		require 'yahoo_stock'
 		quote = YahooStock::Quote.new(:stock_symbols => [@stock])
 	 	@current_price = quote.results(:to_array).output
 		render 'show'

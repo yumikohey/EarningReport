@@ -33,6 +33,8 @@ Rails.application.routes.draw do
 
   get '/current_pain', to: 'stocks#current_pain', as: 'current_pain'
 
+  get '/history/index', to: 'historical_prices#index'
+
 
   get    'sign_up'   => 'users#new'
   get    'login'     => 'sessions#new'
