@@ -1,3 +1,20 @@
+desc 'download daily quote for stocks'
+task daily_quote: :environment do 
+  require 'yahoo_finance'
+  stocks = Stock.all
+  stocks.each do |stock|
+    p stock.symbol
+    quote = YahooFinance.quotes([stock.symbol], [:open, :high, :low, :close, :volume])
+    if quote.first.close != "N/A"
+      HistoryQuote.create!(stock: stock, date: Date.today, open:quote.first.open.to_f, high:quote.first.high.to_f, low:quote.first.low.to_f, close:quote.first.close.to_f, volume:quote.first.volume.to_i, stock_id:stock.id)
+    else
+      File.open("log/daily.txt","a") do |f|
+        f.write "\n #{stock.symbol} doesn't have daily quote"
+      end
+    end      
+  end
+end
+
 desc 'download historical prices for stocks'
 task history_quotes: :environment do
     require 'yahoo_stock'
