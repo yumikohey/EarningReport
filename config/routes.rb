@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   get 'sessions/new'
 
+  get '/next' => "historical_prices#next"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
