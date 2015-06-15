@@ -17,15 +17,15 @@ task history_quotes: :environment do
   			  rescue
   			  	p "errors #{stock.symbol}"
   			  end
-		    	puts "#{stock} IPO date is #{Date.parse(price_quotes.last[:date])}"
+		    	puts "#{stock.symbol} IPO date is #{Date.parse(price_quotes.last[:date])}"
 		    	stock.ipodate = Date.parse(price_quotes.last[:date])
 		    	stock.save
 		    	p "done stock #{stock.symbol}"
 	    	rescue
-	    		File.open("log/history.txt","w") do |f|
-		        puts "writing logs #{stock.symbol}"
-		        f << "#{stock.symbol} doesn't have historical quotes"
-		      end
+    		  File.open("log/history.txt","a") do |f|
+            puts "writing logs #{stock.symbol}"
+            f.write "\n #{stock.symbol} doesn't have historical quotes"
+          end
 	    	end 		    
 	  end
 end
