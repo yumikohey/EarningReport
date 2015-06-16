@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   root 'static_pages#index'
   
-  post 'stocks/create' => 'stocks#create'
+  resources :stocks, only: [:index, :create, :show]
 
   get '/stocks/:symbol', to: 'stocks#show', as: 'stock_symbol'
 

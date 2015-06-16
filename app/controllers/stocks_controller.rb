@@ -44,9 +44,11 @@ class StocksController < ApplicationController
 
 	def options
 		symbol = params[:symbol]
-		url = "http://www.google.com/finance/option_chain?q=#{symbol}&output=json"
-		response = HTTParty.get(url)
-		json_data = response.body
+		today = Date.today
+		when(!today.friday?)
+			today += 1
+		end
+		option_chains = DailyOption.where(symbol:symbol, date:today)
 		render json: json_data.to_json
 	end
 
