@@ -1,3 +1,0 @@
-class EreportsController < ApplicationController
-
-end

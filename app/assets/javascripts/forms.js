@@ -12,3 +12,6 @@
 //= require nouslider/jquery.nouislider.min.js
 //= require switchery/switchery.js
 //= require chosen/chosen.jquery.js
+//= require fullcalendar/moment.min.js
+//= require clockpicker/clockpicker.js
+//= require daterangepicker/daterangepicker.js

@@ -1,10 +1,15 @@
 body {
   font-family: $font-stack;
-  background-color: $nav-bg;
   font-size: 13px;
   color: $text-color;
   overflow-x: hidden;
+}
+body.admin_page{
+  background-color: $nav-bg;
+}
 
+body.normal_page{
+  background-color: #fff;
 }
 
 html,body {
@@ -128,7 +133,7 @@ video {
 }
 
 .modal-dialog {
-  z-index: 1200;
+  z-index: 2200;
 }
 
 .modal-body {
@@ -211,7 +216,7 @@ ul.unstyled, ol.unstyled {
 }
 
 .big-icon {
-  font-size: 160px;
+  font-size: 160px !important;
   color: #e5e6e7;
 }
 
@@ -537,6 +542,14 @@ code {
   border-width: 1px 0px;
 }
 
+.ibox-footer {
+  color: inherit;
+  border-top: 1px solid $border-color;
+  font-size: 90%;
+  background: #ffffff;
+  padding: 10px 15px;
+}
+
 table.table-mail tr td {
   padding: 12px;
 }
@@ -815,7 +828,8 @@ table.table-mail tr td {
 .mailbox\.inbox nav.navbar,
 .mailbox\.email_view nav.navbar,
 .mailbox\.email_compose nav.navbar,
-.dashboards\.dashboard_4_1 nav.navbar
+.dashboards\.dashboard_4_1 nav.navbar,
+.metrics nav.navbar, .metrics\.index nav.navbar
 {
   background: #fff;
 }
@@ -826,7 +840,8 @@ table.table-mail tr td {
 .Dashboard_4_1 .navbar.navbar-static-top,
 .ComposeEmail .navbar.navbar-static-top,
 .EmailView .navbar.navbar-static-top,
-.Inbox .navbar.navbar-static-top {
+.Inbox .navbar.navbar-static-top,
+.Metrics .navbar.navbar-static-top {
   background: #fff;
 }
 
@@ -1200,9 +1215,8 @@ a.close-canvas-menu:hover {
 // Fix
 body.modal-open { padding-right:inherit !important; }
 
-/* Style correction for Vector Map */
-.jvectormap-zoomin, .jvectormap-zoomout {
-  width: 15px;
-  height: 15px;
-  background: #1ab394;
+@media (max-width: 768px){
+  .container > .navbar-header, .container > .navbar-collapse, .container-fluid > .navbar-header, .container-fluid > .navbar-collapse {
+    width: 100%;
+  }
 }

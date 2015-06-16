@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def new
   	@user = User.new
-  	render :layout => "empty"
+    @admin_page = false
   end
 
   def show
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     	flash[:success] = "Welcome to Earning Report"
       redirect_to @user
     else
-      render 'new', :layout => "empty"
+      render 'new'
     end
   end
 

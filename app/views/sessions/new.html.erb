@@ -1,40 +1,40 @@
 <% provide(:title, 'Log in') %>
+<div class="login_page">
+  <div class="middle-box text-center loginscreen   animated fadeInDown">
+      <div>
+          <div>
 
-<div class="middle-box text-center loginscreen   animated fadeInDown">
-    <div>
-        <div>
+              <h1 class="logo-name">IN+</h1>
 
-            <h1 class="logo-name">IN+</h1>
-
-        </div>
-        <h3>Welcome to Earning Reports</h3>
-        <p>
-            Perfectly designed and precisely prepared investors to success.
-        </p>
-        <p>Login in to see it in action.</p>
-
-        <%= form_for :session, url: login_path, :html => {:class => "m-t" } do |f| %>
-        	<div class="form-group">
-        		<%= f.text_field :email, class: "form-control", :placeholder => "abc@example.com", :required => true %>
-        	</div>
-        	<div class="form-group">
-        		<%= f.password_field :password, class: "form-control", :placeholder => "password", :required => true %>
-        	</div>
-          <div class="form-group">
-              <%= f.label :remember_me, class: "checkbox" do %>
-                <%= f.check_box :remember_me %>
-                <i></i> Remember me on this computer
-              <% end %> 
           </div>
-        	
-       		<%= f.submit "Log in", class: "btn btn-primary block full-width m-b" %>
-       		<p class="text-muted text-center"><small>Already have an account?</small></p>
-       		<a href="#"><small>Forgot password?</small></a>
-       		<p class="text-muted text-center"><small>Do not have an account?</small></p>
-       	<% end %>
-          <%= link_to "Create an account", sign_up_path, class: "btn btn-sm btn-white btn-block" %>
-    </div>
-</div>
+          <h3>Welcome to Earning Reports</h3>
+          <p>
+              Perfectly designed and precisely prepared investors to success.
+          </p>
+          <p>Login in to see it in action.</p>
 
+          <%= form_for :session, url: login_path, :html => {:class => "m-t" } do |f| %>
+          	<div class="form-group">
+          		<%= f.text_field :email, class: "form-control", :placeholder => "abc@example.com", :required => true %>
+          	</div>
+          	<div class="form-group">
+          		<%= f.password_field :password, class: "form-control", :placeholder => "password", :required => true %>
+          	</div>
+            <div class="form-group">
+                <%= f.label :remember_me, class: "checkbox" do %>
+                  <%= f.check_box :remember_me %>
+                  <i></i> Remember me on this computer
+                <% end %> 
+            </div>
+          	
+         		<%= f.submit "Log in", class: "btn btn-primary block full-width m-b" %>
+         		<p class="text-muted text-center"><small>Already have an account?</small></p>
+         		<a href="#"><small>Forgot password?</small></a>
+         		<p class="text-muted text-center"><small>Do not have an account?</small></p>
+         	<% end %>
+            <%= link_to "Create an account", register_path, class: "btn btn-sm btn-white btn-block" %>
+      </div>
+  </div>
+</div>
 
 

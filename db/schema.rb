@@ -118,7 +118,6 @@ ActiveRecord::Schema.define(version: 20150615051906) do
     t.string   "sector"
     t.string   "industry"
     t.string   "summary_quote"
-    t.string   "option_chains"
     t.date     "ipodate"
   end
 
