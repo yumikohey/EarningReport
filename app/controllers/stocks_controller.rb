@@ -6,7 +6,6 @@ class StocksController < ApplicationController
 		if !Ereport.where(date:Time.zone.today).empty?
 			@earnings = Ereport.where(date:Time.zone.today)
 		end
-		#DailyOptionChainJob.perform_at(1.minute.from_now, 'symbol', 1)
 		render 'index'
 	end
 
@@ -22,7 +21,7 @@ class StocksController < ApplicationController
  		require 'yahoo_stock'
 	 	quote = YahooStock::Quote.new(:stock_symbols => [stock_symbol])
 	 	@current_price = quote.results(:to_array).output
-
+	 	redict_to 'index'
  end
 
   def show

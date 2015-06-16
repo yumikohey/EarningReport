@@ -5,10 +5,10 @@ every :weekday => "11:00pm" do
   rake 'daily_option_chains'
 end
 
-every '2 7 15 * *' do
-  rake 'history_quotes'
-end
-
 every :weekday => "11:00pm" do
 	rake 'daily_quote'
+end
+
+every :monday => "1:00am" do
+	rake 'earning_report'
 end
