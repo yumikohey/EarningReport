@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150615051906) do
+ActiveRecord::Schema.define(version: 20150617080745) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,6 +106,17 @@ ActiveRecord::Schema.define(version: 20150615051906) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "sma_averages", force: :cascade do |t|
+    t.string   "stock"
+    t.date     "date"
+    t.float    "five_avg"
+    t.float    "ten_avg"
+    t.integer  "cross"
+    t.integer  "stock_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "stocks", force: :cascade do |t|
     t.string   "symbol"
     t.datetime "created_at",    null: false
@@ -118,7 +129,6 @@ ActiveRecord::Schema.define(version: 20150615051906) do
     t.string   "sector"
     t.string   "industry"
     t.string   "summary_quote"
-    t.string   "option_chains"
     t.date     "ipodate"
   end
 

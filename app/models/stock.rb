@@ -8,4 +8,5 @@ class Stock < ActiveRecord::Base
 	has_many :option_chains
 	has_many :daily_options
 	has_many :history_quotes
+	has_many :sma_averages
 end

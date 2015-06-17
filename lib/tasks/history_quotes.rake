@@ -18,7 +18,6 @@ end
 desc 'download historical prices for stocks'
 task history_quotes: :environment do
     require 'yahoo_stock'
-
     begin_date = Date.parse('2010-01-01')
     end_date = Date.parse('2015-06-13')
     stock_list = Stock.all
