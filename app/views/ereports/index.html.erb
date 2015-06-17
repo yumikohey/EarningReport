@@ -1,0 +1,5 @@
+<h1><%= @stock %></h1>
+<% @all_ers.each_with_index do |earning, idx|%>
+<h2><%= earning.date.strftime("%b %d, %Y") %></h2>
+<div><%=raw @html[idx] %></div>
+<% end %>
