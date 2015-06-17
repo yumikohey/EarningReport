@@ -86,10 +86,12 @@
 }
 
 .navbar-toggle {
-  background-color: $navy;
+  background-color: transparent;
   color: #fff;
-  padding: 6px 12px;
+  padding: 9px 10px;
   font-size: 14px;
+  margin-right: -15px;
+  float: right;
 }
 
 .top-navigation .navbar-nav .open .dropdown-menu > li > a, .top-navigation .navbar-nav .open .dropdown-menu .dropdown-header {

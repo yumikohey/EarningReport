@@ -9,3 +9,4 @@
 //= require tinycon/tinycon.min.js
 //= require idle-timer/idle-timer.min.js
 //= require jquery-ui/jquery-ui.min.js
+//= require sweetalert/sweetalert.min.js
