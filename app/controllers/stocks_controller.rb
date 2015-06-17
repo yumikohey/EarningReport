@@ -25,6 +25,7 @@ class StocksController < ApplicationController
  end
 
   def show
+  	require 'yahoo_stock'
 		@stock = params[:symbol].upcase
 		stock = Stock.where(symbol:params[:symbol])[0]
 		@all_ers = stock.ereports.order('date DESC')
@@ -35,7 +36,22 @@ class StocksController < ApplicationController
 		@all_reports = stock.ereports.order('date DESC')
 		quote = YahooStock::Quote.new(:stock_symbols => [@stock])
 	 	@current_price = quote.results(:to_array).output
-		render 'show'
+		render 'show', :layout => "sub_layout"
+	end
+
+  def profile
+  	require 'yahoo_stock'
+		@stock = params[:symbol].upcase
+		stock = Stock.where(symbol:params[:symbol])[0]
+		@all_ers = stock.ereports.order('date DESC')
+		p @all_ers.first
+		@all_ers.each do |earning|
+			EreportsHelper.earning_report_dates_data(stock.symbol, earning)
+		end			
+		@all_reports = stock.ereports.order('date DESC')
+		quote = YahooStock::Quote.new(:stock_symbols => [@stock])
+	 	@current_price = quote.results(:to_array).output
+		render 'profile', :layout => "sub_layout"
 	end
 
 	def upcoming_er

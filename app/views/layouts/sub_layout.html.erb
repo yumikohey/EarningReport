@@ -18,13 +18,13 @@
 
 
 </head>
-<body class="top-navigation">
+<body class="full-height-layout top-navigation">
 
     <!-- Wrapper-->
-    <div id="wrapper" class="<%= params[:controller] %>.<%= params[:action] %>">
+    <div id="wrapper" class="<%= params[:controller] %>.<%= params[:action] %> gray-bg">
 
         <!-- Page wraper -->
-        <div id="page-wrapper" class="gray-bg <%= @extra_class %>">
+        <div id="page-wrapper">
 
             <!-- Page wrapper -->
             <%= render 'layouts/topnavbar_2' %>
@@ -33,12 +33,12 @@
             <%= yield %>
 
             <!-- Footer -->
-            <%= render 'layouts/footer' %>
 
         </div>
         <!-- End page wrapper-->
 
     </div>
+
     <!-- End wrapper-->
 
     <!-- Include javascript per-controller - vendor plugins -->

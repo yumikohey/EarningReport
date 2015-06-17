@@ -1,0 +1,265 @@
+<% upcoming_dates = [] %>
+<div class="wrapper wrapper-content">
+<div class="container">
+<div class="row">
+    <div class="col-md-2">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-success pull-right">Tech</span>
+                <h5>Symbol</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins"><%= @stock %></h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-info pull-right">Daily</span>
+                <h5>Quote</h5>
+            </div>
+            <div class="ibox-content">
+                <h1 class="no-margins">$<%=@current_price[0][1]%></h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <span class="label label-primary pull-right">Today</span>
+                <h5>Daily Changes</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1 class="no-margins"></h1>
+                    </div>
+                    <div class="col-md-6">
+                        <h1 class="no-margins"></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Upcoming Earning Release Dates</h5>
+                <div class="ibox-tools">
+                    <span class="label label-primary">Updated 12.2015</span>
+                </div>
+            </div>
+            <div class="ibox-content no-padding">
+                <% upcoming_dates.each do |date| %> 
+                <h4 class="text-success"><%= date %></h4>
+                <% end %>
+                <% if @stock.is_a? Stock %>
+                        <%= @stock.symbol %>
+                        <h2> Sorry, this stock's earnings report has not yet been released. </h2>
+                <%end%>
+                <%if @no_report %>
+                        <h2> Sorry, this stock's earnings report has not yet been released. </h2>
+                <%end%>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+<div class="col-lg-12">
+<div class="ibox float-e-margins">
+<div class="ibox-title">
+    <h5> Historical Earning Reports Performance</h5>
+    <div class="ibox-tools">
+        <a class="collapse-link">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-wrench"></i>
+        </a>
+    </div>
+</div>
+<% @all_reports.each_with_index do |earning, idx| %>
+<% if earning.price_before_er %>
+<div class="ibox-content">
+    <div class="row">
+        <h3 class="ibox-content">
+            <%= earning.date.strftime("%b %d, %Y") %>
+        </h3>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Date </th>
+                <th>Open </th>
+                <th>High </th>
+                <th>Low </th>
+                <th>Close </th>
+                <th>Volume </th>
+                <th>Date Changes</th>
+                <th><i class="fa fa-play fa-rotate-270"></i> Up/Down</th>
+                <th>Price Trend</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td><%= earning.price_before_er.price_date if earning.price_before_er %></td>
+              <td><%= earning.price_before_er.quote[1].to_f.round(2) if earning.price_before_er %></td>
+              <td><%= earning.price_before_er.quote[2].to_f.round(2) if earning.price_before_er %></td>
+              <td><%= earning.price_before_er.quote[3].to_f.round(2) if earning.price_before_er %></td>
+              <td><%= earning.price_before_er.quote[4].to_f.round(2) if earning.price_before_er %></td>
+              <td><%= earning.price_before_er.quote[5] if earning.price_before_er %></td>
+              <td class="text-primary"><%= ((((earning.price_before_er.quote[4].to_f - earning.price_before_er.quote[1].to_f) / earning.price_before_er.quote[1].to_f)) * 100).round(2) if earning.price_before_er %>%</td>
+            </tr>
+            <tr>
+                <td><%= earning.price_on_er.price_date if earning.price_on_er %></td>
+                <td><%= earning.price_on_er.quote[1].to_f.round(2) if earning.price_on_er %></td>
+                <td><%= earning.price_on_er.quote[2].to_f.round(2) if earning.price_on_er %></td>
+                <td><%= earning.price_on_er.quote[3].to_f.round(2) if earning.price_on_er %></td>
+                <td><%= earning.price_on_er.quote[4].to_f.round(2) if earning.price_on_er %></td>
+                <td><%= earning.price_on_er.quote[5] if earning.price_on_er %></td>
+                <td class="text-primary"><%= ((((earning.price_on_er.quote[4].to_f - earning.price_on_er.quote[1].to_f) / earning.price_on_er.quote[1].to_f)) * 100).round(2) if earning.price_on_er %>%</td>
+            </tr>
+            <tr>
+                <td><%= earning.price_after_er.price_date if earning.price_after_er %></td>
+                <td><%= earning.price_after_er.quote[1].to_f.round(2) if earning.price_after_er %></td>
+                <td><%= earning.price_after_er.quote[2].to_f.round(2) if earning.price_after_er %></td>
+                <td><%= earning.price_after_er.quote[3].to_f.round(2) if earning.price_after_er %></td>
+                <td><%= earning.price_after_er.quote[4].to_f.round(2) if earning.price_after_er %></td>
+                <td><%= earning.price_after_er.quote[5] if earning.price_after_er %></td>
+                <td class="text-primary"><%= ((((earning.price_after_er.quote[4].to_f - earning.price_after_er.quote[1].to_f) / earning.price_after_er.quote[1].to_f)) * 100).round(2) if earning.price_after_er %>%</td>
+            </tr>
+            <tr class="primary">
+                <th>Percentage Change After Earning Report Released</th>
+                <% before_market = (((earning.price_on_er.quote[1].to_f - earning.price_before_er.quote[4].to_f) / earning.price_before_er.quote[4].to_f)*100).round(2) %> 
+                <% after_market = (((earning.price_after_er.quote[1].to_f - earning.price_on_er.quote[4].to_f ) / earning.price_on_er.quote[4].to_f)*100).round(2) %> 
+                <td class="danger">
+                <% if before_market.abs > after_market.abs %>
+                <%= before_market %>%
+                <% else %>
+                <%= after_market %>%
+                <% end %>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+        <% elsif earning.date >= Time.zone.today %>
+        <% upcoming_dates.push(earning.date.strftime("%b %d, %Y"))%>
+        <%end%>
+<% end %>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<% content_for :javascript do %>
+
+<script type="text/javascript">
+
+$(function() {
+
+    $("span.pie").peity("pie", {
+        fill: ['#1ab394', '#d7d7d7', '#ffffff']
+    })
+
+    var d1 = [[1262304000000, 6], [1264982400000, 3057], [1267401600000, 20434], [1270080000000, 31982], [1272672000000, 26602], [1275350400000, 27826], [1277942400000, 24302], [1280620800000, 24237], [1283299200000, 21004], [1285891200000, 12144], [1288569600000, 10577], [1291161600000, 10295]];
+    var d2 = [[1262304000000, 5], [1264982400000, 200], [1267401600000, 1605], [1270080000000, 6129], [1272672000000, 11643], [1275350400000, 19055], [1277942400000, 30062], [1280620800000, 39197], [1283299200000, 37000], [1285891200000, 27000], [1288569600000, 21000], [1291161600000, 17000]];
+
+    var data1 = [
+        { label: "Data 1", data: d1, color: '#17a084' },
+        { label: "Data 2", data: d2, color: '#127e68' }
+    ];
+    $.plot($("#flot-chart1"), data1, {
+        xaxis: {
+            tickDecimals: 0
+        },
+        series: {
+            lines: {
+                show: true,
+                fill: true,
+                fillColor: {
+                    colors: [{
+                        opacity: 1
+                    }, {
+                        opacity: 1
+                    }]
+                },
+            },
+            points: {
+                width: 0.1,
+                show: false
+            },
+        },
+        grid: {
+            show: false,
+            borderWidth: 0
+        },
+        legend: {
+            show: false,
+        }
+    });
+
+    var lineData = {
+        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        datasets: [
+            {
+                label: "Example dataset",
+                fillColor: "rgba(220,220,220,0.5)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [65, 59, 40, 51, 36, 25, 40]
+            },
+            {
+                label: "Example dataset",
+                fillColor: "rgba(26,179,148,0.5)",
+                strokeColor: "rgba(26,179,148,0.7)",
+                pointColor: "rgba(26,179,148,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(26,179,148,1)",
+                data: [48, 48, 60, 39, 56, 37, 30]
+            }
+        ]
+    };
+
+    var lineOptions = {
+        scaleShowGridLines: true,
+        scaleGridLineColor: "rgba(0,0,0,.05)",
+        scaleGridLineWidth: 1,
+        bezierCurve: true,
+        bezierCurveTension: 0.4,
+        pointDot: true,
+        pointDotRadius: 4,
+        pointDotStrokeWidth: 1,
+        pointHitDetectionRadius: 20,
+        datasetStroke: true,
+        datasetStrokeWidth: 2,
+        datasetFill: true,
+        responsive: true,
+    };
+
+
+    var ctx = document.getElementById("lineChart").getContext("2d");
+    var myNewChart = new Chart(ctx).Line(lineData, lineOptions);
+
+
+});
+
+
+</script>
+
+<% end %>
