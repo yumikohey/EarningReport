@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   resources :stocks, only: [:index, :create]
 
   get '/stocks/:symbol', to: 'stocks#show', as: 'stock_symbol'
-  get '/:symbol', to: 'stocks#profile'
 
 
   # get '/weekly_pain', to: 'stocks#weekly_pain', as: 'weekly_pain'
