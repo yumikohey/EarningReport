@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150617080745) do
+ActiveRecord::Schema.define(version: 20150618012215) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "beta_quotes", force: :cascade do |t|
+    t.string   "stock"
+    t.date     "date"
+    t.float    "open"
+    t.float    "high"
+    t.float    "low"
+    t.float    "close"
+    t.integer  "volume"
+    t.integer  "stock_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "daily_options", force: :cascade do |t|
     t.string   "symbol"

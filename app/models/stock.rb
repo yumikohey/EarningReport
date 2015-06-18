@@ -9,4 +9,5 @@ class Stock < ActiveRecord::Base
 	has_many :daily_options
 	has_many :history_quotes
 	has_many :sma_averages
+	has_many :beta_quotes
 end

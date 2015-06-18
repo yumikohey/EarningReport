@@ -25,7 +25,7 @@
         </div>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <span class="label label-primary pull-right">Today</span>
@@ -43,25 +43,42 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-5">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>Upcoming Earning Release Dates</h5>
+                <h5>5/10 SMA History</h5>
                 <div class="ibox-tools">
                     <span class="label label-primary">Updated 12.2015</span>
                 </div>
             </div>
             <div class="ibox-content no-padding">
-                <% upcoming_dates.each do |date| %> 
-                <h4 class="text-success"><%= date %></h4>
-                <% end %>
-                <% if @stock.is_a? Stock %>
-                        <%= @stock.symbol %>
-                        <h2> Sorry, this stock's earnings report has not yet been released. </h2>
-                <%end%>
-                <%if @no_report %>
-                        <h2> Sorry, this stock's earnings report has not yet been released. </h2>
-                <%end%>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th class="text-center">Golden/Death Cross</th>
+                        <th class="text-center">Profits since last Revert</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><%= Date.today %></td> 
+                        <td class="text-center">downward trend</td>
+                        <td class="text-navy text-center"> <i class="fa fa-level-up"></i> 40% </td>
+                    </tr>
+                    <tr>
+                        <td><%=Date.today - 1 %></td>
+                        
+                        <td class="text-center">downward trend</td>
+                        <td class="text-danger text-center"> <i class="fa fa-level-down"></i> -20% </td>
+                    </tr>
+                    <tr>
+                        <td><%=Date.today - 2%></td>
+                        <td class="text-center">death cross</td>
+                        <td class="text-navy text-center"> <i class="fa fa-level-up"></i> 26% </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
 
         </div>
