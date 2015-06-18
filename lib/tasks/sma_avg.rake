@@ -30,7 +30,7 @@ end
 
 desc 'calculate five days average'
 task five_avg: :environment do
-  stocks = Stock.where("id > ?", 7320)
+  stocks = Stock.where("id > ?", 7381)
   stocks.each do |stock|
   	p "done stock #{stock.symbol}"
 	 	days = (0..25).to_a
