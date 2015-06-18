@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def new
-  	render :layout => "empty"
+    @admin_page = false
   end
 
   def create
@@ -15,7 +15,6 @@ class SessionsController < ApplicationController
   		redirect_to user
   	else
   		flash.now[:danger] = "Invalid email/password combination"
-	  	render 'new', :layout => "empty"
 	  end
   end
 

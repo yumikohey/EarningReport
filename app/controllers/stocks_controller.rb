@@ -3,10 +3,6 @@ class StocksController < ApplicationController
 	include StocksHelper
 
 	def index
-		if !Ereport.where(date:Time.zone.today).empty?
-			@earnings = Ereport.where(date:Time.zone.today)
-		end
-		render 'index'
 	end
 
 	def create
@@ -25,6 +21,7 @@ class StocksController < ApplicationController
  end
 
   def show
+  	require 'yahoo_stock'
 		@stock = params[:symbol].upcase
 		stock = Stock.where(symbol:params[:symbol])[0]
 		@all_ers = stock.ereports.order('date DESC')
@@ -35,12 +32,12 @@ class StocksController < ApplicationController
 		@all_reports = stock.ereports.order('date DESC')
 		quote = YahooStock::Quote.new(:stock_symbols => [@stock])
 	 	@current_price = quote.results(:to_array).output
-		render 'show'
+		render 'show', :layout => "sub_layout"
 	end
 
-	def upcoming_er
-		StocksHelper.read_yahoo_data
-	end
+	# def upcoming_er
+	# 	StocksHelper.read_yahoo_data
+	# end
 
 	def options
 		symbol = params[:symbol]

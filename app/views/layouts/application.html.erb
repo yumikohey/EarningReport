@@ -1,54 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <%= include_gon %>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <title>EarningReport</title>
-  <!-- Include style per-controller - vendor plugins -->
-  <%= stylesheet_link_tag params[:controller] if ::Rails.application.assets.find_asset("#{params[:controller]}.css") %>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INSPINIA | Responsive admin theme</title>
 
-  <!-- Main css styles -->
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <!-- Include style per-controller - vendor plugins -->
+    <%= stylesheet_link_tag params[:controller] if ::Rails.application.assets.find_asset("#{params[:controller]}.css") %>
 
-  <!-- Main javascript files -->
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+    <!-- Main css styles -->
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+
+    <!-- Main javascript files -->
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+
+
+
 </head>
-
-<body>
-
-<!-- Skin configuration box -->
-<%= render 'layouts/skinconfig' %>
-
-    <!-- Wrapper-->
-    <div id="wrapper" class="<%= params[:controller] %>.<%= params[:action] %>">
-
-        <!-- Navigation -->
-        <%= render 'layouts/navigation' %>
-
-        <!-- Page wraper -->
-        <div id="page-wrapper" class="gray-bg <%= @extra_class %>">
-
-            <!-- Page wrapper -->
-            <%= render 'layouts/topnavbar' %>
-
-            <!-- Main view  -->
-            <%= yield %>
-
-            <%= debug(params) if Rails.env.development? %>
-            
-            <!-- Footer -->
-            <%= render 'layouts/footer' %>
-
-        </div>
-        <!-- End page wrapper-->
-
-        <!-- Right sidebar -->
-        <%= render 'layouts/rightsidebar' %>
-
-    </div>
-    <!-- End wrapper-->
+<body class="<%= @admin_page ? 'admin_page' : 'normal_page' %>">
+    <!-- Main view  -->
+    <%= yield %>
 
     <!-- Include javascript per-controller - vendor plugins -->
     <%= javascript_include_tag params[:controller] if ::Rails.application.assets.find_asset("#{params[:controller]}.js") %>

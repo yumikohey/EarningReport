@@ -1,0 +1,2 @@
+module SmaAveragesHelper
+end

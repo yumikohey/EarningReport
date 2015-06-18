@@ -1,7 +1,7 @@
 /*
  *
  *   INSPINIA - Responsive Admin Theme
- *   version 2.0
+ *   version 2.2
  *
  */
 
@@ -109,6 +109,10 @@ $(document).ready(function () {
             $('#page-wrapper').css("min-height", $(window).height()  + "px");
         }
 
+        if ($('body').hasClass('fixed-nav')) {
+            $('#page-wrapper').css("min-height", $(window).height() - 60 + "px");
+        }
+
     }
     fix_height();
 
@@ -131,7 +135,7 @@ $(document).ready(function () {
         }
     });
 
-    $(document).bind("load resize scroll", function() {
+    $(window).bind("load resize scroll", function() {
         if(!$("body").hasClass('body-small')) {
             fix_height();
         }
