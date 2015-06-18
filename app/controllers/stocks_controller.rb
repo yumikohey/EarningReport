@@ -6,7 +6,7 @@ class StocksController < ApplicationController
 	end
 
 	def create
-		stock_symbol = params[:symbol].upcase
+		stock_symbol = params[:symbol].upcase!
 		stock = Stock.where(symbol:stock_symbol)[0]
  		@all_ers = stock.ereports
  		@all_ers.each do |earning|
@@ -22,7 +22,7 @@ class StocksController < ApplicationController
 
   def show
   	require 'yahoo_stock'
-		@stock = params[:symbol].upcase
+		@stock = params[:symbol].upcase!
 		stock = Stock.where(symbol:params[:symbol])[0]
 		@all_ers = stock.ereports.order('date DESC')
 		p @all_ers.first

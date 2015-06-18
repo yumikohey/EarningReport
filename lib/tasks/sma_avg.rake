@@ -30,14 +30,14 @@ end
 
 desc 'calculate five days average'
 task five_avg: :environment do
-  stocks = Stock.all
+  stocks = Stock.where("id > ?", 7320)
   stocks.each do |stock|
   	p "done stock #{stock.symbol}"
 	 	days = (0..25).to_a
 	  today = Date.today - 1
-	  days.each do |day|
-	  	quotes_count = BetaQuote.where(stock_id:stock.id).count
-	  	if quotes_count > 20
+	  quotes_count = BetaQuote.where(stock_id:stock.id).count
+	  if quotes_count >= 25
+	    days.each do |day|
 		  	start_date = today - day
 		  	five_start_date = today - day
 		  	ten_start_date = today - day  
@@ -78,9 +78,9 @@ task five_avg: :environment do
 					  	# p "ten days avg #{ten_avg}"
 					  	SmaAverage.create!(stock:stock, date:start_date, five_avg:five_avg, ten_avg:ten_avg, cross:0, stock_id:stock.id)
 					end
-			else
-				p "no data for #{stock.symbol}"
 			end
+		else
+			p "no data for #{stock.symbol}"
 		end
 	end
 end
