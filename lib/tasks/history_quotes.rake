@@ -5,13 +5,17 @@ task daily_quote: :environment do
   stocks.each do |stock|
     p stock.symbol
     quote = YahooFinance.quotes([stock.symbol], [:open, :high, :low, :close, :volume, :last_trade_date])
-    trade_date = Date.strptime(quote.first.last_trade_date, "%m/%d/%Y")
-    if quote.first.close != "N/A"
-      HistoryQuote.create!(stock: stock, date: trade_date, open:quote.first.open.to_f, high:quote.first.high.to_f, low:quote.first.low.to_f, close:quote.first.close.to_f, volume:quote.first.volume.to_i, stock_id:stock.id)
-    else
-      File.open("log/daily.txt","a") do |f|
-        f.write "\n #{stock.symbol} doesn't have daily quote"
+    begin
+      trade_date = Date.strptime(quote.first.last_trade_date, "%m/%d/%Y")
+      if quote.first.close != "N/A"
+        BetaQuote.create!(stock: stock, date: trade_date, open:quote.first.open.to_f, high:quote.first.high.to_f, low:quote.first.low.to_f, close:quote.first.close.to_f, volume:quote.first.volume.to_i, stock_id:stock.id)
+      else
+        File.open("log/daily.txt","a") do |f|
+          f.write "\n #{stock.symbol} doesn't have daily quote"
+        end
       end
+    rescue
+      p "#{quote.first.last_trade_date}"
     end      
   end
 end

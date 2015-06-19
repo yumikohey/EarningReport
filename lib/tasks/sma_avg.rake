@@ -30,10 +30,9 @@ end
 
 desc 'calculate five days average'
 task five_avg: :environment do
-  stocks = Stock.where("id > ?", 7381)
+  stocks = Stock.all
   days = (0..25).to_a
   stocks.each do |stock|
-  	p "done stock #{stock.symbol}"
 	  today = Date.today - 1
 	  quotes_count = BetaQuote.where(stock_id:stock.id).count
 	  if quotes_count >= 25
@@ -76,7 +75,13 @@ task five_avg: :environment do
 					  	ten_avg = ten_days_total / ten_days.count
 					  	# p "five days avg #{five_avg}"
 					  	# p "ten days avg #{ten_avg}"
-					  	SmaAverage.create!(stock:stock, date:start_date, five_avg:five_avg, ten_avg:ten_avg, cross:0, stock_id:stock.id)
+					  	#SmaAverage.create!(stock:stock, date:start_date, five_avg:five_avg, ten_avg:ten_avg, cross:0, stock_id:stock.id)
+					  	p update_stock = BetaQuote.find_by(date:start_date,stock_id:stock.id)
+					  	if update_stock
+						  	update_stock.five_avg = five_avg
+						  	update_stock.ten_avg = ten_avg
+						  	update_stock.save
+						  end
 					end
 			end
 		else
@@ -88,38 +93,113 @@ end
 
 desc 'golden_cross'
 task golden_cross: :environment do
-	stocks = Stock.all
-	today = Date.today - 1
-	days = (0..30).to_a
-	stocks.each do |stock|
-		days.each do |day|
+	# stocks = Stock.all
+	stock = Stock.find(7089)
+	today = Date.today - 3
+	end_date = Date.parse('2015-05-10')
+	# days = (0..30).to_a
+	# stocks.each do |stock|
+	# days.each do |day|
 			cross = 0
-			start_date = today - day
-			stock_prev_day = SmaAverage.find_by(date:start_date-1, stock_id:stock.id)
-			stock_today = SmaAverage.find_by(date:start_date, stock_id:stock.id)
-			prev_sum = stock_prev_day.five_avg - stock_prev_day.ten_avg
-			today_sum = stock_today.five_avg - stock_today.ten_avg
-			if prev_sum >= 0 && today_sum <= 0
-				cross = -1
-				p "#{stock_today.date} Death Cross"
-				stock_today.cross = cross
-				stock_today.save
-			elsif prev_sum <= 0 && today_sum >= 0
-				cross = 1
-				p "#{stock_today.date} golden_cross"
-				stock_today.cross = cross
-				stock_today.save
-			elsif today_sum < 0
-				cross = -2
-				p "downward trend"
-				stock_today.cross = cross
-				stock_today.save
-			elsif today_sum > 0
-				cross = 2
-				p "upward trend"
-				stock_today.cross = cross
-				stock_today.save
+			start_date = today
+			while(start_date > end_date) do
+				prev_date = start_date - 1
+				while(prev_date.saturday? || prev_date.sunday?) do
+					prev_date -= 1
+				end
+				stock_prev_day = BetaQuote.find_by(date:prev_date, stock_id:stock.id)
+
+				while(start_date.saturday? || start_date.sunday?) do
+					start_date -= 1
+			  end
+			  stock_today = BetaQuote.find_by(date:start_date, stock_id:stock.id)
+			  # p stock_prev_day
+			  # p stock_today
+			  prev_sum = stock_prev_day.five_avg - stock_prev_day.ten_avg
+			  today_sum = stock_today.five_avg - stock_today.ten_avg
+			  	if prev_sum >= 0 && today_sum <= 0
+			  		cross = -1
+			  		p "#{stock_today.date} Death Cross"
+			  		stock_today.cross = cross
+			  		stock_today.save
+			  	elsif prev_sum <= 0 && today_sum >= 0
+			  		cross = 1
+			  		p "#{stock_today.date} golden_cross"
+			  		stock_today.cross = cross
+			  		stock_today.save
+			  	elsif today_sum < 0
+			  		cross = -2
+			  		p "downward trend"
+			  		stock_today.cross = cross
+			  		stock_today.save
+			  	elsif today_sum > 0
+			  		cross = 2
+			  		p "upward trend"
+			  		stock_today.cross = cross
+			  		stock_today.save
+			  	end
+			  start_date -= 1
 			end
+end
+
+desc 'calculate five days average'
+task five_avg_daily: :environment do
+  stocks = Stock.all
+  days = (0..15).to_a
+  stocks.each do |stock|
+	  today = Date.today - 1
+	  quotes_count = BetaQuote.where(stock_id:stock.id).count
+	  if quotes_count >= 15
+	    days.each do |day|
+		  	start_date = today - day
+		  	five_start_date = today - day
+		  	ten_start_date = today - day  
+				  five_days = []
+				  ten_days = []
+				  while(five_days.count < 5)
+				  		a = BetaQuote.find_by("stock_id=? AND date = ?", stock.id, five_start_date)
+				  		if a
+				  			five_days.push(a)
+				  			# p "#{a.date} #{a.close}"
+				  		end
+				  		five_start_date -= 1
+				  end
+				  while(ten_days.count < 10)
+				  		b = BetaQuote.find_by("stock_id=? AND date = ?", stock.id, ten_start_date)
+				  		if b
+				  			ten_days.push(b)
+				  			# p "#{b.date} #{b.close}"
+				  		end
+				  		ten_start_date -= 1
+				  end
+
+				  if !five_days.empty? && !ten_days.empty?
+					  # p "five days array count : #{five_days.count} "
+					  # p "ten days array count : #{ten_days.count} "
+					  	five_days_total = 0
+					  	ten_days_total = 5
+					  	five_days.each do |day|
+					  		five_days_total += day.close.to_f
+					  	end
+					  	ten_days.each do |day|
+					  		ten_days_total += day.close.to_f
+					  	end
+					  	
+					  	five_avg = five_days_total / five_days.count
+					  	ten_avg = ten_days_total / ten_days.count
+					  	# p "five days avg #{five_avg}"
+					  	# p "ten days avg #{ten_avg}"
+					  	#SmaAverage.create!(stock:stock, date:start_date, five_avg:five_avg, ten_avg:ten_avg, cross:0, stock_id:stock.id)
+					  	update_stock = BetaQuote.find_by(date:start_date,stock_id:stock.id)
+					  	if update_stock && !update_stock.five_avg
+						  	update_stock.five_avg = five_avg
+						  	update_stock.ten_avg = ten_avg
+						  	update_stock.save
+						  end
+					end
+			end
+		else
+			p "no data for #{stock.symbol}"
 		end
 	end
 end
