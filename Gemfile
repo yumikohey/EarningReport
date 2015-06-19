@@ -60,7 +60,7 @@ gem 'yahoo-finance'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  gem 'pry-debugger'
+  # gem 'pry-debugger'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
