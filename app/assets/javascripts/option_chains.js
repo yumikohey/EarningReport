@@ -1,6 +1,22 @@
 //= require chartist/chartist.min.js
 
 $(function(){
+    var search_symbol;
+    $('.earning_btn').on('click', function(){
+        search_symbol = $('.earning_symbol_input').val();
+        $.ajax({
+            url: '/earning_reports/' + search_symbol,
+            cache: false,
+            success: function(html){
+                console.log('im here');
+                $('.recent_three_reports').html('');
+                $('.recent_three_reports').append(html);
+            }
+        })
+    });
+});
+
+$(function(){
     var current_btn = $('.current_pain_btn'),
         form = $('.current_pain_search_form');
     var current_pain_symbol = '',

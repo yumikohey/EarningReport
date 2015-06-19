@@ -1,0 +1,81 @@
+<div class="ibox float-e-margins">
+<div class="ibox-title">
+    <h5> Historical Earning Reports Performance</h5>
+    <div class="ibox-tools">
+        <a class="collapse-link">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-wrench"></i>
+        </a>
+    </div>
+</div>
+<% @all_reports.each_with_index do |earning, idx| %>
+<% if earning.price_before_er %>
+<div class="ibox-content">
+    <div class="row">
+        <h3 class="ibox-content">
+            <%= earning.date.strftime("%b %d, %Y") %>
+        </h3>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Date </th>
+                <th>Open </th>
+                <th>High </th>
+                <th>Low </th>
+                <th>Close </th>
+                <th>Volume </th>
+                <th>Date Changes</th>
+                <th><i class="fa fa-play fa-rotate-270"></i> Up/Down</th>
+                <th>Price Trend</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td><%= earning.price_before_er.price_date if earning.price_before_er %></td>
+              <td><%= earning.price_before_er.quote[1].to_f.round(2) if earning.price_before_er %></td>
+              <td><%= earning.price_before_er.quote[2].to_f.round(2) if earning.price_before_er %></td>
+              <td><%= earning.price_before_er.quote[3].to_f.round(2) if earning.price_before_er %></td>
+              <td><%= earning.price_before_er.quote[4].to_f.round(2) if earning.price_before_er %></td>
+              <td><%= earning.price_before_er.quote[5] if earning.price_before_er %></td>
+              <td class="text-primary"><%= ((((earning.price_before_er.quote[4].to_f - earning.price_before_er.quote[1].to_f) / earning.price_before_er.quote[1].to_f)) * 100).round(2) if earning.price_before_er %>%</td>
+            </tr>
+            <tr>
+                <td><%= earning.price_on_er.price_date if earning.price_on_er %></td>
+                <td><%= earning.price_on_er.quote[1].to_f.round(2) if earning.price_on_er %></td>
+                <td><%= earning.price_on_er.quote[2].to_f.round(2) if earning.price_on_er %></td>
+                <td><%= earning.price_on_er.quote[3].to_f.round(2) if earning.price_on_er %></td>
+                <td><%= earning.price_on_er.quote[4].to_f.round(2) if earning.price_on_er %></td>
+                <td><%= earning.price_on_er.quote[5] if earning.price_on_er %></td>
+                <td class="text-primary"><%= ((((earning.price_on_er.quote[4].to_f - earning.price_on_er.quote[1].to_f) / earning.price_on_er.quote[1].to_f)) * 100).round(2) if earning.price_on_er %>%</td>
+            </tr>
+            <tr>
+                <td><%= earning.price_after_er.price_date if earning.price_after_er %></td>
+                <td><%= earning.price_after_er.quote[1].to_f.round(2) if earning.price_after_er %></td>
+                <td><%= earning.price_after_er.quote[2].to_f.round(2) if earning.price_after_er %></td>
+                <td><%= earning.price_after_er.quote[3].to_f.round(2) if earning.price_after_er %></td>
+                <td><%= earning.price_after_er.quote[4].to_f.round(2) if earning.price_after_er %></td>
+                <td><%= earning.price_after_er.quote[5] if earning.price_after_er %></td>
+                <td class="text-primary"><%= ((((earning.price_after_er.quote[4].to_f - earning.price_after_er.quote[1].to_f) / earning.price_after_er.quote[1].to_f)) * 100).round(2) if earning.price_after_er %>%</td>
+            </tr>
+            <tr class="primary">
+                <th>Percentage Change After Earning Report Released</th>
+                <% before_market = (((earning.price_on_er.quote[1].to_f - earning.price_before_er.quote[4].to_f) / earning.price_before_er.quote[4].to_f)*100).round(2) %> 
+                <% after_market = (((earning.price_after_er.quote[1].to_f - earning.price_on_er.quote[4].to_f ) / earning.price_on_er.quote[4].to_f)*100).round(2) %> 
+                <td class="danger">
+                <% if before_market.abs > after_market.abs %>
+                <%= before_market %>%
+                <% else %>
+                <%= after_market %>%
+                <% end %>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<% end %>
+<% end %>

@@ -6,7 +6,7 @@ class StocksController < ApplicationController
 	end
 
 	def create
-		stock_symbol = params[:symbol].upcase!
+		stock_symbol = params[:symbol].upcase
 		stock = Stock.where(symbol:stock_symbol)[0]
  		@all_ers = stock.ereports
  		@all_ers.each do |earning|
@@ -22,8 +22,9 @@ class StocksController < ApplicationController
 
   def show
   	require 'yahoo_stock'
-		@stock = params[:symbol].upcase!
-		stock = Stock.where(symbol:params[:symbol])[0]
+  	stock_symbol = params[:symbol].upcase
+		stock = Stock.where(symbol:stock_symbol)[0]
+		@stock = stock.symbol
 		@all_ers = stock.ereports.order('date DESC')
 		p @all_ers.first
 		@all_ers.each do |earning|
@@ -32,12 +33,21 @@ class StocksController < ApplicationController
 		@all_reports = stock.ereports.order('date DESC')
 		quote = YahooStock::Quote.new(:stock_symbols => [@stock])
 	 	@current_price = quote.results(:to_array).output
-		render 'show', :layout => "sub_layout"
+		render :layout => "sub_layout"
 	end
 
-	# def upcoming_er
-	# 	StocksHelper.read_yahoo_data
-	# end
+	def ajax_table
+		stock_symbol = params[:symbol].upcase
+		p "stock symbol: #{stock_symbol}"
+		stock = Stock.find_by(symbol:stock_symbol)
+		@all_ers = stock.ereports.order('date DESC')
+		p @all_ers.first
+		@all_ers.each do |earning|
+			EreportsHelper.earning_report_dates_data(stock_symbol, earning)
+		end			
+		@all_reports = stock.ereports.order('date DESC').first(3)
+	end
+
 
 	def options
 		symbol = params[:symbol]

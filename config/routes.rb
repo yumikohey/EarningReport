@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :stocks, only: [:index, :create]
 
   get '/stocks/:symbol', to: 'stocks#show', as: 'stock_symbol'
+  get '/earning_reports/:symbol', to: 'stocks#ajax_table', as: 'recent_three'
 
   get '/current_pain/:symbol', to: 'option_chains#current_pain', as: 'current_pain'
 
