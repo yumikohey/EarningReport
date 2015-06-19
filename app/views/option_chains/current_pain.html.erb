@@ -1,4 +1,12 @@
         <div class="ibox float-e-margins">
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="m-l-md">
+                        <span class="h3 font-bold m-t block">$<%= @close_prices[@current_pain_idx] %></span>
+                        <small class="text-muted m-b block"><% Date.today %> Predicted Stock's close price </small>
+                    </div>
+                </div>
+            </div>
             <div class="ibox-title">
                 <h5>Current Pain</h5>
             </div>
@@ -6,9 +14,6 @@
                 <div id="ct-chart3" class="ct-perfect-fourth" style="height: 400px;"></div>
             </div>
         </div>
-
-
-<%= stylesheet_link_tag    'option_chains' %>
 
 <% content_for :javascript do %>
 <script type="text/javascript">

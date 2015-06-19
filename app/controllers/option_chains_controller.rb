@@ -15,15 +15,15 @@ class OptionChainsController < ApplicationController
 			strike_price_array.push(strike_price_level["strike_price"])
 		end
 
-		close_prices = []
+		@close_prices = []
 		close_price_start = strike_price_array.first.round(2)
 
 		while (close_price_start <= strike_price_array.last) do
 			close_price_start += 0.10
-			close_prices.push(close_price_start.round(2))
+			@close_prices.push(close_price_start.round(2))
 		end
 
-		close_prices.each do |target_price|
+		@close_prices.each do |target_price|
 			call_sum = 0
 			strike_price_array.each_with_index do |strike_price, idx|
 				if ( target_price > strike_price)
@@ -33,7 +33,7 @@ class OptionChainsController < ApplicationController
 			call_volumes.push(call_sum)
 		end 
 
-		close_prices.each do |target_price|
+		@close_prices.each do |target_price|
 			put_sum = 0
 			strike_price_array.each_with_index do |strike_price, idx|
 				if(strike_price > target_price)
@@ -44,14 +44,14 @@ class OptionChainsController < ApplicationController
 		end 
 
 		@current_pain_array = []
-		close_prices.each_with_index do |ele, idx|
+		@close_prices.each_with_index do |ele, idx|
 			@current_pain_array.push(call_volumes[idx] + put_volumes[idx])
 		end
 		@current_pain = @current_pain_array.min
 		@current_pain_idx = @current_pain_array.index(@current_pain)
 
 
-		gon.strike_price_array = close_prices[@current_pain_idx-constant_number..@current_pain_idx+constant_number]
+		gon.strike_price_array = @close_prices[@current_pain_idx-constant_number..@current_pain_idx+constant_number]
 		gon.call_volumes = call_volumes[@current_pain_idx-constant_number..@current_pain_idx+constant_number]
 		gon.put_volumes = put_volumes[@current_pain_idx-constant_number..@current_pain_idx+constant_number]
 
