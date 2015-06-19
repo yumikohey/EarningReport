@@ -8,6 +8,28 @@ task daily_quote: :environment do
     begin
       trade_date = Date.strptime(quote.first.last_trade_date, "%m/%d/%Y")
       if quote.first.close != "N/A"
+        HistoryQuote.create!(stock: stock, date: trade_date, open:quote.first.open.to_f, high:quote.first.high.to_f, low:quote.first.low.to_f, close:quote.first.close.to_f, volume:quote.first.volume.to_i, stock_id:stock.id)
+      else
+        File.open("log/daily.txt","a") do |f|
+          f.write "\n #{stock.symbol} doesn't have daily quote"
+        end
+      end
+    rescue
+      p "#{quote.first.last_trade_date}"
+    end      
+  end
+end
+
+desc 'download daily quote for stocks'
+task beta_daily_quote: :environment do 
+  require 'yahoo_finance'
+  stocks = Stock.all
+  stocks.each do |stock|
+    p stock.symbol
+    quote = YahooFinance.quotes([stock.symbol], [:open, :high, :low, :close, :volume, :last_trade_date])
+    begin
+      trade_date = Date.strptime(quote.first.last_trade_date, "%m/%d/%Y")
+      if quote.first.close != "N/A"
         BetaQuote.create!(stock: stock, date: trade_date, open:quote.first.open.to_f, high:quote.first.high.to_f, low:quote.first.low.to_f, close:quote.first.close.to_f, volume:quote.first.volume.to_i, stock_id:stock.id)
       else
         File.open("log/daily.txt","a") do |f|
@@ -32,8 +54,8 @@ task history_quotes: :environment do
 	    		price_quotes = history.results(:to_hash).output
   		    begin
   			  	price_quotes.each do |day_quote|
-  			  		#HistoryQuote.create!(stock: stock, date: Date.parse(day_quote[:date]), open:day_quote[:open].to_f, high:day_quote[:high].to_f, low:day_quote[:low].to_f, close:day_quote[:close].to_f, volume:day_quote[:volume].to_i, stock_id:stock.id)
-              BetaQuote.create!(stock: stock, date: Date.parse(day_quote[:date]), open:day_quote[:open].to_f, high:day_quote[:high].to_f, low:day_quote[:low].to_f, close:day_quote[:close].to_f, volume:day_quote[:volume].to_i, stock_id:stock.id)
+  			  		HistoryQuote.create!(stock: stock, date: Date.parse(day_quote[:date]), open:day_quote[:open].to_f, high:day_quote[:high].to_f, low:day_quote[:low].to_f, close:day_quote[:close].to_f, volume:day_quote[:volume].to_i, stock_id:stock.id)
+              #BetaQuote.create!(stock: stock, date: Date.parse(day_quote[:date]), open:day_quote[:open].to_f, high:day_quote[:high].to_f, low:day_quote[:low].to_f, close:day_quote[:close].to_f, volume:day_quote[:volume].to_i, stock_id:stock.id)
   			  	end
   			  rescue
   			  	p "errors #{stock.symbol}"
