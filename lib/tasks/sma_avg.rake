@@ -31,9 +31,9 @@ end
 desc 'calculate five days average'
 task five_avg: :environment do
   stocks = Stock.where("id > ?", 7381)
+  days = (0..25).to_a
   stocks.each do |stock|
   	p "done stock #{stock.symbol}"
-	 	days = (0..25).to_a
 	  today = Date.today - 1
 	  quotes_count = BetaQuote.where(stock_id:stock.id).count
 	  if quotes_count >= 25

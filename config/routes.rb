@@ -13,6 +13,10 @@ Rails.application.routes.draw do
 
   get '/stocks/:symbol', to: 'stocks#show', as: 'stock_symbol'
 
+  get '/current_pain/:symbol', to: 'option_chains#current_pain', as: 'current_pain'
+
+  #post '/current_pain', to: 'option_chains#current_pain'
+
 
   # get '/weekly_pain', to: 'stocks#weekly_pain', as: 'weekly_pain'
 
