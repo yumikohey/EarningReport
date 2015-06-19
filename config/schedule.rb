@@ -13,3 +13,7 @@ end
 every :monday => "1:00am" do
 	rake 'earning_report'
 end
+
+every :friday => "8:30pm" do
+	rake 'update_db'
+end

@@ -172,7 +172,7 @@ end
 
 desc 'update beta database' 
 	task update_db: :environment do
-		stocks = Stock.first(50)
+		stocks = Stock.all
 		end_date = Date.parse('2015-05-26')
 		
 		stocks.each do |stock|
