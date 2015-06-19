@@ -1,7 +1,7 @@
 set :environment, "production"
 set :output, {:error => "log/cron_error_log.log", :standard => "log/cron_log.log"}
 
-every :tuesday, :wednesday, :thursday, :friday => "1:00am" do
+every %w( tue wed thu fri ), :at => "1:00am" do
   rake 'daily_option_chains'
 end
 
