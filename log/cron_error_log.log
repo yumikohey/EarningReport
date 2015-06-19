@@ -1,0 +1,9 @@
+rake aborted!
+ArgumentError: invalid date
+/home/ubuntu/EarningReport/lib/tasks/history_quotes.rake:8:in `strptime'
+/home/ubuntu/EarningReport/lib/tasks/history_quotes.rake:8:in `block (2 levels) in <top (required)>'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/relation/delegation.rb:46:in `each'
+/var/lib/gems/2.0.0/gems/activerecord-4.2.1/lib/active_record/relation/delegation.rb:46:in `each'
+/home/ubuntu/EarningReport/lib/tasks/history_quotes.rake:5:in `block in <top (required)>'
+Tasks: TOP => daily_quote
+(See full trace by running task with --trace)
