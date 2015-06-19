@@ -1,7 +1,7 @@
 class OptionChainsController < ApplicationController
 	def current_pain
 		constant_number = 20
-		symbol = params[:symbol]
+		symbol = params[:symbol].upcase!
 		stock = DailyOption.where(symbol:symbol, expiration_date:Date.parse('2015-06-19')).first
 		option_chains = stock.option_chains
 		strike_price_array = []
