@@ -37,13 +37,12 @@ class StocksController < ApplicationController
 	end
 
 	def ajax_table
-		stock_symbol = params[:symbol].upcase
-		p "stock symbol: #{stock_symbol}"
-		stock = Stock.find_by(symbol:stock_symbol)
+		@stock_symbol = params[:symbol].upcase
+		stock = Stock.find_by(symbol:@stock_symbol)
 		@all_ers = stock.ereports.order('date DESC')
 		p @all_ers.first
 		@all_ers.each do |earning|
-			EreportsHelper.earning_report_dates_data(stock_symbol, earning)
+			EreportsHelper.earning_report_dates_data(@stock_symbol, earning)
 		end			
 		@all_reports = stock.ereports.order('date DESC').first(3)
 	end
