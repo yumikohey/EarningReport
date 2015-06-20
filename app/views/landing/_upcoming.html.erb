@@ -17,17 +17,21 @@
                         <th> Company Name </th>
                         <th> Symbol </th>
                         <th> Date </th>
-                        <th> Profit since last revert</th>
+                        <th> Stock Price </th>
+                        <th> Today's change </th>
                     </tr>
                     </thead>
                     <tbody id='golden_cross_list'>
                     <% @golden_cross_stocks.each do |stock| %>
                        <tr>
                            <% equity = Stock.find(stock.stock_id) %>
+                           <% require "yahoo_finance" %>
+                           <% data = YahooFinance.quotes([equity.symbol], [:open, :close, :change_in_percent, :last_trade_date, :trade_date]) %>
                            <td><%= equity.name %></td>
                            <td><a href="<%= stock_symbol_path(equity.symbol) %>"><%= equity.symbol %></a></td>
-                           <td><%= Date.today %> </td>
-                           <td class="text-navy"> <i class="fa fa-level-up"></i> 40% </td>
+                           <td> $<%= data[0].last_trade_date %></td>
+                           <td><%= data[0].close %></td>
+                           <td class="text-navy"> <i class="fa fa-level-up"></i><%= data[0].change_in_percent %> </td>
                        </tr>
                     <% end %>
                     </tbody>
