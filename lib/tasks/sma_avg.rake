@@ -143,10 +143,13 @@ end
 
 desc 'calculate five days average'
 task five_avg_daily: :environment do
-  stocks = Stock.all
+  stocks = Stock.first(10)
  	# stock = Stock.find_by(symbol:'AMZN')
   stocks.each do |stock|
-  	start_date = Date.today - 1
+  	start_date = Date.today
+    while (start_date.saturday? || start_date.sunday?) do
+    	start_date -= 1
+    end
   	prev_date = start_date - 1
   	that_day = BetaQuote.find_by("stock_id=? AND date = ?", stock.id, start_date)
   	while (prev_date.saturday? || prev_date.sunday?) do
@@ -154,18 +157,19 @@ task five_avg_daily: :environment do
   	end
   	the_day_before = BetaQuote.find_by("stock_id=? AND date = ?", stock.id, prev_date)
 		
-		five_days_total = that_day.close.to_f + 4 * (the_day_before.close.to_f)
-		ten_days_total = that_day.close.to_f + 9 * (the_day_before.close.to_f)
+		five_days_total = that_day.close.to_f + 5 * (the_day_before.close.to_f) if that_day
+		ten_days_total = that_day.close.to_f + 10 * (the_day_before.close.to_f) if that_day
 
-  	five_avg = five_days_total / 5
-  	ten_avg = ten_days_total / 10
+  	five_avg = five_days_total / 6
+  	ten_avg = ten_days_total / 11
 
   	update_stock = BetaQuote.find_by(date:start_date,stock_id:stock.id)
-  	if update_stock && !update_stock.five_avg
-	  	update_stock.five_avg = five_avg
-	  	update_stock.ten_avg = ten_avg
-	  	update_stock.save
+  	if update_stock 
+	  	p update_stock.five_avg = five_avg
+	  	p update_stock.ten_avg = ten_avg
+	  	# update_stock.save
 	  end
+	  p stock.symbol
 	end
 end
 
@@ -206,12 +210,12 @@ desc 'update beta database'
 						ten_days = five_days.dup
 						begin
 							while ten_days.count < 10 do 
+								ten_start_date -= 1
 								while (ten_start_date.saturday? || ten_start_date.sunday?) do
 									ten_start_date -= 1
 								end
 								temp_stock = BetaQuote.find_by(date:ten_start_date, stock_id:stock.id)
 								ten_days.push(temp_stock.close.to_f) if temp_stock
-								ten_start_date -= 1
 								#p "#{stock.symbol} #{ten_start_date} #{temp_stock.close.to_f.round(2)}"
 							end	
 						rescue
