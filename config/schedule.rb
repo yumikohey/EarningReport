@@ -5,7 +5,7 @@ every %w( tue wed thu fri ), :at => "1:00am" do
   rake 'daily_option_chains'
 end
 
-every :weekday => "11:00pm" do
+every %w( tue wed thu fri sat) => "2:00am" do
 	rake 'daily_quote'
 	rake 'beta_daily_quote'
 end
@@ -14,6 +14,6 @@ every :monday => "1:00am" do
 	rake 'earning_report'
 end
 
-every :friday => "8:30pm" do
+every :saturday => "2:00am" do
 	rake 'update_db'
 end
