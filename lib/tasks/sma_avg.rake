@@ -219,10 +219,9 @@ desc 'update beta database'
 	task update_db: :environment do
 		stocks = Stock.all
 		end_date = Date.parse('2015-05-26')
-		
 		stocks.each do |stock|
 			begin 
-				start_date = Date.today - 1
+				start_date = Date.today - 2
 				count = BetaQuote.where(stock_id:stock.id).count
 				if count > 25
 					while start_date > end_date do
@@ -232,7 +231,7 @@ desc 'update beta database'
 							start_date -= 1
 						end
 						beta_stock = BetaQuote.find_by(date:start_date, stock_id:stock.id)
-						five_days.push(beta_stock.close.to_f)
+						five_days.push(beta_stock.close.to_f) 
 						temp_date = start_date - 1
 						begin
 							while five_days.count < 5 do 
@@ -269,7 +268,7 @@ desc 'update beta database'
 						five_days.each do |day|
 							five_days_total += day
 						end
-						p five_avg = five_days_total / 5
+						five_avg = five_days_total / 5
 
 						ten_days_total = 0
 						ten_days.each do |day|
@@ -282,6 +281,7 @@ desc 'update beta database'
 						beta_stock.save
 						start_date -= 1
 					end
+					p "#{stock.symbol}"
 				else
 					p "not a valid stock #{stock.symbol}"
 				end
