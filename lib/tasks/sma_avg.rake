@@ -95,8 +95,8 @@ desc 'golden_cross'
 task golden_cross: :environment do
 	stocks = Stock.all
 	# stock = Stock.find(3281)
-	today = Date.today - 1
-	end_date = Date.parse('2015-06-10')
+	today = Date.today
+	end_date = Date.parse('2015-06-18')
 	stocks.each do |stock|
 		begin 
 			cross = 0
@@ -207,6 +207,7 @@ task five_avg_daily: :environment do
 		  		beta_stock.five_avg = five_avg
 		  		beta_stock.ten_avg = ten_avg
 		  		beta_stock.save
+		  		p beta_stock
 			  p stock.symbol
 			else
 				p "no data for #{stock.symbol}"

@@ -22,13 +22,7 @@
                     </thead>
                     <tbody id='golden_cross_list'>
                     <% @golden_cross_stocks.each do |stock| %>
-                       <tr>
-                           <% equity = Stock.find(stock.stock_id) %>
-                           <td><%= equity.name %></td>
-                           <td><a href="<%= stock_symbol_path(equity.symbol) %>"><%= equity.symbol %></a></td>
-                           <td><%= Date.today %> </td>
-                           <td class="text-navy"> <i class="fa fa-level-up"></i> 40% </td>
-                       </tr>
+                        <%= render 'stock' %>
                     <% end %>
                     </tbody>
                 </table>

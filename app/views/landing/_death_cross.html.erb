@@ -2,7 +2,7 @@
 
 <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5> Golden Cross </h5>
+                <h5> Death Cross </h5>
                 <div class="ibox-tools">
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
@@ -20,8 +20,8 @@
                         <th> Profit since last revert</th>
                     </tr>
                     </thead>
-                    <tbody id='golden_cross_list'>
-                    <% @golden_cross_stocks.each do |stock| %>
+                    <tbody id='death_cross_list'>
+                    <% @death_cross_stocks.each do |stock| %>
                        <tr>
                            <% equity = Stock.find(stock.stock_id) %>
                            <td><%= equity.name %></td>
@@ -33,7 +33,7 @@
                     </tbody>
                 </table>
                 <div id="paginator">
-                    <%= paginate @golden_cross_stocks, :remote => true %>
+                    <%= paginate @death_cross_stocks, :remote => true %>
                 </div>
                 
             </div>
