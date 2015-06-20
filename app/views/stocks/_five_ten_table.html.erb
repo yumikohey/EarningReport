@@ -7,21 +7,22 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td><%= Date.today %></td> 
-        <td class="text-center">downward trend</td>
-        <td class="text-navy text-center"> <i class="fa fa-level-up"></i> 40% </td>
-    </tr>
-    <tr>
-        <td><%=Date.today - 1 %></td>
-        
-        <td class="text-center">downward trend</td>
-        <td class="text-danger text-center"> <i class="fa fa-level-down"></i> -20% </td>
-    </tr>
-    <tr>
-        <td><%=Date.today - 2%></td>
-        <td class="text-center">death cross</td>
-        <td class="text-navy text-center"> <i class="fa fa-level-up"></i> 26% </td>
-    </tr>
+        <% @five_ten.each do |cross| %>
+        <tr>
+            <td><%= cross.date %></td>
+            <% if cross.cross == 1 %> 
+            <td class="text-center"><span class="label label-primary" style="
+    font-size: 14px;">Golden Cross</span></td>
+            <% elsif cross.cross == 2 %> 
+            <td class="text-center">Upward Trend</td>
+            <% elsif cross.cross == -1 %> 
+            <td class="text-center"><span class="label label-danger" style="
+    font-size: 14px;">Death Cross</span></td>
+            <% else %> 
+            <td class="text-center">Downward Trend</td>
+            <% end %>
+            <td class="text-navy text-center"> <i class="fa fa-level-up"></i> 40% </td>
+        </tr>
+        <% end %>
     </tbody>
 </table>
