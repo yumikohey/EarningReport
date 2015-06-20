@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  include SessionsHelper
+  
   def new
     @admin_page = false
   end
