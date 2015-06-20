@@ -93,11 +93,12 @@ end
 
 desc 'golden_cross'
 task golden_cross: :environment do
-	stocks = Stock.first(30)
+	stocks = Stock.all
 	# stock = Stock.find(3281)
 	today = Date.today - 1
 	end_date = Date.parse('2015-06-10')
 	stocks.each do |stock|
+		begin 
 			cross = 0
 			start_date = today
 			while(start_date > end_date) do
@@ -138,38 +139,78 @@ task golden_cross: :environment do
 			  	end
 			  start_date -= 1
 			end
+		rescue
+			p "no work!"
 		end
+	end
 end
 
 desc 'calculate five days average'
 task five_avg_daily: :environment do
-  stocks = Stock.first(10)
+  stocks = Stock.all
  	# stock = Stock.find_by(symbol:'AMZN')
   stocks.each do |stock|
   	start_date = Date.today
-    while (start_date.saturday? || start_date.sunday?) do
-    	start_date -= 1
-    end
-  	prev_date = start_date - 1
-  	that_day = BetaQuote.find_by("stock_id=? AND date = ?", stock.id, start_date)
-  	while (prev_date.saturday? || prev_date.sunday?) do
-  		prev_date -= 1
-  	end
-  	the_day_before = BetaQuote.find_by("stock_id=? AND date = ?", stock.id, prev_date)
-		
-		five_days_total = that_day.close.to_f + 5 * (the_day_before.close.to_f) if that_day
-		ten_days_total = that_day.close.to_f + 10 * (the_day_before.close.to_f) if that_day
+  		five_days = []
+  		ten_start_date = start_date
+  		while (start_date.saturday? || start_date.sunday?) do
+  			start_date -= 1
+  		end
+  		beta_stock = BetaQuote.find_by(date:start_date, stock_id:stock.id)
+  		count = BetaQuote.where("date <= ? AND stock_id = ?", start_date, stock.id).count
+  		if beta_stock && count >= 11
+		  		five_days.push(beta_stock.close.to_f)
+		  		temp_date = start_date - 1
+		  		begin
+		  			while five_days.count < 5 do 
+		  				while (temp_date.saturday? || temp_date.sunday?) do
+		  					temp_date -= 1
+		  				end
+		  				temp_stock = BetaQuote.find_by(date:temp_date, stock_id:stock.id)
+		  				five_days.push(temp_stock.close.to_f) if temp_stock
+		  				# p "#{stock.symbol} #{temp_date} #{temp_stock.close.to_f.round(2)}"
+		  				ten_start_date = temp_date
+		  				temp_date -= 1
+		  			end
+		  		rescue
+		  			p "end five days #{start_date}"
+		  		end
 
-  	five_avg = five_days_total / 6
-  	ten_avg = ten_days_total / 11
+		  		ten_days = five_days.dup
+		  		begin
+		  			while ten_days.count < 10 do 
+		  				ten_start_date -= 1
+		  				while (ten_start_date.saturday? || ten_start_date.sunday?) do
+		  					ten_start_date -= 1
+		  				end
+		  				temp_stock = BetaQuote.find_by(date:ten_start_date, stock_id:stock.id)
+		  				ten_days.push(temp_stock.close.to_f) if temp_stock
+		  				#p "#{stock.symbol} #{ten_start_date} #{temp_stock.close.to_f.round(2)}"
+		  			end	
+		  		rescue
+		  			p "end ten days #{ten_start_date}"
+		  		end		
 
-  	update_stock = BetaQuote.find_by(date:start_date,stock_id:stock.id)
-  	if update_stock 
-	  	p update_stock.five_avg = five_avg
-	  	p update_stock.ten_avg = ten_avg
-	  	# update_stock.save
-	  end
-	  p stock.symbol
+		  		
+		  		five_days_total = 0
+		  		five_days.each do |day|
+		  			five_days_total += day
+		  		end
+		  		five_avg = five_days_total / 5
+
+		  		ten_days_total = 0
+		  		ten_days.each do |day|
+		  			ten_days_total += day
+		  		end
+		  		ten_avg = ten_days_total / 10
+		  		
+		  		beta_stock.five_avg = five_avg
+		  		beta_stock.ten_avg = ten_avg
+		  		beta_stock.save
+			  p stock.symbol
+			else
+				p "no data for #{stock.symbol}"
+			end
 	end
 end
 
