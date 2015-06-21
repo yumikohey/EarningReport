@@ -34,6 +34,7 @@ class StocksController < ApplicationController
 		quote = YahooStock::Quote.new(:stock_symbols => [@stock])
 	 	@current_price = quote.results(:to_array).output
 	 	@five_ten = BetaQuote.where(stock_id: stock.id).where("date >= ?", Date.today - 10).order('date DESC')
+	 	@company = stock.name
 		render :layout => "sub_layout"
 	end
 

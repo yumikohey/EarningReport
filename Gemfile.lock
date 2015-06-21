@@ -81,9 +81,6 @@ GEM
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     json (1.8.2)
-    kaminari (0.16.3)
-      actionpack (>= 3.0.0)
-      activesupport (>= 3.0.0)
     loofah (2.0.2)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -176,6 +173,7 @@ GEM
       sprockets-rails (>= 2.0, < 4.0)
     whenever (0.9.4)
       chronic (>= 0.6.3)
+    will_paginate (3.0.7)
     yahoo-finance (0.2.0)
 
 PLATFORMS
@@ -192,7 +190,6 @@ DEPENDENCIES
   httparty
   iconv
   jbuilder (~> 2.0)
-  kaminari
   nas-yahoo_stock
   nokogiri
   pg
@@ -206,4 +203,5 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
   whenever
+  will_paginate
   yahoo-finance

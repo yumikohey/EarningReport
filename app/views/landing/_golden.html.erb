@@ -1,0 +1,11 @@
+<% @golden_cross_stocks.each do |stock| %>
+   <tr>
+       <% equity = Stock.find(stock.stock_id) %>
+       <% require "yahoo_finance" %>
+       <% data = YahooFinance.quotes([equity.symbol], [:open, :close, :change_in_percent, :last_trade_date, :trade_date]) %>
+       <td><%= equity.name %></td>
+       <td><a href="<%= stock_symbol_path(equity.symbol) %>" target="_blank" ><%= equity.symbol %></a></td>
+       <td><%= data[0].close %></td>
+       <td class="text-navy"> <i class="fa fa-level-up"></i><%= data[0].change_in_percent %> </td>
+   </tr>
+<% end %>

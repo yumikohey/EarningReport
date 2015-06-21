@@ -1,5 +1,18 @@
 //= require chartist/chartist.min.js
 
+$(function() {
+  $('.golden_cross .pagination a').on("click", function(){
+    $.getScript(this.href);
+    return false;
+  });
+
+  $('.death_cross .pagination a').on("click", function(){
+    $.getScript(this.href);
+    return false;
+  });
+
+});
+
 $(function(){
     var search_symbol;
     $('.earning_btn').on('click', function(){

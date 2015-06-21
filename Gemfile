@@ -49,7 +49,7 @@ gem 'bcrypt', '3.1.7'
 
 gem 'yahoo-finance'
 
-gem 'kaminari'
+gem 'will_paginate'
 
 
 # Use ActiveModel has_secure_password
