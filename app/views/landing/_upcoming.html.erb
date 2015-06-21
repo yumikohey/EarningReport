@@ -27,7 +27,7 @@
                       </tbody>
                 </table>
                 <div class="golden_cross">
-                    <%= will_paginate @golden_cross_stocks %>
+                    <%= will_paginate @golden_cross_stocks, :param_name => 'golden_page'%>
                 </div>
             </div>
         </div>
