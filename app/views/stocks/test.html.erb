@@ -1,0 +1,55 @@
+<div class="row">
+    <% price = '' %>
+    <% @last_revert.each do |revert| %>
+        <% if revert.cross == -1 || revert.cross == 1 %>
+            <% price = BetaQuote.where(stock_id:Stock.find_by(symbol:@stock).id).where(date:revert.date).first.close %>
+            <% break %>
+        <% end %>
+        <% if price = '' %>
+            <% price = BetaQuote.where(stock_id:Stock.find_by(symbol:@stock).id).where(date:@last_revert.last.date).first.close %>
+        <% end %>
+    <% end %>
+    <div class="row">
+        <%= price %>
+    </div>
+</div>
+
+<% @five_ten.each do |cross| %>
+<tr>
+    <td><%= cross.date %></td>
+    <% if cross.cross == 1 %> 
+    <td class="text-center"><span class="label label-primary">Golden Cross</span></td>
+    <% elsif cross.cross == 2 %> 
+    <td class="text-center">Upward Trend</td>
+    <% elsif cross.cross == -1 %> 
+    <td class="text-center"><span class="label label-danger">Death Cross</span></td>
+    <% else %> 
+    <td class="text-center">Downward Trend</td>
+    <% end %>
+    <td class="text-navy text-center"><i class="fa fa-level-up"></i> 40% </td>
+</tr>
+<% end %>
+
+<% last_piece = @five_ten.pop %>
+
+<% cross_array[0]["8"] || cross_array[1]["8"] %>
+    <% @five_ten.each_with_index do |cross, index| %>
+    <tr>
+        <td><%= cross.date %></td>
+        <% if cross.cross == 1 %> 
+        <td class="text-center"><span class="label label-primary">Golden Cross</span></td>
+        <% elsif cross.cross == 2 %> 
+        <td class="text-center">Upward Trend</td>
+        <% elsif cross.cross == -1 %> 
+        <td class="text-center"><span class="label label-danger">Death Cross</span></td>
+        <% else %> 
+        <td class="text-center">Downward Trend</td>
+        <% end %>
+        <% day_close = stock_data.where(date: cross.date).first.close %>
+        <td class="text-navy text-center"><i class="fa fa-level-up"></i><%= day_close %></td>
+        <td><%= (((day_close - price.to_f) / price.to_f) * 100).round(2) %> % </td>
+    </tr>
+    <% end %>
+
+
+

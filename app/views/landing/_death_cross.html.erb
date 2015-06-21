@@ -28,7 +28,7 @@
                        <% require "yahoo_finance" %>
                        <% data = YahooFinance.quotes([equity.symbol], [:open, :close, :change_in_percent, :last_trade_date, :trade_date]) %>
                        <td><%= equity.name %></td>
-                       <td><a href="<%= stock_symbol_path(equity.symbol) %>"><%= equity.symbol %></a></td>
+                       <td><%= link_to equity.symbol, stock_symbol_path(equity.symbol), :target => "_blank" %></td>
                        <td><%= data[0].last_trade_date %></td>
                        <td><%= data[0].close %></td>
                        <td class="text-danger"> <i class="fa fa-level-up"></i><%= data[0].change_in_percent %> </td>

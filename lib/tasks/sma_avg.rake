@@ -95,22 +95,23 @@ desc 'golden_cross'
 task golden_cross: :environment do
 	stocks = Stock.all
 	# stock = Stock.find(3281)
-	today = Date.today
-	end_date = Date.parse('2015-06-18')
+	today = Date.parse('2015-06-19')
+	end_date = Date.parse('2015-06-09')
 	stocks.each do |stock|
 		begin 
 			cross = 0
 			start_date = today
 			while(start_date > end_date) do
+				
+				while(start_date.saturday? || start_date.sunday?) do
+					start_date -= 1
+				end
 				prev_date = start_date - 1
 				while(prev_date.saturday? || prev_date.sunday?) do
 					prev_date -= 1
 				end
-				stock_prev_day = BetaQuote.find_by(date:prev_date, stock_id:stock.id)
 
-				while(start_date.saturday? || start_date.sunday?) do
-					start_date -= 1
-			  end
+				stock_prev_day = BetaQuote.find_by(date:prev_date, stock_id:stock.id)
 			  stock_today = BetaQuote.find_by(date:start_date, stock_id:stock.id)
 			  # p stock_prev_day
 			  # p stock_today
@@ -125,7 +126,7 @@ task golden_cross: :environment do
 			  		cross = 1
 			  		p "#{stock.symbol} #{stock_today.date} golden_cross"
 			  		stock_today.cross = cross
-			  		stock_today.save
+			  		stock_today.save	
 			  	elsif today_sum < 0
 			  		cross = -2
 			  		p "downward trend"
@@ -150,7 +151,7 @@ task five_avg_daily: :environment do
   stocks = Stock.all
  	# stock = Stock.find_by(symbol:'AMZN')
   stocks.each do |stock|
-  	start_date = Date.today
+  	start_date = Date.parse('2015-06-19')
   		five_days = []
   		ten_start_date = start_date
   		while (start_date.saturday? || start_date.sunday?) do
