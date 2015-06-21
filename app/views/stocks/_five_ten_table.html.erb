@@ -7,10 +7,11 @@
             <% first_cross.push(index) %>
         <% end %>
     <% end %>
-
+    <% if first_cross[1] == 0 %>
+        <% first_cross.shift %>
+    <% end %>
     <% first_cross.push(6) %>
     <% cross_count = first_cross.count %>
-
     <% count = 0 %>
     <% while count < cross_count - 1 do %>
         <% cross_price = @five_ten[first_cross[count+1].to_i].close %>
