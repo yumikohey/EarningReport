@@ -1,3 +1,31 @@
+<% stock_data = BetaQuote.where(stock_id:Stock.find_by(symbol:@stock).id) %>
+
+    <% price_changes = [] %>
+    <% first_cross = [0] %>
+    <% @five_ten.each_with_index do |data, index| %>
+        <% if data.cross == 1 || data.cross == -1 %>
+            <% first_cross.push(index) %>
+        <% end %>
+    <% end %>
+    <% if first_cross[1] == [0] %>
+        <% first_cross.pop %>
+    <% end %>
+    <% first_cross.push(6) %>
+    <% cross_count = first_cross.count %>
+
+    <% count = 0 %>
+    <% while count < cross_count - 1 do %>
+        <% cross_price = @five_ten[first_cross[count+1].to_i].close %>
+        <% @five_ten[first_cross[count].to_i..first_cross[count+1].to_i-1].each do |piece| %>
+            <div class="row">
+                <% price_changes.push((((piece.close - cross_price) / cross_price) * 100).round(2)) %> 
+            </div>
+        <% end %>
+        <% count += 1 %>
+    <% end %>
+
+<%= price_changes %>
+
 <table class="table table-striped">
     <thead>
     <tr>

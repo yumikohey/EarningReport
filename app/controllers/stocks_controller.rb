@@ -17,7 +17,6 @@ class StocksController < ApplicationController
  		require 'yahoo_stock'
 	 	quote = YahooStock::Quote.new(:stock_symbols => [stock_symbol])
 	 	@current_price = quote.results(:to_array).output
-	 	@five_ten = BetaQuote.where(stock_id: stock.id).where("date >= ?", Date.today - 5).order('date DESC')
 	 	redict_to 'index'
  end
 
@@ -34,7 +33,7 @@ class StocksController < ApplicationController
 		@all_reports = stock.ereports.order('date DESC')
 		quote = YahooStock::Quote.new(:stock_symbols => [@stock])
 	 	@current_price = quote.results(:to_array).output
-	 	@five_ten = BetaQuote.where(stock_id: stock.id).where("date >= ?", Date.today - 5).order('date DESC')
+	 	@five_ten = BetaQuote.where(stock_id: stock.id).where("date >= ?", Date.today - 10).order('date DESC')
 		render :layout => "sub_layout"
 	end
 
