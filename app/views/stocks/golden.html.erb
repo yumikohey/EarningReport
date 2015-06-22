@@ -2,7 +2,7 @@
 
 <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5> Death Cross </h5>
+                <h5> Golden Cross </h5>
                 <div class="ibox-tools">
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
@@ -16,23 +16,20 @@
                     <tr>
                         <th> Company Name </th>
                         <th> Symbol </th>
-                        <th> Date </th>
                         <th> Stock Price </th>
-                        <th> Price Changes</th>
+                        <th> Today's change </th>
                     </tr>
                     </thead>
-                    <tbody id='death_cross_list'>
-                         <%= render 'death' %>
-                    </tbody>
+                      <tbody id='golden_cross_list'>
+                        
+                        <%= render 'landing/golden' %>
+                        
+                      </tbody>
                 </table>
-                <div class="row">
-                    <div class="col-md-1 col-md-offset-10">
-                        <%= button_to "Read more...", '/death', :class => "btn btn-info btn-sm pull-right", :method => :get %>
-                    </div>
+                <div class="golden_cross">
+                    <%= will_paginate @golden_cross_stocks, :param_name => 'golden_page' %>
                 </div>
-                
             </div>
         </div>
     </div>
 </div>
-

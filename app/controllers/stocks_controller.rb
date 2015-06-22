@@ -73,6 +73,15 @@ class StocksController < ApplicationController
 		render 'option'
 	end
 
+	def golden
+		@golden_cross_stocks = BetaQuote.where(cross:1).where(date: Date.parse('2015-06-19')).paginate(:page => params[:golden_page], :per_page => 20)
+		render :layout => 'sub_layout'
+	end
+
+	def death
+		@death_cross_stocks = BetaQuote.where(cross:-1).where(date: Date.parse('2015-06-19')).paginate(:page => params[:death_page], :per_page => 20)
+		render :layout => 'sub_layout'
+	end
 	private
 	  def ereports_params
 	    params.require(:ereport).permit(:symbol, :date, :before_or_after_hour, :stock_id)

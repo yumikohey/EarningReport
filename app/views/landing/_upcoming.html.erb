@@ -26,8 +26,10 @@
                         
                       </tbody>
                 </table>
-                <div class="golden_cross">
-                    <%= will_paginate @golden_cross_stocks, :param_name => 'golden_page'%>
+                <div class="row">
+                    <div class="col-md-1 col-md-offset-10">
+                        <%= button_to "Read more...", '/golden', :class => "btn btn-info btn-sm pull-right", :method => :get %> 
+                    </div>
                 </div>
             </div>
         </div>

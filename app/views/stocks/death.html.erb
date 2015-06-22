@@ -16,23 +16,20 @@
                     <tr>
                         <th> Company Name </th>
                         <th> Symbol </th>
-                        <th> Date </th>
                         <th> Stock Price </th>
-                        <th> Price Changes</th>
+                        <th> Today's change </th>
                     </tr>
                     </thead>
-                    <tbody id='death_cross_list'>
-                         <%= render 'death' %>
-                    </tbody>
+                      <tbody id='death_cross_list'>
+                        
+                        <%= render 'landing/death' %>
+                        
+                      </tbody>
                 </table>
-                <div class="row">
-                    <div class="col-md-1 col-md-offset-10">
-                        <%= button_to "Read more...", '/death', :class => "btn btn-info btn-sm pull-right", :method => :get %>
-                    </div>
+                <div class="death_cross">
+                  <%= will_paginate @death_cross_stocks, :param_name => 'death_page' %>
                 </div>
-                
             </div>
         </div>
     </div>
 </div>
-

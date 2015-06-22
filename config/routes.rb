@@ -16,6 +16,10 @@ Rails.application.routes.draw do
 
   get '/current_pain/:symbol', to: 'option_chains#current_pain', as: 'current_pain'
 
+  get '/golden', to: 'stocks#golden'
+
+  get '/death', to: 'stocks#death'
+
   #post '/current_pain', to: 'option_chains#current_pain'
 
 
