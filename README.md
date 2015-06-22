@@ -10,7 +10,7 @@ As an options trader, it's very important to know how much percentage changes af
 ![Stock Portfolio](https://github.com/yumikohey/EarningReport/tree/master/app/assets/images/portfolio.jpg)
 
 # Updates
-- Current Pain <a href="options-er.herokuapp.com/current_pain">options-er.herokuapp.com/current_pain</a> is up. Current Pain is trying to predict what price an equity is going to land at the end of the trading day.
+- Current Pain <a href="options-er.herokuapp.com/current_pain">options-er.herokuapp.com/#current_pain</a> is up. Current Pain is trying to predict what price an equity is going to land at the end of the trading day.
 - Web application has a fresh outlook now.
 - Five Days and Ten Days Simple Moving Average Golden / Death Cross Alert feature is up. 
   * Golden Cross indicates that a stock reverts from downward trend to upward trend.
