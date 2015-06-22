@@ -38,6 +38,15 @@ class StocksController < ApplicationController
 		render :layout => "sub_layout"
 	end
 
+	def report_data
+		stock_symbol = params[:symbol].upcase
+		stock = Stock.find_by(symbol:stock_symbol)
+		@stock_id = stock.id
+		@stock = stock.symbol
+		@all_ers = stock.ereports.order('date DESC')
+		@all_ers
+	end
+
 	def ajax_table
 		@stock_symbol = params[:symbol].upcase
 		stock = Stock.find_by(symbol:@stock_symbol)

@@ -1,0 +1,59 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Date </th>
+        <th>Close </th>
+    </tr>
+    </thead>
+    <tbody>
+
+<% @all_ers.each do |report| %>
+	<% before_date = report.date - 1%>
+	<% start_date = report.date %>
+	<% after_date = report.date + 1%>
+	<tr>
+		<td><%= report.date %></td>
+		<td>******************</td>
+	</tr>
+
+	<% before_quote = HistoryQuote.find_by(stock_id:@stock_id, date:before_date) %>
+	<% while !before_quote do %>
+		<% before_date -= 1 %>
+		<% before_quote = HistoryQuote.find_by(stock_id:@stock_id, date:before_date) %>
+	<% end %>
+	
+	<% quote = HistoryQuote.find_by(stock_id:@stock_id, date:start_date) %>
+	<% while !quote do %>
+		<% date -= 1 %>
+		<% quote = HistoryQuote.find_by(stock_id:@stock_id, date:start_date) %>
+	<% end %>
+
+	<% after_quote = HistoryQuote.find_by(stock_id:@stock_id, date:after_date) %>
+	<% while !after_quote do %>
+		<% after_date -= 1 %>
+		<% after_quote = HistoryQuote.find_by(stock_id:@stock_id, date:after_date) %>
+	<% end %>
+
+	<tr>
+		<td> <%= before_date %> </td>
+		<td> <%= before_quote.close %> </td>
+	</tr>
+	<tr>
+		<td> <%= start_date %> </td>
+		<td> <%= quote.close %> </td>
+	</tr>
+	<tr>
+		<td> <%= after_date %> </td>
+		<td> <%= after_quote.close %> </td>
+	</tr>
+
+	<tr>
+		<td>******************</td>
+		<td>******************</td>
+	</tr>
+<% end %>
+
+	</tbody>
+</table>
+
+

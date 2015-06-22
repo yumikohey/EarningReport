@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 
   get '/death', to: 'stocks#death'
 
+  get '/report_data/:symbol', to: 'stocks#report_data'
+
   #post '/current_pain', to: 'option_chains#current_pain'
 
 
