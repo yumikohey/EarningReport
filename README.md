@@ -3,10 +3,11 @@ Even Yahoo! Finance or TD Ameritrade doesn't come with such fancy services, so I
 
 As an options trader, it's very important to know how much percentage changes after earning report released on a specific equity. It helps options traders construct the option trading strategies. 
 
-![Home Page](https://github.com/yumikohey/EarningReport/tree/master/app/assets/images/index.png)
-![Earning Reports](https://github.com/yumikohey/EarningReport/tree/master/app/assets/images/earning.png)
-![Golden Cross and Death Cross Alert](https://github.com/yumikohey/EarningReport/tree/master/app/assets/images/golden_cross.png)
-![Current Pain Chart](https://github.com/yumikohey/EarningReport/tree/master/app/assets/images/current_pain.png)
+![Home Page](https://github.com/yumikohey/EarningReport/tree/master/app/assets/images/index.jpg)
+![Earning Reports](https://github.com/yumikohey/EarningReport/tree/master/app/assets/images/earning.jpg)
+![Golden Cross and Death Cross Alert](https://github.com/yumikohey/EarningReport/tree/master/app/assets/images/golden_cross.jpg)
+![Current Pain Chart](https://github.com/yumikohey/EarningReport/tree/master/app/assets/images/current_pain.jpg)
+![Stock Portfolio](https://github.com/yumikohey/EarningReport/tree/master/app/assets/images/portfolio.jpg)
 
 # Updates
 - Current Pain <a href="options-er.herokuapp.com/current_pain">options-er.herokuapp.com/current_pain</a> is up. Current Pain is trying to predict what price an equity is going to land at the end of the trading day.
