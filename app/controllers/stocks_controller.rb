@@ -28,10 +28,10 @@ class StocksController < ApplicationController
 		@stock = stock.symbol
 		@all_ers = stock.ereports.order('date DESC')
 		p @all_ers.first
-		# @all_ers.each do |earning|
-		# 	EreportsHelper.earning_report_dates_data(stock.symbol, earning)
-		# end			
-		# @all_reports = stock.ereports.order('date DESC')
+		@all_ers.each do |earning|
+			EreportsHelper.earning_report_dates_data(stock.symbol, earning)
+		end			
+		@all_reports = stock.ereports.order('date DESC')
 		quote = YahooStock::Quote.new(:stock_symbols => [@stock])
 	 	@current_price = quote.results(:to_array).output
 	 	@five_ten = BetaQuote.where(stock_id: stock.id).where("date >= ?", Date.parse('2015-06-22') - 10).order('date DESC')
