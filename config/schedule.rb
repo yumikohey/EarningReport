@@ -12,10 +12,9 @@ end
 
 every %w( tue wed thu fri sat), :at => "3:00am" do
 	rake 'five_avg_daily'
-	rake 'golden_cross'
 end
 
-every :tuesday => "4:00am" do
+every :monday => "1:00am" do
 	rake 'earning_report'
 end
 

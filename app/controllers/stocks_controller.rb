@@ -34,18 +34,19 @@ class StocksController < ApplicationController
 		# @all_reports = stock.ereports.order('date DESC')
 		quote = YahooStock::Quote.new(:stock_symbols => [@stock])
 	 	@current_price = quote.results(:to_array).output
-	 	@five_ten = BetaQuote.where(stock_id: stock.id).where("date >= ?", Date.today - 11).order('date DESC')
+	 	@five_ten = BetaQuote.where(stock_id: stock.id).where("date >= ?", Date.today - 10).order('date DESC')
 	 	@company = stock.name
 		render :layout => "sub_layout"
 	end
 
-	def report_data
-		stock_symbol = params[:symbol].upcase
-		stock = Stock.find_by(symbol:stock_symbol)
-		@stock_id = stock.id
-		@stock = stock.symbol
-		@all_ers = stock.ereports.order('date DESC')
-		@all_ers
+	def report_data		
+		client = Twitter::REST::Client.new do |config|
+		  config.consumer_key = ENV['CONSUMER_KEY']
+		  config.consumer_secret = ENV['CONSUMER_SECRET']
+		  config.access_token = ENV['ACCESS_TOKEN']
+		  config.access_token_secret = ENV['ACCESS_SECRET']
+		end
+			client.update("I'm tweeting with @gem! '#'#{stock.symbol}")
 	end
 
 	def ajax_table
@@ -84,12 +85,12 @@ class StocksController < ApplicationController
 	end
 
 	def golden
-		@golden_cross_stocks = BetaQuote.where(cross:1).where(date: Date.parse('2015-06-19')).paginate(:page => params[:golden_page], :per_page => 20)
+		@golden_cross_stocks = BetaQuote.where(cross:1).where(date: Date.parse('2015-06-22')).paginate(:page => params[:golden_page], :per_page => 20)
 		render :layout => 'sub_layout'
 	end
 
 	def death
-		@death_cross_stocks = BetaQuote.where(cross:-1).where(date: Date.parse('2015-06-19')).paginate(:page => params[:death_page], :per_page => 20)
+		@death_cross_stocks = BetaQuote.where(cross:-1).where(date: Date.parse('2015-06-22')).paginate(:page => params[:death_page], :per_page => 20)
 		render :layout => 'sub_layout'
 	end
 	private

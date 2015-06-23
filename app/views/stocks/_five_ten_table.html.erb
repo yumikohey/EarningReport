@@ -7,8 +7,8 @@
             <% first_cross.push(index) %>
         <% end %>
     <% end %>
-    <% if first_cross[1] == [0] %>
-        <% first_cross.pop %>
+    <% if first_cross[1] == 0 %>
+        <% first_cross.shift %>
     <% end %>
     <% first_cross.push(6) %>
     <% cross_count = first_cross.count %>
