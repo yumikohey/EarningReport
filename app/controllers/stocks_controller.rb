@@ -24,16 +24,17 @@ class StocksController < ApplicationController
   	require 'yahoo_stock'
   	stock_symbol = params[:symbol].upcase
 		stock = Stock.find_by(symbol:stock_symbol)
+		@stock_id = stock.id
 		@stock = stock.symbol
 		@all_ers = stock.ereports.order('date DESC')
 		p @all_ers.first
-		@all_ers.each do |earning|
-			EreportsHelper.earning_report_dates_data(stock.symbol, earning)
-		end			
-		@all_reports = stock.ereports.order('date DESC')
+		# @all_ers.each do |earning|
+		# 	EreportsHelper.earning_report_dates_data(stock.symbol, earning)
+		# end			
+		# @all_reports = stock.ereports.order('date DESC')
 		quote = YahooStock::Quote.new(:stock_symbols => [@stock])
 	 	@current_price = quote.results(:to_array).output
-	 	@five_ten = BetaQuote.where(stock_id: stock.id).where("date >= ?", Date.parse('2015-06-21') - 10).order('date DESC')
+	 	@five_ten = BetaQuote.where(stock_id: stock.id).where("date >= ?", Date.today - 11).order('date DESC')
 	 	@company = stock.name
 		render :layout => "sub_layout"
 	end

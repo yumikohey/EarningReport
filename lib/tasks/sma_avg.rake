@@ -95,8 +95,8 @@ desc 'golden_cross'
 task golden_cross: :environment do
 	stocks = Stock.all
 	# stock = Stock.find(3281)
-	today = Date.today
-	end_date = Date.parse('2015-06-18')
+	today = Date.today - 1
+	end_date = Date.today - 2
 	stocks.each do |stock|
 		begin 
 			cross = 0
