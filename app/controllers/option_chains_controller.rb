@@ -6,7 +6,7 @@ class OptionChainsController < ApplicationController
 		else
 			symbol = params[:symbol]
 		end
-		stock = DailyOption.where(symbol:symbol, expiration_date:Date.parse('2015-06-21')).last
+		stock = DailyOption.where(symbol:symbol).order('created_at DESC').first
 		option_chains = stock.option_chains
 		strike_price_array = []
 		calls = []
