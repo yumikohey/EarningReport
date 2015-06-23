@@ -5,19 +5,17 @@ every %w( tue wed thu fri ), :at => "5:00am" do
   rake 'daily_option_chains'
 end
 
-every %w( tue wed thu fri sat) => "1:00am" do
+every %w( tue wed thu fri sat), :at => "1:00am" do
 	rake 'daily_quote'
 	rake 'beta_daily_quote'
+end
+
+every %w( tue wed thu fri sat), :at => "3:00am" do
 	rake 'five_avg_daily'
 	rake 'golden_cross'
 end
 
-every %w( tue wed thu fri sat) => "3:00am" do
-	rake 'five_avg_daily'
-	rake 'golden_cross'
-end
-
-every :tuesday => "4:00am" do
+every :tuesday, :at => "4:00am" do
 	rake 'earning_report'
 end
 
