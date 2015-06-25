@@ -62,9 +62,7 @@ module SmaAveragesHelper
 			else
 				p "no data for #{stock.symbol}"
 			end
-	end
 
-	def golden_cross(stock)
 		end_date = Date.today - 1
 		begin 
 			cross = 0
@@ -86,13 +84,13 @@ module SmaAveragesHelper
 			  today_sum = stock_today.five_avg - stock_today.ten_avg
 			  	if prev_sum >= 0 && today_sum <= 0
 			  		cross = -1
-			  		client.update("##{stock.symbol} appeared Death Cross today, https://options-er.herokuapp.com")
+			  		p "#{stock.symbol} death cross"
 			  		stock_today.cross = cross
 			  		stock_today.save
 
 			  	elsif prev_sum <= 0 && today_sum >= 0
 			  		cross = 1
-			  		client.update("##{stock.symbol} appeared Golden Cross today, https://options-er.herokuapp.com")
+			  		p "#{stock.symbol} death cross"
 			  		stock_today.cross = cross
 			  		stock_today.save
 			  	elsif today_sum < 0
