@@ -30,6 +30,7 @@ end
 
 desc 'golden_cross'
 task golden_cross: :environment do
+	stocks = Stock.all
 	include SmaAveragesHelper
 	client = Twitter::REST::Client.new do |config|
 	  config.consumer_key = ENV['CONSUMER_KEY']
