@@ -40,7 +40,7 @@ task five_avg_daily: :environment do
   stocks = Stock.all
   stocks.each do |stock|
   	SmaAveragesHelper.five_ten_avg(stock)
-  	# SmaAveragesHelper.golden_cross(stock)
+  	SmaAveragesHelper.golden_cross(stock)
 	end
 	total_golden_cross = BetaQuote.where(date:Date.today, cross:1).count
 	total_death_cross = BetaQuote.where(date:Date.today, cross:-1).count

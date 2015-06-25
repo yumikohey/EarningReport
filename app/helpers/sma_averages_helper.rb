@@ -62,7 +62,9 @@ module SmaAveragesHelper
 			else
 				p "no data for #{stock.symbol}"
 			end
+	end
 
+	def golden_cross(stock)
 		end_date = Date.today - 1
 		begin 
 			cross = 0
