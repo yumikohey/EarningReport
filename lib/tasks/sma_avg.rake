@@ -28,8 +28,8 @@ task one_month: :environment do
 		end
 end
 
-desc 'calculate five days average'
-task five_avg_daily: :environment do
+desc 'golden_cross'
+task golden_cross: :environment do
 	include SmaAveragesHelper
 	client = Twitter::REST::Client.new do |config|
 	  config.consumer_key = ENV['CONSUMER_KEY']
@@ -37,11 +37,9 @@ task five_avg_daily: :environment do
 	  config.access_token = ENV['ACCESS_TOKEN']
 	  config.access_token_secret = ENV['ACCESS_SECRET']
 	end
-  stocks = Stock.all
-  stocks.each do |stock|
-  	SmaAveragesHelper.five_ten_avg(stock)
-  	SmaAveragesHelper.golden_cross(stock)
-	end
+	  stocks.each do |stock|
+	  	SmaAveragesHelper.golden_cross(stock)
+		end
 	total_golden_cross = BetaQuote.where(date:Date.today, cross:1).count
 	total_death_cross = BetaQuote.where(date:Date.today, cross:-1).count
 	total_upper = BetaQuote.where(date:Date.today, cross:2).count
@@ -50,6 +48,15 @@ task five_avg_daily: :environment do
 	client.update("#{total_death_cross} stocks appeared death cross #{Date.today}")
 	client.update("#{total_upper} stocks are in upward trend #{Date.today}")
 	client.update("#{total_downward} stocks are in downward trend #{Date.today}")
+end
+
+desc 'calculate five days average'
+task five_avg_daily: :environment do
+	include SmaAveragesHelper
+  stocks = Stock.all
+  stocks.each do |stock|
+  	SmaAveragesHelper.five_ten_avg(stock)
+	end
 end
 
 desc 'update beta database' 
