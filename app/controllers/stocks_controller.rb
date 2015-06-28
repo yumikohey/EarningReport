@@ -108,7 +108,6 @@ class StocksController < ApplicationController
 			  	@golden_cross_stocks = BetaQuote.where(cross:1).where(date: @today).first(10)
 			  end
 		  end
-	  end
 		render :layout => 'sub_layout'
 	end
 
@@ -122,7 +121,6 @@ class StocksController < ApplicationController
 			  	@death_cross_stocks = BetaQuote.where(cross:-1).where(date: @today).first(10)
 			  end
 		  end
-	  end
 		render :layout => 'sub_layout'
 	end
 	private
