@@ -101,11 +101,11 @@ class StocksController < ApplicationController
 	def golden
 	  @today = BetaQuote.last.date
 	  	if BetaQuote.where(date:@today).where(cross:1).count > 0
-		  	@golden_cross_stocks = BetaQuote.where(cross:1).where(date: @today).first(10)
+		  	@golden_cross_stocks = BetaQuote.where(date: @today).where(cross:1).paginate(:page => params[:golden_page], :per_page => 20)
 		  else
 		  	while (BetaQuote.where(date:@today).where(cross:1).count <= 0) do
 		  		@today -= 1
-			  	@golden_cross_stocks = BetaQuote.where(cross:1).where(date: @today).first(10)
+			  	@golden_cross_stocks = BetaQuote.where(date: @today).where(cross:1).paginate(:page => params[:golden_page], :per_page => 20)
 			  end
 		  end
 		render :layout => 'sub_layout'
@@ -114,11 +114,11 @@ class StocksController < ApplicationController
 	def death
 	  @today = BetaQuote.last.date
 	  	if BetaQuote.where(date:@today).where(cross:1).count > 0
-		  	@death_cross_stocks = BetaQuote.where(cross:-1).where(date: @today).first(10)
+		  	@death_cross_stocks = BetaQuote.where(date: @today).where(cross:-1).paginate(:page => params[:golden_page], :per_page => 20)
 		  else
 		  	while (BetaQuote.where(date:@today).where(cross:1).count <= 0) do
 		  		@today -= 1
-			  	@death_cross_stocks = BetaQuote.where(cross:-1).where(date: @today).first(10)
+			  	@death_cross_stocks = BetaQuote.where(date: @today).where(cross:-1).paginate(:page => params[:golden_page], :per_page => 20)
 			  end
 		  end
 		render :layout => 'sub_layout'
