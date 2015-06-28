@@ -38,9 +38,9 @@ task golden_cross: :environment do
 	  config.access_token = ENV['ACCESS_TOKEN']
 	  config.access_token_secret = ENV['ACCESS_SECRET']
 	end
-	  stocks.each do |stock|
-	  	SmaAveragesHelper.golden_cross(stock)
-		end
+  stocks.each do |stock|
+  	SmaAveragesHelper.golden_cross(stock)
+	end
 	total_golden_cross = BetaQuote.where(date:Date.today - 1, cross:1).count
 	total_death_cross = BetaQuote.where(date:Date.today - 1, cross:-1).count
 	total_upper = BetaQuote.where(date:Date.today - 1, cross:2).count
@@ -53,6 +53,7 @@ end
 
 desc 'calculate five days average'
 task five_avg_daily: :environment do
+	stocks = Stock.all
 	include SmaAveragesHelper
   stocks = Stock.all
   stocks.each do |stock|
