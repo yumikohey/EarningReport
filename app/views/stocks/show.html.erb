@@ -95,7 +95,7 @@
 <div class="col-lg-12">
 <div class="ibox float-e-margins">
 <div class="ibox-title">
-    <h5> Historical Earning Reports Performance</h5>
+    <h5> Historical Earnings Reports Performance</h5>
     <div class="ibox-tools">
         <a class="collapse-link">
             <i class="fa fa-chevron-up"></i>
@@ -124,8 +124,6 @@
                 <th>Close </th>
                 <th>Volume </th>
                 <th>Date Changes</th>
-                <th><i class="fa fa-play fa-rotate-270"></i> Up/Down</th>
-                <th>Price Trend</th>
             </tr>
             </thead>
             <tbody>
@@ -157,7 +155,7 @@
                 <td class="text-primary"><%= ((((earning.price_after_er.quote[4].to_f - earning.price_after_er.quote[1].to_f) / earning.price_after_er.quote[1].to_f)) * 100).round(2) if earning.price_after_er %>%</td>
             </tr>
             <tr class="primary">
-                <th>Percentage Change After Earning Report Released</th>
+                <th>Percentage Change After Earnings Report Released</th>
                 <% before_market = (((earning.price_on_er.quote[1].to_f - earning.price_before_er.quote[4].to_f) / earning.price_before_er.quote[4].to_f)*100).round(2) %> 
                 <% after_market = (((earning.price_after_er.quote[1].to_f - earning.price_on_er.quote[4].to_f ) / earning.price_on_er.quote[4].to_f)*100).round(2) %> 
                 <td class="danger">
@@ -173,7 +171,7 @@
     </div>
 </div>
         <% elsif earning.date >= Time.zone.today %>
-        <% upcoming_dates.push(earning.date.strftime("%b %d, %Y"))%>
+        <%= upcoming_dates.push(earning.date.strftime("%b %d, %Y"))%>
         <%end%>
 <% end %>
 </div>

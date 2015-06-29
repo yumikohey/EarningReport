@@ -2,8 +2,8 @@ desc "download one week's earning report date"
 
 task earning_report: :environment do
 	#today = Time.zone.today
-	today = Date.today
-	days = (0..7).to_a
+	today = Date.parse('2015-06-23')
+	days = (0..30).to_a
 	days.each do |day|
 			date = today + day 
 			date_str = date.to_s.split("-").join("")
