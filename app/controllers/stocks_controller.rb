@@ -36,17 +36,12 @@ class StocksController < ApplicationController
 	 	@current_price = quote.results(:to_array).output
 	 	check = BetaQuote.where(stock_id: stock.id).where("date >= ?", Date.today)
 	 	number_of_dates = 8
-	 	if Date.today.saturday?
-	 		number_of_dates = 9
-	 	elsif Date.today.sunday?
-	 		number_of_dates = 9
+	 	counter = BetaQuote.where(stock_id: stock.id).where("date >= ?", Date.today  - number_of_dates).count
+	 	while (counter < 7 ) do
+	 		number_of_dates += 1
+	 		counter = BetaQuote.where(stock_id: stock.id).where("date >= ?", Date.today  - number_of_dates).count
 	 	end
-	 	@five_ten
-	 	if check.empty? && !Date.today.sunday? && !Date.today.saturday?
-	 		@five_ten = BetaQuote.where(stock_id: stock.id).where("date >= ?", (Date.today - 1) - number_of_dates).order('date DESC')
-	 	else
-	 		@five_ten = BetaQuote.where(stock_id: stock.id).where("date >= ?", Date.today  - number_of_dates).order('date DESC')
-	 	end
+	 	@five_ten = BetaQuote.where(stock_id: stock.id).where("date >= ?", Date.today  - number_of_dates).order('date DESC')
 	 	@company = stock.name
 		render :layout => "sub_layout"
 	end
