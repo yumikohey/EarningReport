@@ -5,16 +5,16 @@ every %w( tue wed thu fri ), :at => "6:00am" do
   rake 'daily_option_chains'
 end
 
-every %w( tue wed thu fri sat), :at => "10:30pm" do
+every %w( tue wed thu fri sat), :at => "09:30pm" do
 	rake 'daily_quote'
 	rake 'beta_daily_quote'
 end
 
-every %w( tue wed thu fri sat), :at => "00:30am" do
+every %w( tue wed thu fri sat), :at => "00:01am" do
 	rake 'five_avg_daily'
 end
 
-every %w( tue wed thu fri sat), :at => "5:00am" do
+every %w( tue wed thu fri sat), :at => "4:00am" do
 	rake 'golden_cross'
 end
 
