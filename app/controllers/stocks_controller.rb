@@ -44,7 +44,7 @@ class StocksController < ApplicationController
 	 		number_of_dates = 8
 	 	end
 	 	@five_ten
-	 	if check.empty?
+	 	if check.empty? && !Date.today.sunday? && !Date.today.saturday?
 	 		@five_ten = BetaQuote.where(stock_id: stock.id).where("date >= ?", (Date.today - 1) - number_of_dates).order('date DESC')
 	 	else
 	 		@five_ten = BetaQuote.where(stock_id: stock.id).where("date >= ?", Date.today  - number_of_dates).order('date DESC')
