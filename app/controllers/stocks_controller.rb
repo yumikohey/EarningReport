@@ -39,9 +39,7 @@ class StocksController < ApplicationController
 	 	if Date.today.saturday?
 	 		number_of_dates = 9
 	 	elsif Date.today.sunday?
-	 		number_of_dates = 10
-	 	else
-	 		number_of_dates = 8
+	 		number_of_dates = 9
 	 	end
 	 	@five_ten
 	 	if check.empty? && !Date.today.sunday? && !Date.today.saturday?
