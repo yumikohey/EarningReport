@@ -53,9 +53,8 @@ end
 
 desc 'calculate five days average'
 task five_avg_daily: :environment do
-	stocks = Stock.all
 	include SmaAveragesHelper
-  stocks = Stock.all
+  stocks = Stock.where("id > ?", 7205)
   stocks.each do |stock|
   	SmaAveragesHelper.five_ten_avg(stock)
 	end

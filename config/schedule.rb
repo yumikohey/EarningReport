@@ -10,11 +10,11 @@ every %w( tue wed thu fri sat), :at => "09:30pm" do
 	rake 'beta_daily_quote'
 end
 
-every %w( tue wed thu fri sat), :at => "00:01am" do
+every %w( tue wed thu fri sat), :at => "05:30am" do
 	rake 'five_avg_daily'
 end
 
-every %w( tue wed thu fri sat), :at => "4:00am" do
+every %w( tue wed thu fri sat), :at => "09:00am" do
 	rake 'golden_cross'
 end
 
