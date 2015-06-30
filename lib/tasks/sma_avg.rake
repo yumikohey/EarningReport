@@ -30,6 +30,7 @@ end
 
 desc 'golden_cross'
 task golden_cross: :environment do
+	today = BetaQuote.last.date
 	stocks = Stock.all
 	include SmaAveragesHelper
 	client = Twitter::REST::Client.new do |config|
@@ -41,14 +42,14 @@ task golden_cross: :environment do
   stocks.each do |stock|
   	SmaAveragesHelper.golden_cross(stock)
 	end
-	total_golden_cross = BetaQuote.where(date:Date.today - 1, cross:1).count
-	total_death_cross = BetaQuote.where(date:Date.today - 1, cross:-1).count
-	total_upper = BetaQuote.where(date:Date.today - 1, cross:2).count
-	total_downward = BetaQuote.where(date:Date.today - 1, cross:-2).count
-	client.update("$SPY $AAPL #{total_golden_cross} stocks appeared golden cross #{Date.today - 1} more info, please check http://options-er.herokuapp.com/golden")
-	client.update("$SPY $AAPL #{total_death_cross} stocks appeared death cross #{Date.today - 1} more info, please check http://options-er.herokuapp.com/death")
-	client.update("$SPY $AAPL #{total_upper} stocks are in upward trend #{Date.today - 1} more info, please check http://options-er.herokuapp.com")
-	client.update("$SPY $AAPL #{total_downward} stocks are in downward trend #{Date.today - 1} more info, please check http://options-er.herokuapp.com")
+	total_golden_cross = BetaQuote.where(date:today, cross:1).count
+	total_death_cross = BetaQuote.where(date:today, cross:-1).count
+	total_upper = BetaQuote.where(date:today, cross:2).count
+	total_downward = BetaQuote.where(date:today, cross:-2).count
+	client.update("$SPY $AAPL #{total_golden_cross} stocks appeared golden cross #{today} more info, please check http://options-er.herokuapp.com/golden")
+	client.update("$SPY $AAPL #{total_death_cross} stocks appeared death cross #{today} more info, please check http://options-er.herokuapp.com/death")
+	client.update("$SPY $AAPL #{total_upper} stocks are in upward trend #{today} more info, please check http://options-er.herokuapp.com")
+	client.update("$SPY $AAPL #{total_downward} stocks are in downward trend #{today} more info, please check http://options-er.herokuapp.com")
 end
 
 desc 'calculate five days average'

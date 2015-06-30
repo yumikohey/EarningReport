@@ -1,6 +1,6 @@
 module SmaAveragesHelper
 	def five_ten_avg(stock)
-  	start_date = Date.today - 1
+  	start_date = BetaQuote.last.date
   		five_days = []
   		ten_start_date = start_date
   		while (start_date.saturday? || start_date.sunday?) do
@@ -67,10 +67,10 @@ module SmaAveragesHelper
 	end
 
 	def golden_cross(stock)
-		end_date = Date.today - 2
+		end_date = BetaQuote.last.date - 1
 		begin 
 			cross = 0
-			start_date = Date.today - 1
+			start_date = BetaQuote.last.date
 			while(start_date > end_date) do
 				prev_date = start_date - 1
 				while(prev_date.saturday? || prev_date.sunday?) do
