@@ -14,7 +14,7 @@ every %w( mon tue wed thu fri), :at => "10:30pm" do
 	rake 'five_avg_daily'
 end
 
-every %w( tue wed thu fri sat), :at => "01:30am" do
+every %w( tue wed thu fri sat), :at => "00:47am" do
 	rake 'golden_cross'
 end
 
