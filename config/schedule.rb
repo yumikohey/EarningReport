@@ -6,7 +6,7 @@ every %w( tue wed thu fri ), :at => "10:00pm" do
 end
 
 every %w( mon tue wed thu fri), :at => "09:30pm" do
-	rake 'daily_quote'
+#	rake 'daily_quote'
 	rake 'beta_daily_quote'
 end
 
