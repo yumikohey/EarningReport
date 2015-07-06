@@ -55,7 +55,12 @@ end
 desc 'calculate five days average'
 task five_avg_daily: :environment do
 	include SmaAveragesHelper
-	stocks = Stock.all
+	today = BetaQuote.last.date
+	stock_list = BetaQuote.where(date:today).where(five_avg:nil).all
+	stocks = []
+	stock_list.each do |quote|
+		stocks.push(Stock.find(quote.stock_id))
+	end
   stocks.each do |stock|
   	SmaAveragesHelper.five_ten_avg(stock)
 	end
