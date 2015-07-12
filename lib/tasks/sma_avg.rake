@@ -55,12 +55,13 @@ end
 desc 'calculate five days average'
 task five_avg_daily: :environment do
 	include SmaAveragesHelper
-	today = BetaQuote.last.date
-	stock_list = BetaQuote.where(date:today).where(five_avg:nil).all
-	stocks = []
-	stock_list.each do |quote|
-		stocks.push(Stock.find(quote.stock_id))
-	end
+	# today = BetaQuote.last.date
+	# stock_list = BetaQuote.where(date:today).where(five_avg:nil).all
+	# stocks = []
+	# stock_list.each do |quote|
+	# 	stocks.push(Stock.find(quote.stock_id))
+	# end
+	stocks = Stock.all
   stocks.each do |stock|
   	SmaAveragesHelper.five_ten_avg(stock)
 	end
@@ -69,12 +70,12 @@ end
 desc 'update beta database' 
 	task update_db: :environment do
 		stocks = Stock.all
-		end_date = Date.parse('2015-05-26')
+		end_date = Date.parse('2015-06-10')
 		stocks.each do |stock|
 			begin 
-				start_date = Date.today - 2
-				count = BetaQuote.where(stock_id:stock.id).count
-				if count > 25
+				start_date = Date.parse('2015-07-01')
+				count = BetaQuote.where(stock_id:stock.id).where(five_avg:nil).count
+				if count > 10
 					while start_date > end_date do
 						five_days = []
 						ten_start_date = start_date
@@ -132,9 +133,9 @@ desc 'update beta database'
 						beta_stock.save
 						start_date -= 1
 					end
-					p "#{stock.symbol}"
+					p "#{stock.symbol} has more than 10 days data."
 				else
-					p "not a valid stock #{stock.symbol}"
+					p "#{stock.symbol} N/A"
 				end
 		  rescue
 			  p "no more data for this stock #{stock.symbol}"

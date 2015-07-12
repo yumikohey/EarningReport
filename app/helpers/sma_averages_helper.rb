@@ -9,8 +9,8 @@ module SmaAveragesHelper
   		beta_stock = BetaQuote.find_by(date:start_date, stock_id:stock.id)
   		p beta_stock
   		count = BetaQuote.where("date <= ? AND stock_id = ?", start_date, stock.id).count
-  		p "count is: #{count}"
-  		if beta_stock && count >= 11
+  		counter = BetaQuote.where("date <= ? AND date >=? AND stock_id = ?", start_date, Date.parse('2015-06-17'), stock.id).where(five_avg:nil).count
+  		if beta_stock && count >= 11 && counter < 5
 		  		five_days.push(beta_stock.close.to_f)
 		  		temp_date = start_date - 1
 		  		begin

@@ -21,8 +21,8 @@ set :output, {:error => "log/cron_error_log.log", :standard => "log/cron_log.log
 # 	rake 'golden_cross'
 # end
 
-every :monday, :at => "5:58am" do
-	rake 'beta_daily_quote'
+every :sunday, :at => "7:00am" do
+	rake 'five_avg_daily'
 end
 
 # every :monday => "1:00am" do
