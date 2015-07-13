@@ -38,7 +38,7 @@ task golden_cross: :environment do
 	#   config.consumer_secret = ENV['CONSUMER_SECRET']
 	#   config.access_token = ENV['ACCESS_TOKEN']
 	#   config.access_token_secret = ENV['ACCESS_SECRET']
-	end
+	# end
   stocks.each do |stock|
   	SmaAveragesHelper.golden_cross(stock)
 	end
