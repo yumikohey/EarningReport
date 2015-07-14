@@ -1,6 +1,6 @@
 module SmaAveragesHelper
 	def five_ten_avg(stock)
-  	start_date = Date.parse('2015-07-08')
+  	start_date = Date.parse('2015-07-09')
   		five_days = []
   		ten_start_date = start_date
   		while (start_date.saturday? || start_date.sunday?) do
@@ -76,7 +76,7 @@ module SmaAveragesHelper
 				# while(prev_date.saturday? || prev_date.sunday?) do
 				# 	prev_date -= 1
 				# end
-				# stock_prev_day = BetaQuote.find_by(date:prev_date, stock_id:stock.id)
+				stock_prev_day = BetaQuote.find_by(date:prev_date, stock_id:stock.id)
 
 				# while(start_date.saturday? || start_date.sunday?) do
 				# 	start_date -= 1
