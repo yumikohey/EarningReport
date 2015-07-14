@@ -67,12 +67,12 @@ module SmaAveragesHelper
 	end
 
 	def golden_cross(stock)
-		end_date = Date.parse('2015-07-09')
+		end_date = Date.parse('2015-07-10')
 		begin 
 			cross = 0
-			start_date = Date.parse('2015-07-10')
+			start_date = Date.parse('2015-07-13')
 			# while(start_date > end_date) do
-				prev_date = start_date - 1
+				prev_date = Date.parse('2015-07-10')
 				# while(prev_date.saturday? || prev_date.sunday?) do
 				# 	prev_date -= 1
 				# end
