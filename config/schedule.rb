@@ -21,8 +21,12 @@ end
 # 	rake 'golden_cross'
 # end
 
-every :monday, :at => "10:05pm" do
+every :tuesday, :at => "1:25am" do
 	rake 'five_avg_daily'
+end
+
+every :tuesday, :at => "1:25pm" do
+	rake 'golden_cross'
 end
 
 # every :monday => "1:00am" do
