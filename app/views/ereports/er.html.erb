@@ -1,0 +1,9 @@
+<div class="container">
+	<% if !@stocks.nil? %>
+		<% @stocks.each do |stock| %>
+			<div class="row">
+			  <%= stock.symbol %>
+			</div>
+		<% end %>
+	<% end %>
+</div>

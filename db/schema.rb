@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150619200421) do
+ActiveRecord::Schema.define(version: 20150717061514) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,9 @@ ActiveRecord::Schema.define(version: 20150619200421) do
     t.integer  "cross"
   end
 
+  add_index "beta_quotes", ["date"], name: "index_beta_quotes_on_date", using: :btree
+  add_index "beta_quotes", ["stock_id"], name: "index_beta_quotes_on_stock_id", using: :btree
+
   create_table "daily_options", force: :cascade do |t|
     t.string   "symbol"
     t.integer  "stock_id"
@@ -41,6 +44,8 @@ ActiveRecord::Schema.define(version: 20150619200421) do
     t.datetime "updated_at",      null: false
     t.date     "record_date"
   end
+
+  add_index "daily_options", ["symbol"], name: "index_daily_options_on_symbol", using: :btree
 
   create_table "earning_calendars", force: :cascade do |t|
     t.string   "company_name"
@@ -62,6 +67,9 @@ ActiveRecord::Schema.define(version: 20150619200421) do
     t.datetime "updated_at",           null: false
   end
 
+  add_index "ereports", ["date"], name: "index_ereports_on_date", using: :btree
+  add_index "ereports", ["symbol"], name: "index_ereports_on_symbol", using: :btree
+
   create_table "history_quotes", force: :cascade do |t|
     t.string   "stock"
     t.date     "date"
@@ -77,6 +85,9 @@ ActiveRecord::Schema.define(version: 20150619200421) do
     t.float    "ten_avg"
     t.integer  "cross"
   end
+
+  add_index "history_quotes", ["date"], name: "index_history_quotes_on_date", using: :btree
+  add_index "history_quotes", ["stock_id"], name: "index_history_quotes_on_stock_id", using: :btree
 
   create_table "option_chains", force: :cascade do |t|
     t.string   "symbol"
@@ -96,6 +107,9 @@ ActiveRecord::Schema.define(version: 20150619200421) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "price_after_ers", ["ereport_id"], name: "index_price_after_ers_on_ereport_id", using: :btree
+  add_index "price_after_ers", ["price_date"], name: "index_price_after_ers_on_price_date", using: :btree
+
   create_table "price_before_ers", force: :cascade do |t|
     t.date     "price_date"
     t.text     "quote"
@@ -105,6 +119,9 @@ ActiveRecord::Schema.define(version: 20150619200421) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "price_before_ers", ["ereport_id"], name: "index_price_before_ers_on_ereport_id", using: :btree
+  add_index "price_before_ers", ["price_date"], name: "index_price_before_ers_on_price_date", using: :btree
+
   create_table "price_on_ers", force: :cascade do |t|
     t.date     "price_date"
     t.text     "quote"
@@ -113,6 +130,9 @@ ActiveRecord::Schema.define(version: 20150619200421) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "price_on_ers", ["ereport_id"], name: "index_price_on_ers_on_ereport_id", using: :btree
+  add_index "price_on_ers", ["price_date"], name: "index_price_on_ers_on_price_date", using: :btree
 
   create_table "put_call_ratios", force: :cascade do |t|
     t.date     "date"
@@ -151,6 +171,8 @@ ActiveRecord::Schema.define(version: 20150619200421) do
     t.string   "summary_quote"
     t.date     "ipodate"
   end
+
+  add_index "stocks", ["symbol"], name: "index_stocks_on_symbol", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

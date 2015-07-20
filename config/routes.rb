@@ -22,6 +22,8 @@ Rails.application.routes.draw do
 
   get '/report_data/:symbol', to: 'stocks#report_data'
 
+  get '/er', to: 'ereports#er'
+
   #post '/current_pain', to: 'option_chains#current_pain'
 
 

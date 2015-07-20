@@ -11,5 +11,7 @@ class LandingController < ApplicationController
 		  	@death_cross_stocks = BetaQuote.where(cross:-1).where(date: @today).first(10)
 		  end
 	  end
+
+		@ereports = Ereport.where(date:@today)
   end
 end
