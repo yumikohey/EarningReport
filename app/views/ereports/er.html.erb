@@ -2,7 +2,7 @@
 	<% if !@stocks.nil? %>
 		<% @stocks.each do |stock| %>
 			<div class="row">
-			  <%= stock.symbol %>
+			  <%= link_to stock.symbol, stock_symbol_path(stock.symbol) %>
 			</div>
 		<% end %>
 	<% end %>
