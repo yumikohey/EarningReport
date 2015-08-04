@@ -5,11 +5,12 @@ earnings = angular.module('earnings',[
 ])
 
 .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider){
+	template_url = 'angular-app/templates/'
 	$stateProvider
 	  .state('home', {
 	  	url:'/',
-	  	templateUrl: 'index.html',
-	  	controller: 'calenderCtrl'
+	  	templateUrl: template_url + 'earnings_calender/index.html',
+	  	controller: 'stocksCtrl'
 	  });
 
 	  $urlRouterProvider.otherwise('/');
@@ -19,6 +20,3 @@ earnings = angular.module('earnings',[
 
 controllers = angular.module('controllers',[])
 
-controllers.controller('calenderCtrl', function($scope){
-	$scope.dates = '2015-08-03';
-});

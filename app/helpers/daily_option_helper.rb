@@ -1,7 +1,7 @@
 module DailyOptionHelper
 	def self.option_chains
 			stock_list = Stock.all
-			date_unix = DateTime.parse("2015-07-23 17:00:00 -0700").to_time.to_i
+			date_unix = DateTime.parse("2015-08-06 17:00:00 -0700").to_time.to_i
 			stock_list.each do |stock|
 					url = "http://finance.yahoo.com/q/op?s=#{stock.symbol}&straddle=true&date=#{date_unix}"
 					puts url
@@ -23,7 +23,7 @@ module DailyOptionHelper
 						end
 						p option_chain.length
 						if (option_chain.length > 1)
-							DailyOption.create!(symbol:stock.symbol, expiration_date:Date.parse("2015-07-23 17:00:00 -0700").next, option_chains:option_chain, record_date: Date.today - 1)
+							DailyOption.create!(symbol:stock.symbol, expiration_date:Date.parse("2015-08-06 17:00:00 -0700").next, option_chains:option_chain, record_date: Date.today - 1)
 						end
 					end
 				end

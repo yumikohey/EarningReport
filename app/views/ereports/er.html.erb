@@ -1,9 +1,0 @@
-<div class="container">
-	<% if !@stocks.nil? %>
-		<% @stocks.each do |stock| %>
-			<div class="row">
-			  <%= link_to stock.symbol, stock_symbol_path(stock.symbol) %>
-			</div>
-		<% end %>
-	<% end %>
-</div>

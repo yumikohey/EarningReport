@@ -1,0 +1,146 @@
+<div class="row">
+    {{dates}}
+</div>
+<div class="col-lg-12">
+    <div class="tabs-container">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#monday"> 
+                <span class="label label-success">1</span> 
+                Monday </a></li>
+            <li class=""><a data-toggle="tab" href="#tuesday"> 
+                <span class="label label-info">2</span>
+                Tuesday </a></li>
+            <li class=""><a data-toggle="tab" href="#wednesday"> 
+                <span class="label label-primary">3</span> 
+                Wednesday </a></li>
+            <li class=""><a data-toggle="tab" href="#thursday"> 
+                <span class="label label-default">4</span> 
+                Thursday </a></li>
+            <li class=""><a data-toggle="tab" href="#friday"> 
+                <span class="label label-primary">5</span> 
+                Friday </a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="monday" class="tab-pane active">
+                <div class="panel-body">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>SYMBOL</th>
+                            <th>Company Name</th>
+                            <th>Sector</th>
+                            <th>Market Value</th>
+                            <th>IPO Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="stock in monday">
+                                <td>{{stock.symbol}}</td>
+                                <td>{{stock.name}}</td>
+                                <td>{{stock.industry}}</td>
+                                <td>{{stock.market_cap}}</td>
+                                <td>{{stock.ipodate}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="tuesday" class="tab-pane">
+                <div class="panel-body">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>SYMBOL</th>
+                            <th>Company Name</th>
+                            <th>Sector</th>
+                            <th>Market Value</th>
+                            <th>IPO Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="stock in tuesday">
+                                <td>{{stock.symbol}}</td>
+                                <td>{{stock.name}}</td>
+                                <td>{{stock.industry}}</td>
+                                <td>{{stock.market_cap}}</td>
+                                <td>{{stock.ipodate}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="wednesday" class="tab-pane">
+                <div class="panel-body">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>SYMBOL</th>
+                            <th>Company Name</th>
+                            <th>Sector</th>
+                            <th>Market Value</th>
+                            <th>IPO Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="stock in wednesday">
+                                <td>{{stock.symbol}}</td>
+                                <td>{{stock.name}}</td>
+                                <td>{{stock.industry}}</td>
+                                <td>{{stock.market_cap}}</td>
+                                <td>{{stock.ipodate}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="thursday" class="tab-pane">
+                <div class="panel-body">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>SYMBOL</th>
+                            <th>Company Name</th>
+                            <th>Sector</th>
+                            <th>Market Value</th>
+                            <th>IPO Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="stock in thursday">
+                                <td>{{stock.symbol}}</td>
+                                <td>{{stock.name}}</td>
+                                <td>{{stock.industry}}</td>
+                                <td>{{stock.market_cap}}</td>
+                                <td>{{stock.ipodate}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="friday" class="tab-pane">
+                <div class="panel-body">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>SYMBOL</th>
+                            <th>Company Name</th>
+                            <th>Sector</th>
+                            <th>Market Value</th>
+                            <th>IPO Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="stock in friday">
+                                <td>{{stock.symbol}}</td>
+                                <td>{{stock.name}}</td>
+                                <td>{{stock.industry}}</td>
+                                <td>{{stock.market_cap}}</td>
+                                <td>{{stock.ipodate}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

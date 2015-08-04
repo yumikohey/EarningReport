@@ -20,4 +20,5 @@
 //= require angular-route/angular-route
 //= require angular-rails-templates
 //= require angular-flash/dist/angular-flash
-//= require_tree .
+//= require_tree ./angular-app
+//= require angular-app/app
