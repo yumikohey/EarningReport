@@ -56,6 +56,17 @@ gem 'twitter'
 gem 'weibo_2'
 
 
+#Angular Setup
+gem 'angularjs-rails'
+
+gem 'angular-rails-templates'
+
+gem 'bower-rails'
+
+gem 'sprockets', '2.12.3'
+
+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

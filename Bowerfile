@@ -1,0 +1,5 @@
+asset 'angular-route'
+asset 'angular-mocks'
+asset 'angular-flash'
+asset 'angular-ui-router'
+# vim: ft=ruby

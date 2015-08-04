@@ -12,3 +12,12 @@
 //= require peity/jquery.peity.min.js
 //= require slimscroll/jquery.slimscroll.min.js
 //= require inspinia.js
+
+//= require angular
+//= require angular-animate
+//= require angular-ui-router
+//= require angular-resource
+//= require angular-route/angular-route
+//= require angular-rails-templates
+//= require angular-flash/dist/angular-flash
+//= require_tree .
