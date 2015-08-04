@@ -7,4 +7,8 @@ controllers.controller('stocksCtrl', function($scope, Stock){
 		$scope.thursday = data.ereports[3];
 		$scope.friday = data.ereports[4];
 	})
+	$scope.order = function(predicate) {
+    $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+    $scope.predicate = predicate;
+  };
 });

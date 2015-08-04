@@ -29,12 +29,12 @@
                             <th>SYMBOL</th>
                             <th>Company Name</th>
                             <th>Sector</th>
-                            <th>Market Value</th>
+                            <th><a href="" ng-click="order('market_cap')">Market Value</a></th>
                             <th>IPO Date</th>
                         </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="stock in monday">
+                            <tr ng-repeat="stock in monday | orderBy:predicate:reverse">
                                 <td>{{stock.symbol}}</td>
                                 <td>{{stock.name}}</td>
                                 <td>{{stock.industry}}</td>
@@ -53,12 +53,12 @@
                             <th>SYMBOL</th>
                             <th>Company Name</th>
                             <th>Sector</th>
-                            <th>Market Value</th>
+                            <th><a href="" ng-click="order('market_cap')">Market Value</a></th>
                             <th>IPO Date</th>
                         </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="stock in tuesday">
+                            <tr ng-repeat="stock in tuesday | orderBy:predicate:reverse">
                                 <td>{{stock.symbol}}</td>
                                 <td>{{stock.name}}</td>
                                 <td>{{stock.industry}}</td>
@@ -77,12 +77,12 @@
                             <th>SYMBOL</th>
                             <th>Company Name</th>
                             <th>Sector</th>
-                            <th>Market Value</th>
+                            <th><a href="" ng-click="order('market_cap')">Market Value</a></th>
                             <th>IPO Date</th>
                         </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="stock in wednesday">
+                            <tr ng-repeat="stock in wednesday | orderBy:predicate:reverse">
                                 <td>{{stock.symbol}}</td>
                                 <td>{{stock.name}}</td>
                                 <td>{{stock.industry}}</td>
@@ -101,12 +101,12 @@
                             <th>SYMBOL</th>
                             <th>Company Name</th>
                             <th>Sector</th>
-                            <th>Market Value</th>
+                            <th><a href="" ng-click="order('market_cap')">Market Value</a></th>
                             <th>IPO Date</th>
                         </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="stock in thursday">
+                            <tr ng-repeat="stock in thursday | orderBy:predicate:reverse ">
                                 <td>{{stock.symbol}}</td>
                                 <td>{{stock.name}}</td>
                                 <td>{{stock.industry}}</td>
@@ -125,12 +125,12 @@
                             <th>SYMBOL</th>
                             <th>Company Name</th>
                             <th>Sector</th>
-                            <th>Market Value</th>
+                            <th><a href="" ng-click="order('market_cap')">Market Value</a></th>
                             <th>IPO Date</th>
                         </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="stock in friday">
+                            <tr ng-repeat="stock in friday | orderBy:predicate:reverse ">
                                 <td>{{stock.symbol}}</td>
                                 <td>{{stock.name}}</td>
                                 <td>{{stock.industry}}</td>
