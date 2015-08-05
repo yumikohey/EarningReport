@@ -25,7 +25,8 @@ class EreportsController < ApplicationController
 		@stocks = []
 		a_week.each do |weekday|
 			single_day = []
-			reports = Ereport.where(date:weekday)
+			# need to update DB's stock market capital in order to do sorting at backend
+			reports = Ereport.where(date:weekday).limit(20)
 			reports.each do |report|
 				stock = Stock.find(report.stock_id)
 				single_day.push(stock)
