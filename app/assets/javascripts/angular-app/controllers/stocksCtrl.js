@@ -1,4 +1,5 @@
-controllers.controller('stocksCtrl', function($scope, Stock){
+angular.module('earnings')
+.controller('stocksCtrl', function($scope, Stock){
 	Stock.all()
 	.success(function(data) {
 		$scope.monday = data.ereports[0];

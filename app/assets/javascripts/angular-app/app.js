@@ -1,7 +1,6 @@
 earnings = angular.module('earnings',[
 	'templates',
-  'ui.router',
-  'controllers'
+  'ui.router'
 ])
 
 .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider){
@@ -18,5 +17,4 @@ earnings = angular.module('earnings',[
 	  $locationProvider.html5Mode(true);
 }]);
 
-controllers = angular.module('controllers',[])
 
