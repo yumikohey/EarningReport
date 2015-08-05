@@ -13,3 +13,4 @@ angular.module('earnings')
     $scope.predicate = predicate;
   };
 });
+stocksCtrl.$inject = ['$scope'];
