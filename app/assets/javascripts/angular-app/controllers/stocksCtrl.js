@@ -1,4 +1,4 @@
-function StocksCtrl($scope, Stock){
+var StocksCtrl =['$scope','Stock', function($scope, Stock){
 	Stock.all()
 	.success(function(data) {
 		$scope.monday = data.ereports[0];
@@ -11,7 +11,7 @@ function StocksCtrl($scope, Stock){
     $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
     $scope.predicate = predicate;
   };
-}
+}];
 
 angular.module('earnings')
 .controller('StocksCtrl', StocksCtrl);
