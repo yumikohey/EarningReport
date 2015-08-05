@@ -7,6 +7,7 @@ angular.module("earnings")
 	}
 }]);
 
+
 var StocksCtrl =['$scope','Stock', function($scope, Stock){
 	Stock.all()
 	.success(function(data) {
@@ -15,6 +16,7 @@ var StocksCtrl =['$scope','Stock', function($scope, Stock){
 		$scope.wednesday = data.ereports[2];
 		$scope.thursday = data.ereports[3];
 		$scope.friday = data.ereports[4];
+		$scope.quantity = 20;
 	})
 	$scope.order = function(predicate) {
     $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
