@@ -1,5 +1,4 @@
-angular.module('earnings')
-.controller('stocksCtrl', function($scope, Stock){
+function StocksCtrl($scope, Stock){
 	Stock.all()
 	.success(function(data) {
 		$scope.monday = data.ereports[0];
@@ -12,5 +11,7 @@ angular.module('earnings')
     $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
     $scope.predicate = predicate;
   };
-});
-stocksCtrl.$inject = ['$scope'];
+}
+
+angular.module('earnings')
+.controller('StocksCtrl', StocksCtrl);

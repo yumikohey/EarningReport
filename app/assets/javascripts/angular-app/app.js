@@ -9,7 +9,7 @@ earnings = angular.module('earnings',[
 	  .state('home', {
 	  	url:'/',
 	  	templateUrl: template_url + 'earnings_calender/index.html',
-	  	controller: 'stocksCtrl'
+	  	controller: 'StocksCtrl'
 	  });
 
 	  $urlRouterProvider.otherwise('/');
