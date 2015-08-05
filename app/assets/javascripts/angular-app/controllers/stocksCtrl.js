@@ -1,3 +1,12 @@
+angular.module("earnings")
+.factory('Stock', ['$http', function StockFactory($http){
+	return {
+		all: function() {
+			return $http({method: "GET", url:"/er"});
+		}
+	}
+}]);
+
 var StocksCtrl =['$scope','Stock', function($scope, Stock){
 	Stock.all()
 	.success(function(data) {
